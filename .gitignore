@@ -2,4 +2,4 @@
 *.o
 objs/
 .DS_Store
-pruebas.c
+.pruebas.c
