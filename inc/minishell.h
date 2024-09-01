@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:04:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/01 13:04:59 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/01 21:24:02 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
  * Includes
  */
 # include "libft.h"
+# include "parser.h"
+
 # include <unistd.h>
 # include <stdio.h>			// printf, perror
 # include <stdlib.h>		// malloc, free, exit, getenv
@@ -39,10 +41,27 @@
 /*
  * Structs
  */
+typedef struct s_data
+{
+	char	*input;
+	char	**tokens;
+	char	**env;
+	int		index;
+	int		exit_status;
+}				t_data;
 
 /*
  * Files
  */
 // main.c
+void	good_exit(t_data *d);
+
+// utils.c
+void	check_term(char **envp);
+void	init_shell(t_data *d, char **envp, char **argv, int argc);
+
+// env.c
+char	*get_env(char **env, char *var);
+char	**init_env(char **envp);
 
 #endif
