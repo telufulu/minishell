@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/09/01 18:04:14 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/01 18:15:04 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,11 @@ int	main(void)
 		{
 			add_history(d.input);
 			d.tokens = main_parser(d.input, d.exit_status);
-			ft_print_matrix(d.tokens, 1);
 			if (d.tokens)
+			{
+				ft_print_matrix(d.tokens, 1);
 				ft_free_matrix((void **)d.tokens);
+			}
 		}
 		free(d.input);
 	}
