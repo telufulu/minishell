@@ -11,6 +11,10 @@ SRCS			=		$(addprefix $(SRCS_DIR), $(SRCS_FILES))
 OBJS			=		$(addprefix $(OBJS_DIR), $(OBJS_FILES))
 OBJS_FILES		=		$(SRCS_FILES:%.c=%.o)
 SRCS_FILES		=		main.c
+#SRCS_FILES		+=		parser/parser_main.c
+#SRCS_FILES		+=		lexer/lexer_main.c
+#SRCS_FILES		+=		executor/executor_main.c
+#SRCS_FILES		+=		utils/
 
 LIBS			=		libs/
 LIBFT			=		$(LIBFT_DIR)libft.a
