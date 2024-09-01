@@ -6,11 +6,10 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/09/01 13:33:05 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/01 18:04:14 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
 #include "minishell.h"
 
 void	check_term(void)
@@ -39,13 +38,12 @@ void	check_term(void)
 int	main(void)
 {
 	t_data	d;
-	int		i;
 
 	d.exit_status = 0;
 	check_term();
 	while (1)
 	{
-		d.input = readline("minishell> ");
+		d.input = readline(PROMPT);
 		if (d.input == NULL || ft_strncmp(d.input, "exit", 5) == 0)
 		{
 			if (d.input)
@@ -56,13 +54,9 @@ int	main(void)
 		{
 			add_history(d.input);
 			d.tokens = main_parser(d.input, d.exit_status);
+			ft_print_matrix(d.tokens, 1);
 			if (d.tokens)
-			{
-				i = 0;
-				while (d.tokens[i])
-					printf("input: %s\n", d.tokens[i++]);
-				free_array(d.tokens);
-			}
+				ft_free_matrix((void **)d.tokens);
 		}
 		free(d.input);
 	}

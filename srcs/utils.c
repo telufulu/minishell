@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 16:16:55 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/08/19 11:55:54 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/09/01 17:54:39 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,4 @@ void	*ft_realloc(void *ptr, size_t size)
 		free(ptr);
 	}
 	return (result);
-}
-
-void	*free_array(char **array)
-{
-	int	i;
-
-	if (!array)
-		return (NULL);
-	i = -1;
-	while (array[++i])
-	{
-		free(array[i]);
-		array[i] = NULL;
-	}
-	free(array);
-	array = NULL;
-	return (NULL);
 }

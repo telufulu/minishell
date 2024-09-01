@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:55:13 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/07/15 18:56:26 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/09/01 17:54:54 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <unistd.h>    
 # include "libft.h"
 
-void	*free_array(char **array);
 void	*ft_realloc(void *ptr, size_t size);
 
 #endif

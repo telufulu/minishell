@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:03:07 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/08/30 16:04:55 by augustindelab    ###   ########.fr       */
+/*   Updated: 2024/09/01 18:03:21 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ char	**main_parser(const char *input, int exit_status)
 		else
 			p.check = handle_args(&p);
 		if (!p.check)
-			return (free_array(p.tokens));
+			return ((char **)ft_free_matrix((void **)p.tokens));
 	}
 	p.tokens[p.count] = NULL;
 	p.tokens = ft_realloc(p.tokens, (p.count + 1) * sizeof(char *));

@@ -3,3 +3,4 @@
 objs/
 .DS_Store
 .pruebas.c
+minishell
