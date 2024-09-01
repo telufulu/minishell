@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:04:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/01 13:04:59 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/01 13:29:34 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@
 # include <term.h>			// tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs
 # include <readline/readline.h>	//add_history, readline 
 
+# include "parser.h"
+# include "utils.h"
+
 /*
  * Defines
  */
@@ -39,10 +42,18 @@
 /*
  * Structs
  */
+typedef struct s_data
+{
+	char	*input;
+	char	**tokens;
+	int		index;
+	int		exit_status;
+}				t_data;
 
 /*
  * Files
  */
 // main.c
+void	check_term(void);
 
 #endif

@@ -10,11 +10,11 @@ OBJS_DIR		=		objs/
 SRCS			=		$(addprefix $(SRCS_DIR), $(SRCS_FILES))
 OBJS			=		$(addprefix $(OBJS_DIR), $(OBJS_FILES))
 OBJS_FILES		=		$(SRCS_FILES:%.c=%.o)
-SRCS_FILES		=		main.c
-#SRCS_FILES		+=		parser/parser_main.c
+SRCS_FILES		=		main.c utils.c
+SRCS_FILES		+=		parser/parser.c parser/parser_args.c \
+						parser/parser_utils.c parser/parser_variable.c
 #SRCS_FILES		+=		lexer/lexer_main.c
 #SRCS_FILES		+=		executor/executor_main.c
-#SRCS_FILES		+=		utils/
 
 LIBS			=		libs/
 LIBFT			=		$(LIBFT_DIR)libft.a
@@ -59,8 +59,9 @@ $(LIBFT):
 $(OBJS_DIR)%.o:	$(SRCS_DIR)%.c
 	if [ ! -d $(OBJS_DIR) ]; then echo "\nCompiling $(BLUE)$(NAME)$(DEF_COLOR)"; fi
 	mkdir -p $(OBJS_DIR)
-	mkdir -p $(OBJS_DIR)utils
 	mkdir -p $(OBJS_DIR)lexer
+	mkdir -p $(OBJS_DIR)parser
+	mkdir -p $(OBJS_DIR)executor
 	$(CC) $(CFLAGS) -c $< -o $@
 	echo  "\33[2K\r$(GRAY)$(CC) $(CFLAGS) $(LFLAGS) -c $< -o $@$(DEF_COLOR)"
 
