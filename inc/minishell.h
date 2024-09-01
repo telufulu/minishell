@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:04:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/01 18:54:36 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/01 21:24:02 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 /*
  * Includes
  */
-# include "utils.h"
 # include "libft.h"
 # include "parser.h"
 
@@ -55,9 +54,11 @@ typedef struct s_data
  * Files
  */
 // main.c
-void	check_term(char **envp);
+void	good_exit(t_data *d);
 
 // utils.c
+void	check_term(char **envp);
+void	init_shell(t_data *d, char **envp, char **argv, int argc);
 
 // env.c
 char	*get_env(char **env, char *var);

@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:44:12 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/08/30 15:38:40 by augustindelab    ###   ########.fr       */
+/*   Updated: 2024/09/01 21:22:29 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <unistd.h>   
 # include <string.h>   
 # include "libft.h"
-# include "utils.h"
 
 # ifndef MAX_TOKENS
 #  define MAX_TOKENS 600
