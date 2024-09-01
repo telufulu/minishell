@@ -4,12 +4,15 @@ CFLAGS          =       -Wall -Werror -Wextra -I$(INC) -I$(LIBFT_DIR)inc/
 SANITIZE        =       -fsanitize=
 INC             =       inc/
 
+SRCS_DIR        =       srcs/
+OBJS_DIR        =       objs/
+
 SRCS            =       $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 OBJS            =       $(addprefix $(OBJS_DIR), $(OBJS_FILES))
 OBJS_FILES      =       $(SRCS_FILES:%.c=%.o)
 SRCS_FILES      =       main.c
-SRCS_DIR        =       srcs/
-OBJS_DIR        =       objs/
+SRCS_FILES      +=      utils/init_env.c utils/errors.c utils/frees.c
+SRCS_FILES      +=      lexer/cmd.c
 
 LIBS            =       libs/
 LIBFT           =       $(LIBFT_DIR)libft.a
@@ -19,10 +22,10 @@ LFLAGS          =	-L $(LIBFT_DIR) -lft -lreadline
 
 ## Colors
 
-NO_COLOR        =       \033[0m
 BOLD_PURPLE     =       \033[1;35m
 BOLD_CYAN       =       \033[1;36m
 BOLD_YELLOW     =       \033[1;33m
+NO_COLOR        =       \033[0m
 DEF_COLOR       =       \033[0;39m
 GRAY            =       \033[0;90m
 RED             =       \033[0;91m
@@ -34,6 +37,9 @@ CYAN            =       \033[0;96m
 WHITE           =       \033[0;97m
 
 all:    $(NAME)
+
+sanitize:         CFLAGS += $(SANITIZE) -g3
+sanitize:         clean all
 
 sanitize_leaks:         CFLAGS += $(SANITIZE)address -g3
 sanitize_leaks:         clean all
@@ -51,6 +57,8 @@ $(LIBFT):
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	if [ ! -d $(OBJS_DIR) ]; then echo "\nCompiling $(BLUE)$(NAME)$(DEF_COLOR)"; fi
 	mkdir -p $(OBJS_DIR)
+	mkdir -p $(OBJS_DIR)utils
+	mkdir -p $(OBJS_DIR)lexer
 	$(CC) $(CFLAGS) -c $< -o $@
 	echo  "\33[2K\r$(GRAY)$(CC) $(CFLAGS) $(LFLAGS) -c $< -o $@$(DEF_COLOR)"
 
