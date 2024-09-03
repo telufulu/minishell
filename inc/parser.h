@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:44:12 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/09/01 21:22:29 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/04 00:11:16 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,10 @@ void	handle_variable_expansion(t_parser *p);
 void	append_variable(t_parser *p, char *var);
 void	handle_variable_expansion(t_parser *p);
 void	append_variable(t_parser *p, char *var);
+
+// tokenizer.c
+char	*tokenizer(char **params);
+void	is_infl(char **res, char params, int i);
+void	is_outfl(char **res, char params, int i);
 
 #endif
