@@ -6,34 +6,12 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 23:03:41 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/04 00:19:51 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/05 19:28:06 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h" //t_data
 #include "parser.h"
-
-void	is_outfl(char **res, char params, int i)
-{
-	if (params == '<')
-	{
-		*res[i + 1] = OUTFL;
-		*res[i] = OPER;
-	}
-	else
-		*res[i] = 42;
-}
-
-void	is_infl(char **res, char params, int i)
-{
-	if (params && params == '<')
-	{
-		*res[i] = INFL;
-		*res[i + 1] = OPER;
-	}
-	else
-		*res[i] = 42;
-}
 
 char	*tokenizer(char **params)
 {
