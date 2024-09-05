@@ -6,11 +6,12 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/09/04 00:22:00 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/05 19:48:43 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "utils.h"
 
 void	good_exit(t_data *d)
 {

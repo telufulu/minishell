@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:04:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/05 19:38:08 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/05 19:53:32 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
  * Includes
  ******************************************************************************/
 # include "libft.h"
-# include "parser.h"
 
 # include <unistd.h>
 # include <stdio.h>				// printf, perror
@@ -31,7 +30,8 @@
 # include <termios.h>			// tcsetattr, tcgetattr
 # include <term.h>				// tgetent, tgetflag, tgetnum, tgetstr, tgoto
 								// tputs
-# include <readline/readline.h>	//add_history, readline 
+# include <readline/readline.h>	//readline 
+# include <readline/history.h>	//add_history 
 
 /*******************************************************************************
  * Defines

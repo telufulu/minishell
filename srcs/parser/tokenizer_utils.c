@@ -6,10 +6,11 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:26:35 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/05 19:27:35 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/05 19:53:28 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
 #include "parser.h"
 
 void	is_outfl(char **res, char params, int i)
