@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:04:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/05 19:37:24 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/05 19:38:08 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,6 @@ typedef struct s_data
  ******************************************************************************/
 // main.c
 void	good_exit(t_data *d);
-
-// utils.c
-void	check_term(char **envp);
-void	init_shell(t_data *d, char **envp, char **argv, int argc);
 
 // env.c
 char	*get_env(char **env, char *var);
