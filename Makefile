@@ -13,7 +13,7 @@ OBJS_FILES		=		$(SRCS_FILES:%.c=%.o)
 SRCS_FILES		=		main.c utils.c env.c
 SRCS_FILES		+=		parser/parser.c parser/parser_args.c \
 						parser/parser_utils.c parser/parser_variable.c\
-						parser/tokenizer.c
+						parser/tokenizer.c parser\tokenizer_utils.c
 #SRCS_FILES		+=		executor/executor_main.c
 
 LIBS			=		libs/
