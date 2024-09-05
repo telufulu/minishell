@@ -6,13 +6,16 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:44:12 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/09/04 00:11:16 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/05 19:35:57 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 # include <stdio.h>      // printf, perror
 # include <stdlib.h>     // malloc, free, exit, getenv
 # include <unistd.h>   
@@ -23,6 +26,9 @@
 #  define MAX_TOKENS 600
 # endif
 
+/*******************************************************************************
+ * Struct
+ ******************************************************************************/
 typedef struct s_parser
 {
 	char		**tokens;
@@ -40,6 +46,9 @@ typedef struct s_parser
 	size_t		l;
 }				t_parser;
 
+/*******************************************************************************
+ * Files
+ ******************************************************************************/
 int		get_varname(t_parser *p, const char *s);
 int		handle_args(t_parser *p);
 int		handle_singlequote(t_parser *p);
