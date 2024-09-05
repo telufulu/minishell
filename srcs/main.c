@@ -27,7 +27,7 @@ int	main(int argc, char **argv, char **envp)
 	while (d.input && ft_strncmp(d.input, "exit", 5))
 	{
 		add_history(d.input);
-		d.tokens = main_parser(d.input, d.exit_status);
+		d.tokens = main_parser(&d);
 		if (d.tokens)
 		{
 			ft_print_matrix(d.tokens, 1);

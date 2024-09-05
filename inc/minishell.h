@@ -30,7 +30,8 @@
 # include <errno.h>			// errno
 # include <termios.h>		// tcsetattr, tcgetattr
 # include <term.h>			// tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs
-# include <readline/readline.h>	//add_history, readline 
+# include <readline/readline.h>	//readline 
+# include <readline/history.h>	//add_history
 
 /*
  * Defines

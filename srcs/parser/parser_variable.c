@@ -33,6 +33,8 @@ int	get_varname(t_parser *p, const char *s)
 			p->i += 2;
 			return (1);
 		}
+		else if (s[p->i + 1] == '\'' || s[p->i + 1] == '"')
+			p->i++;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:03:07 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/09/01 21:09:23 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/08/30 16:04:55 by augustindelab    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	handle_args(t_parser *p)
 			p->l = 0;
 			while (p->start < p->s)
 			{
-				if (*(p->start) == '\'')
+				if (*(p->start) == '\'' && !is_heredoc(p))
 					handle_single_quote(p);
-				else if (*(p->start) == '"')
+				else if (*(p->start) == '"' && !is_heredoc(p))
 					handle_double_quote(p);
 				else
 					handle_variable_expansion(p);
@@ -40,6 +40,7 @@ int	handle_args(t_parser *p)
 	return (1);
 }
 
+/*
 int	handle_singlequote(t_parser *p)
 {
 	p->start = ++(p->s);
@@ -88,13 +89,15 @@ int	handle_doublequote(t_parser *p)
 	(p->count)++;
 	return (1);
 }
+*/
 
-char	**main_parser(const char *input, int exit_status)
+char	**main_parser(t_data *d)
 {
 	t_parser	p;
 
-	p.s = input;
-	p.exit_code = exit_status;
+	p.s = d->input;
+	p.env = d->env;
+	p.exit_code = d->exit_status;
 	p.tokens = ft_calloc((ft_strlen(p.s) + 1), sizeof(char *));
 	if (!p.tokens)
 		return (NULL);
@@ -103,12 +106,12 @@ char	**main_parser(const char *input, int exit_status)
 	{
 		while (*(p.s) == ' ' || (*(p.s) >= 9 && *(p.s) <= 13))
 			(p.s)++;
-		if (*(p.s) == '\'')
-			p.check = handle_singlequote(&p);
-		else if (*(p.s) == '"')
-			p.check = handle_doublequote(&p);
-		else
-			p.check = handle_args(&p);
+//		if (*(p.s) == '\'')
+//			p.check = handle_singlequote(&p);
+//		else if (*(p.s) == '"')
+//			p.check = handle_doublequote(&p);
+//		else
+		p.check = handle_args(&p);
 		if (!p.check)
 			return ((char **)ft_free_matrix((void **)p.tokens));
 	}
