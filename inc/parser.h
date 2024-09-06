@@ -24,7 +24,6 @@
 #  define MAX_TOKENS 600
 # endif
 
-
 typedef struct s_parser
 {
 	char		**tokens;
