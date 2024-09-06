@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "parser.h"
 
 void	good_exit(t_data *d)
 {

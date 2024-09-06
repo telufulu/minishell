@@ -40,57 +40,6 @@ int	handle_args(t_parser *p)
 	return (1);
 }
 
-/*
-int	handle_singlequote(t_parser *p)
-{
-	p->start = ++(p->s);
-	p->end = ft_strchr(p->s, '\'');
-	if (p->end == p->s)
-		return (++(p->s), 1);
-	if (!p->end)
-		return (ft_putstr_fd("minishell: single quote not closed.\n", 2), 0);
-	if (is_heredoc(p))
-	{
-		p->start = --(p->s);
-		p->end++;
-	}
-	p->length = p->end - p->start;
-	p->tokens[p->count] = malloc(p->length + 1);
-	if (!p->tokens[p->count])
-		return (0);
-	ft_strlcpy(p->tokens[p->count], p->start, p->length + 1);
-	p->s = p->end;
-	if (!is_heredoc(p))
-		p->s = p->end + 1;
-	(p->count)++;
-	return (1);
-}
-
-int	handle_doublequote(t_parser *p)
-{
-	p->start = ++(p->s);
-	p->end = ft_strchr(p->s, '"');
-	if (p->end == p->s)
-		return (++(p->s), 1);
-	if (!p->end)
-		return (ft_putstr_fd("minishell: double quote not closed.\n", 2), 0);
-	if (is_heredoc(p))
-	{
-		p->start = --(p->s);
-		p->end++;
-	}
-	p->length = p->end - p->start;
-	p->tokens[p->count] = handle_variable(p, '"');
-	if (!p->tokens[p->count])
-		return (0);
-	p->s = p->end;
-	if (!is_heredoc(p))
-		p->s = p->end + 1;
-	(p->count)++;
-	return (1);
-}
-*/
-
 char	**main_parser(t_data *d)
 {
 	t_parser	p;
@@ -106,11 +55,6 @@ char	**main_parser(t_data *d)
 	{
 		while (*(p.s) == ' ' || (*(p.s) >= 9 && *(p.s) <= 13))
 			(p.s)++;
-//		if (*(p.s) == '\'')
-//			p.check = handle_singlequote(&p);
-//		else if (*(p.s) == '"')
-//			p.check = handle_doublequote(&p);
-//		else
 		p.check = handle_args(&p);
 		if (!p.check)
 			return ((char **)ft_free_matrix((void **)p.tokens));
