@@ -21,6 +21,7 @@
 # include <unistd.h>   
 # include <string.h>   
 # include "libft.h"
+# include "minishell.h"
 
 # ifndef MAX_TOKENS
 #  define MAX_TOKENS 600
@@ -32,6 +33,7 @@
 typedef struct s_parser
 {
 	char		**tokens;
+	char		**env;
 	int			count;
 	int			check;
 	int			exit_code;
@@ -60,7 +62,7 @@ int		define_length(t_parser *p);
 char	next_quote(const char *s);
 char	*substitute_variable(t_parser *p, char *result);
 char	*handle_variable(t_parser *p, char limiter);
-char	**main_parser(const char *input, int exit_status);
+char	**main_parser(t_data *d);
 void	handle_single_quote(t_parser *p);
 void	handle_double_quote(t_parser *p);
 void	handle_variable_expansion(t_parser *p);

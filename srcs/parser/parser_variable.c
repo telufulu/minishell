@@ -33,6 +33,8 @@ int	get_varname(t_parser *p, const char *s)
 			p->i += 2;
 			return (1);
 		}
+		else if (s[p->i + 1] == '\'' || s[p->i + 1] == '"')
+			p->i++;
 	}
 	return (0);
 }
@@ -44,7 +46,7 @@ char	*substitute_variable(t_parser *p, char *result)
 	if (*(p->varname) == '?')
 		p->env_value = ft_itoa(p->exit_code);
 	else
-		p->env_value = getenv(p->varname);
+		p->env_value = get_env(p->env, p->varname);
 	if (p->env_value)
 	{
 		env_length = ft_strlen(p->env_value);

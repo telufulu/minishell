@@ -19,6 +19,18 @@
 # include "libft.h"
 
 # include <unistd.h>
+# include <stdio.h>			// printf, perror
+# include <stdlib.h>		// malloc, free, exit, getenv
+# include <sys/wait.h>		// wait, waitpid, wait3, wait4
+# include <signal.h>		// signal, sigaction, kill
+# include <sys/stat.h>		// stat, lstat, fstat
+# include <dirent.h>		// opendir, readdir, closedir
+# include <string.h>		// strerror
+# include <errno.h>			// errno
+# include <termios.h>		// tcsetattr, tcgetattr
+# include <term.h>			// tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs
+# include <readline/readline.h>	//readline 
+# include <readline/history.h>	//add_history
 # include <stdio.h>				// printf, perror
 # include <stdlib.h>			// malloc, free, exit, getenv
 # include <sys/wait.h>			// wait, waitpid, wait3, wait4
@@ -31,7 +43,7 @@
 # include <term.h>				// tgetent, tgetflag, tgetnum, tgetstr, tgoto
 								// tputs
 # include <readline/readline.h>	//readline 
-# include <readline/history.h>	//add_history 
+# include <readline/history.h>	//add_history
 
 /*******************************************************************************
  * Defines
