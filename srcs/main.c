@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/09/01 21:26:49 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/11 23:51:57 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 
 void	good_exit(t_data *d)
 {
-	d->env = (char **)ft_free_matrix((void **)d->env);
+	//d->env = (char **)ft_free_matrix((void **)d->env);
+	d->params = (char **)ft_free_matrix((void **)d->params);
+	free(d->tokens);
 	free(d->input);
+	d->tokens = NULL;
+	d->input = NULL;
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -28,17 +32,14 @@ int	main(int argc, char **argv, char **envp)
 	while (d.input && ft_strncmp(d.input, "exit", 5))
 	{
 		add_history(d.input);
-		d.tokens = main_parser(&d);
+		d.params = main_parser(&d);
 		if (d.tokens)
-		{
-			ft_print_matrix(d.tokens, 1);
-			d.tokens = (char **)ft_free_matrix((void **)d.tokens);
-		}
+			ft_print_matrix(d.params, 1);
 		free(d.input);
 		d.input = readline(PROMPT);
 	}
 	if (!d.input)
 		ft_error("readline failed", strerror(errno));
-	good_exit(&d);
+	//good_exit(&d);
 	return (0);
 }

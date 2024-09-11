@@ -6,22 +6,13 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 20:10:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/01 19:04:54 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/11 23:45:09 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h" //t_data
 #include "libft.h" // ft_calloc, ft_strdup, ft_strnstr, ft_strlen, 
 					// ft_free_matrix
-
-/*
-char	*get_env(char **env, char *var)
-{
-	while (env && !ft_strnstr(*env, var, 50))
-		env++;
-	return (*env + ft_strlen(var) + 1);
-}
-*/
 
 char	*get_env(char **env, char *var)
 {

@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:04:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/01 21:24:02 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/11 23:32:42 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@
 typedef struct s_data
 {
 	char	*input;
-	char	**tokens;
+	char	**params;
+	char	*tokens;
 	char	**env;
 	int		index;
 	int		exit_status;
