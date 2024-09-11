@@ -11,36 +11,20 @@
 /* ************************************************************************** */
 
 #include "minishell.h" //t_data
-#include "libft.h" // ft_calloc, ft_strdup, ft_strnstr, ft_strlen, 
-					// ft_free_matrix
+#include "libft.h" // ft_calloc, ft_strdup, ft_strnstr, ft_strlen, ft_matrix_len
+				   // ft_free_matrix
 
-/*
 char	*get_env(char **env, char *var)
 {
 	while (env && !ft_strnstr(*env, var, 50))
 		env++;
 	return (*env + ft_strlen(var) + 1);
 }
-*/
-
-char	*get_env(char **env, char *var)
-{
-	size_t	var_len;
-
-	var_len = ft_strlen(var);
-	while (*env)
-	{
-		if (ft_strncmp(*env, var, var_len) == 0 && (*env)[var_len] == '=')
-			return (*env + var_len + 1);
-		env++;
-	}
-	return (NULL);
-}
 
 char	**init_env(char **envp)
 {
-	char	**res;
-	int		i;
+	char **res;
+	int	i;
 
 	i = 0;
 	res = ft_calloc(sizeof(char *), ft_matrix_len(envp) + 1);

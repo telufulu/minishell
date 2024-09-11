@@ -29,7 +29,7 @@ void	handle_double_quote(t_parser *p)
 		append_variable(p, var);
 		p->start += p->i;
 	}
-	if (*p->start == '"')
+	else
 		p->start++;
 }
 
