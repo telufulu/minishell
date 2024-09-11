@@ -6,11 +6,12 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 16:16:55 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/09/01 21:20:39 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/05 19:33:29 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "utils.h"
 
 void	check_term(char **envp)
 {
