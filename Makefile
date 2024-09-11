@@ -13,7 +13,7 @@ OBJS_FILES		=		$(SRCS_FILES:%.c=%.o)
 SRCS_FILES		=		main.c utils.c env.c
 SRCS_FILES		+=		parser/parser.c parser/parser_args.c \
 						parser/parser_utils.c parser/parser_variable.c
-#SRCS_FILES		+=		lexer/lexer_main.c
+SRCS_FILES		+=		tokenizer/tokenizer.c
 #SRCS_FILES		+=		executor/executor_main.c
 
 LIBS			=		libs/
@@ -59,7 +59,7 @@ $(LIBFT):
 $(OBJS_DIR)%.o:	$(SRCS_DIR)%.c
 	if [ ! -d $(OBJS_DIR) ]; then echo "\nCompiling $(BLUE)$(NAME)$(DEF_COLOR)"; fi
 	mkdir -p $(OBJS_DIR)
-	mkdir -p $(OBJS_DIR)lexer
+	mkdir -p $(OBJS_DIR)tokenizer
 	mkdir -p $(OBJS_DIR)parser
 	mkdir -p $(OBJS_DIR)executor
 	$(CC) $(CFLAGS) -c $< -o $@

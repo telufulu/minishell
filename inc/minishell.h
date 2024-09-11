@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:04:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/11 23:32:42 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/12 00:01:56 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 /*
  * Includes
  */
-# include "libft.h"
-
-# include <unistd.h>
+# include <unistd.h>		// write
 # include <stdio.h>			// printf, perror
 # include <stdlib.h>		// malloc, free, exit, getenv
 # include <sys/wait.h>		// wait, waitpid, wait3, wait4
@@ -56,10 +54,6 @@ typedef struct s_data
  */
 // main.c
 void	good_exit(t_data *d);
-
-// utils.c
-void	check_term(char **envp);
-void	init_shell(t_data *d, char **envp, char **argv, int argc);
 
 // env.c
 char	*get_env(char **env, char *var);

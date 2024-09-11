@@ -6,16 +6,19 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/09/11 23:51:57 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/12 01:16:07 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "parser.h"
+#include "minishell.h" //libc, t_data
+#include "libft.h" //ft_strncmp, ft_free_matrix
+#include "utils.h" // init_shell
+#include "parser.h" // main_parser
+#include "token.h"
 
 void	good_exit(t_data *d)
 {
-	//d->env = (char **)ft_free_matrix((void **)d->env);
+	d->env = (char **)ft_free_matrix((void **)d->env);
 	d->params = (char **)ft_free_matrix((void **)d->params);
 	free(d->tokens);
 	free(d->input);
@@ -33,8 +36,14 @@ int	main(int argc, char **argv, char **envp)
 	{
 		add_history(d.input);
 		d.params = main_parser(&d);
-		if (d.tokens)
-			ft_print_matrix(d.params, 1);
+		d.tokens = tokenizer(d.params);
+		/**/
+		char	*aux;
+		aux = d.tokens;
+		while (aux && *aux)
+			ft_printf("%c", *aux++);
+		write(1, "\n", 1);
+		/**/
 		free(d.input);
 		d.input = readline(PROMPT);
 	}

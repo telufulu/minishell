@@ -6,11 +6,12 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 16:16:55 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/09/11 23:50:20 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/12 00:00:32 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell.h" //libc, t_data
+#include "libft.h" //ft_error, get_env, ft_printf
 
 void	check_term(char **envp)
 {
@@ -20,11 +21,11 @@ void	check_term(char **envp)
 	{
 		tty = ttyname(STDIN_FILENO);
 		if (get_env(envp, "SHELL"))
-			printf("Shell: %s\n", get_env(envp, "SHELL"));
+			ft_printf("Shell: %s\n", get_env(envp, "SHELL"));
 		if (get_env(envp, "USER"))
-			printf("User: %s ", get_env(envp, "USER"));
+			ft_printf("User: %s ", get_env(envp, "USER"));
 		if (tty)
-			printf("is succesfully logged on %s\n", tty);
+			ft_printf("is succesfully logged on %s\n", tty);
 		else
 			perror("ttyname");
 	}
