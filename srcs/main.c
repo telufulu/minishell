@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/09/12 20:04:16 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/12 20:34:54 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "utils.h" // init_shell
 #include "parser.h" // main_parser
 #include "token.h" // tokenizer
+#include "executor.h" // executor
 
 void	good_exit(t_data *d)
 {
@@ -34,9 +35,13 @@ int	main(int argc, char **argv, char **envp)
 	d.input = readline(PROMPT);
 	while (d.input && ft_strncmp(d.input, "exit", 5))
 	{
-		add_history(d.input);
-		d.params = main_parser(&d);
-		d.tokens = tokenizer(d.params);
+		if (*d.input)
+		{
+			add_history(d.input);
+			d.params = main_parser(&d);
+			d.tokens = tokenizer(d.params);
+			executor(&d);
+		}
 		free(d.input);
 		d.input = readline(PROMPT);
 	}
