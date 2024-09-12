@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/09/12 01:16:07 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/12 20:04:16 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h" //ft_strncmp, ft_free_matrix
 #include "utils.h" // init_shell
 #include "parser.h" // main_parser
-#include "token.h"
+#include "token.h" // tokenizer
 
 void	good_exit(t_data *d)
 {
@@ -37,13 +37,6 @@ int	main(int argc, char **argv, char **envp)
 		add_history(d.input);
 		d.params = main_parser(&d);
 		d.tokens = tokenizer(d.params);
-		/**/
-		char	*aux;
-		aux = d.tokens;
-		while (aux && *aux)
-			ft_printf("%c", *aux++);
-		write(1, "\n", 1);
-		/**/
 		free(d.input);
 		d.input = readline(PROMPT);
 	}
