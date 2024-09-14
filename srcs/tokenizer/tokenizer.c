@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 00:28:47 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/12 01:39:32 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/14 12:05:14 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*redirs(char *res, char **params)
 	{
 		if (i && !res[i] && *params[i] == '<')
 		{
-			res[i - 1] = INFD;
+			res[i + 1] = INFD;
 			res[i] = OPER;
 		}
 		else if (!res[i] && *params[i] == '>')
