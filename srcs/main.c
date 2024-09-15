@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/09/12 20:56:20 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/14 12:28:03 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	if (!d.input)
 		ft_error("readline failed", strerror(errno));
-	good_exit(&d);
+	ft_printf("exit\n");
+	//good_exit(&d);
 	return (0);
 }
