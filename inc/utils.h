@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 23:55:17 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/11 23:56:56 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/18 00:12:23 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@
  ******************************************************************************/
 // utils.c
 void	check_term(char **envp);
-void	init_shell(t_data *d, char **envp, char **argv, int argc);
+t_data	*init_shell(t_data *d, char **envp, char **argv, int argc);
 
 #endif

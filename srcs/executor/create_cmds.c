@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 20:06:58 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/15 21:21:51 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/18 00:26:40 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int open_infiles(t_cmd *d, int in)
 		{
 			if (in)
 				close(in);
-			ft_printf("in: %i\n", in);
 			in = open(d->params[i], O_CREAT | O_RDONLY, 0644);
 			if (in == -1)
 				ft_error("something happend (infd)", NULL);
@@ -85,11 +84,10 @@ t_cmd	*init_cmd(t_data *d, size_t i)
 	if (!res)
 		ft_error("malloc failed",strerror(errno));
 	res->data = d;
-	ft_printf("cmd %u: %s\n", i, d->tokens);
-	//mv_params(d->tokens, d->params, i, res);
-	//res->infd = open_infiles(res, res->infd);
-	//res->outfd = open_outfiles(res, res->outfd);
-	//res->argv = get_ex_args(res->params, res->tokens);
+	mv_params(d->tokens, d->params, i, res);
+	res->infd = open_infiles(res, res->infd);
+	res->outfd = open_outfiles(res, res->outfd);
+	res->argv = get_ex_args(res->params, res->tokens);
 	//res->path = get_path(res->argv[0]);
 	return (res);
 }
@@ -100,11 +98,14 @@ t_cmd	**create_cmds(size_t nb_cmds, t_data *d)
 	size_t	i;
 
 	i = -1;
-	ft_printf("cmd: %s\n", i, d->tokens);
 	res = ft_calloc(sizeof(t_cmd *), nb_cmds + 1);
 	if (!res)
 		ft_error("malloc failed", strerror(errno));
 	while (++i < nb_cmds)
+	{
 		res[i] = init_cmd(d, i);
+		ft_print_matrix(res[i]->params, 1);
+		ft_printf("-----------------------\n");
+	}
 	return (res);
 }

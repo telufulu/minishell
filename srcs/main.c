@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/09/15 21:18:28 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/18 00:17:27 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,26 @@ void	good_exit(t_data *d)
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_data	d;
+	t_data	*d;
 
-	init_shell(&d, envp, argv, argc);
-	d.input = readline(PROMPT);
-	while (d.input && ft_strncmp(d.input, "exit", 5))
+	d = init_shell(NULL, envp, argv, argc);
+	d->input = readline(PROMPT);
+	while (d->input && ft_strncmp(d->input, "exit", 5))
 	{
-		if (*d.input)
+		if (*d->input)
 		{
-			add_history(d.input);
-			d.params = main_parser(&d);
-			d.tokens = tokenizer(d.params);
-			ft_printf("d: %p\n", d);
-			executor(&d);
+			add_history(d->input);
+			d->params = main_parser(d);
+			d->tokens = tokenizer(d->params);
+			//ft_printf("cmd %u: %s\n", tokenizer(d->params));
+			executor(d);
 		}
-		free(d.input);
-		d.input = readline(PROMPT);
+		free(d->input);
+		d->input = readline(PROMPT);
 	}
-	if (!d.input)
+	if (!d->input)
 		ft_error("readline failed", strerror(errno));
 	ft_printf("exit\n");
-	//good_exit(&d);
+	//good_exit(d);
 	return (0);
 }

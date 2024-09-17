@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 20:06:58 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/15 18:45:17 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/18 00:19:06 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	mv_params(char *tokens, char **params, size_t i, t_cmd *c)
 {
 	if (i > 0)
 	{
-		ft_printf("ENTRO\n");
 		while (tokens && *tokens && *tokens != PIPE && i > 0)
 		{
 			++tokens;

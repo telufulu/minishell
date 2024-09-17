@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 16:16:55 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/09/12 01:48:10 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/18 00:11:00 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,17 @@ void	check_term(char **envp)
 		ft_error("stdin is not a terminal", strerror(errno));
 }
 
-void	init_shell(t_data *d, char **envp, char **argv, int argc)
+t_data	*init_shell(t_data *d, char **envp, char **argv, int argc)
 {
 	if (argc > 1 && argv)
 		ft_error("minishell doesn't get any arguments", NULL);
+	d = ft_calloc(sizeof(t_data), 1);
+	if (!d)
+		ft_error("malloc failed", strerror(errno));
 	d->env = init_env(envp);
 	if (!d->env || !*d->env)
 		ft_error("init shell failed", strerror(errno));
 	check_term(d->env);
 	d->exit_status = 0;
+	return (d);
 }
