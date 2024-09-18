@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/09/18 00:17:27 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/18 19:39:30 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	main(int argc, char **argv, char **envp)
 			add_history(d->input);
 			d->params = main_parser(d);
 			d->tokens = tokenizer(d->params);
-			//ft_printf("cmd %u: %s\n", tokenizer(d->params));
 			executor(d);
 		}
 		free(d->input);
@@ -48,7 +47,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	if (!d->input)
 		ft_error("readline failed", strerror(errno));
-	ft_printf("exit\n");
+	//ft_printf("exit\n");
 	//good_exit(d);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 20:06:58 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/18 00:19:06 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/18 20:03:49 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,29 +42,6 @@ size_t	count_args(char *tokens)
 		++tokens;
 	}
 	return (res);
-}
-
-// This function moves params and tokens to the next cmd, in other words,
-// it moves params and tokens behind the next PIPE
-void	mv_params(char *tokens, char **params, size_t i, t_cmd *c)
-{
-	if (i > 0)
-	{
-		while (tokens && *tokens && *tokens != PIPE && i > 0)
-		{
-			++tokens;
-			++params;
-			if (*tokens == PIPE)
-				--i;
-		}
-		c->params = params + 1;
-		c->tokens = tokens + 1;
-	}
-	else
-	{
-		c->params = params;
-		c->tokens = tokens;
-	}
 }
 
 size_t	next_pipe(char *tokens)

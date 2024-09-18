@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 20:07:53 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/18 00:05:52 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/18 20:04:07 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 typedef struct s_cmd
 {
 	t_data	*data;
-	char	**params;
-	char	*tokens;
 	int		infd;
 	int		outfd;
 	char	**argv;
@@ -43,6 +41,5 @@ t_cmd	**create_cmds(size_t nb_cmds, t_data *d);
 // executor_utils.c
 size_t	count_cmds(char *tokens);
 size_t	count_args(char *tokens);
-void	mv_params(char *tokens, char **params, size_t i, t_cmd *c);
 size_t	next_pipe(char *tokens);
 #endif
