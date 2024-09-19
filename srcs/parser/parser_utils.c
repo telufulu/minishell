@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:35:36 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/08/30 15:38:26 by augustindelab    ###   ########.fr       */
+/*   Updated: 2024/09/19 17:58:03 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_meta_character(char c)
 {
-	return (c == '<' || c == '>' || c == '|');
+	return (c == '<' || c == '>');
 }
 
 int	is_heredoc(t_parser *p)
@@ -63,7 +63,7 @@ int	check_quotes(t_parser *p)
 			return (0);
 		}
 	}
-	else if (*(p->s) == '&' && *(p->s + 1) == '&')
+	else if (*(p->s) == '&' || *(p->s) == '|')
 		return (2);
 	else
 		p->s++;
@@ -77,8 +77,8 @@ int	define_length(t_parser *p)
 	p->start = p->s;
 	if (is_meta_character(*(p->s)) && (*(p->s + 1) == *(p->s)))
 		p->s += 2;
-	else if (*(p->s) == '&' && *(p->s + 1) == '&')
-		p->s += 2;
+	else if (*(p->s) == '&' || *(p->s) == '|')
+		p->s++;
 	else if (is_meta_character(*(p->s)))
 		p->s++;
 	else
