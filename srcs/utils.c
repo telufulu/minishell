@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 16:16:55 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/09/18 00:11:00 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/21 17:51:35 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,14 @@ t_data	*init_shell(t_data *d, char **envp, char **argv, int argc)
 	check_term(d->env);
 	d->exit_status = 0;
 	return (d);
+}
+
+void	ft_shell_error(char *var, char *msg_error)
+{
+	ft_putstr_fd("bash: ", 2);
+	if (var && *var)
+		ft_putstr_fd(var, 2);
+	if (msg_error && *msg_error)
+		ft_putstr_fd(msg_error, 2);
+	ft_putstr_fd("\n", 2);
 }

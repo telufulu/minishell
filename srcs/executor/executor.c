@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 20:06:58 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/15 21:21:26 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/21 17:55:39 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,7 @@ void	executor(t_data *d)
 	t_cmd	**c;
 
 	c = create_cmds(count_cmds(d->tokens), d);
-	ft_free_matrix((void **)c);
+	if (c[0]->path)
+		ft_printf("%s\n", c[0]->path);
+	//ft_free_matrix((void **)c);
 }

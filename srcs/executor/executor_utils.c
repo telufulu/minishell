@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 20:06:58 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/18 20:03:49 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/21 17:42:47 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,27 @@ size_t	next_pipe(char *tokens)
 	while (tokens && tokens[res] && tokens[res] != PIPE)
 		++res;
 	return (res);
+}
+
+char	*get_path(char *cmd, char **env)
+{
+	char	*path;
+	char	*path_env;
+	char	**spl_path;
+	int		i;
+
+	i = 0;
+	path = NULL;
+	path_env = get_env(env, "PATH");
+	spl_path = ft_split(path_env, ':');
+	while (spl_path[i] && access(path, X_OK) == -1)
+	{
+		path = ft_strjoin(spl_path[i], cmd);
+		if (!access(path, X_OK))
+			return (path);
+		free(path);
+		++i;
+	}
+	free(cmd);
+	return (NULL);
 }

@@ -6,17 +6,18 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 20:06:58 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/18 20:06:50 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/21 17:52:34 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "utils.h" // ft_shell_error
 #include "minishell.h" // t_data, access
 #include "executor.h" // t_cmd
 #include "libft.h" // ft_calloc, ft_error, strrerror
 #include "token.h" // PIPE, INFD, OUTFD
 #include <fcntl.h> // open
 
-int open_infiles(t_cmd *d, int in)
+int open_infiles(t_data *d, int in)
 {
 	int	i;
 
@@ -36,7 +37,7 @@ int open_infiles(t_cmd *d, int in)
 	return (in);
 }
 
-int open_outfiles(t_cmd *d, int out)
+int open_outfiles(t_data *d, int out)
 {
 	int	i;
 
@@ -76,7 +77,7 @@ char **get_ex_args(char **params, char *tok)
 	return (res);
 }
 
-t_cmd	*init_cmd(t_data *d, size_t i)
+t_cmd	*init_cmd(t_data *d)
 {
 	t_cmd	*res;
 
@@ -86,8 +87,10 @@ t_cmd	*init_cmd(t_data *d, size_t i)
 	res->data = d;
 	//res->infd = open_infiles(res, res->infd);
 	//res->outfd = open_outfiles(res, res->outfd);
-	//res->argv = get_ex_args(res->params, res->tokens);
-	//res->path = get_path(res->argv[0]);
+	res->argv = get_ex_args(d->params, d->tokens);
+	res->path = get_path(ft_strjoin("/", res->argv[0]), d->env);
+	if (!res->path)
+		ft_shell_error(res->argv[0], ": command not found");
 	return (res);
 }
 
@@ -101,11 +104,6 @@ t_cmd	**create_cmds(size_t nb_cmds, t_data *d)
 	if (!res)
 		ft_error("malloc failed", strerror(errno));
 	while (i < nb_cmds)
-	{
-		res[i] = init_cmd(d, i);
-		ft_print_matrix(res[i]->params, 1);
-		ft_printf("-----------------------\n");
-		++i;
-	}
+		res[i++] = init_cmd(d);
 	return (res);
 }
