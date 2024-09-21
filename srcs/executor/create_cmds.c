@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 20:06:58 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/21 17:52:34 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/21 18:30:54 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int open_infiles(t_data *d, int in)
 				close(in);
 			in = open(d->params[i], O_CREAT | O_RDONLY, 0644);
 			if (in == -1)
-				ft_error("something happend (infd)", NULL);
+				ft_error("unable to open infile", NULL);
 		}
 		++i;
 	}
@@ -50,7 +50,7 @@ int open_outfiles(t_data *d, int out)
 				close(out);
 			out = open(d->params[i], O_CREAT | O_WRONLY, 0644);
 			if (out == -1)
-				ft_error("something happend (outfd)", NULL);
+				ft_error("unable to open outfd", NULL);
 		}
 		++i;
 	}
@@ -85,12 +85,10 @@ t_cmd	*init_cmd(t_data *d)
 	if (!res)
 		ft_error("malloc failed",strerror(errno));
 	res->data = d;
-	//res->infd = open_infiles(res, res->infd);
-	//res->outfd = open_outfiles(res, res->outfd);
+	res->infd = open_infiles(res->data, res->infd);
+	res->outfd = open_outfiles(res->data, res->outfd);
 	res->argv = get_ex_args(d->params, d->tokens);
 	res->path = get_path(ft_strjoin("/", res->argv[0]), d->env);
-	if (!res->path)
-		ft_shell_error(res->argv[0], ": command not found");
 	return (res);
 }
 

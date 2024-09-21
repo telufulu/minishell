@@ -6,11 +6,12 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 20:06:58 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/21 17:42:47 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/21 18:33:17 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h" // t_data, access
+#include "utils.h" // ft_shell_error
 #include "executor.h" // t_cmd
 #include "libft.h" // ft_calloc, ft_error, strrerror
 #include "token.h" // PIPE, INFD, OUTFD
@@ -69,10 +70,11 @@ char	*get_path(char *cmd, char **env)
 	{
 		path = ft_strjoin(spl_path[i], cmd);
 		if (!access(path, X_OK))
-			return (path);
+			return (free(cmd), path);
 		free(path);
 		++i;
 	}
+	ft_shell_error(cmd + 1, ": command not found");
 	free(cmd);
 	return (NULL);
 }
