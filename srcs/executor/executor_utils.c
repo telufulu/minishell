@@ -6,16 +6,12 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 20:06:58 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/21 18:33:17 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/21 20:14:12 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h" // t_data, access
-#include "utils.h" // ft_shell_error
-#include "executor.h" // t_cmd
-#include "libft.h" // ft_calloc, ft_error, strrerror
 #include "token.h" // PIPE, INFD, OUTFD
-#include <fcntl.h> // open
+#include "minishell.h" // size_t
 
 size_t	count_cmds(char *tokens)
 {
@@ -53,28 +49,4 @@ size_t	next_pipe(char *tokens)
 	while (tokens && tokens[res] && tokens[res] != PIPE)
 		++res;
 	return (res);
-}
-
-char	*get_path(char *cmd, char **env)
-{
-	char	*path;
-	char	*path_env;
-	char	**spl_path;
-	int		i;
-
-	i = 0;
-	path = NULL;
-	path_env = get_env(env, "PATH");
-	spl_path = ft_split(path_env, ':');
-	while (spl_path[i] && access(path, X_OK) == -1)
-	{
-		path = ft_strjoin(spl_path[i], cmd);
-		if (!access(path, X_OK))
-			return (free(cmd), path);
-		free(path);
-		++i;
-	}
-	ft_shell_error(cmd + 1, ": command not found");
-	free(cmd);
-	return (NULL);
 }

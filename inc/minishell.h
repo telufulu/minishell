@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:04:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/21 17:58:18 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/21 19:35:41 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
  * Includes
  */
 # include <unistd.h>		// write
+# include <stddef.h>		// size_t
 # include <stdio.h>			// printf, perror
 # include <stdlib.h>		// malloc, free, exit, getenv
 # include <sys/wait.h>		// wait, waitpid, wait3, wait4

@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/09/21 17:21:58 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/24 16:31:45 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	good_exit(t_data *d)
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	*d;
+	// SACAR CMD PARA LIBERAR
 
 	d = init_shell(NULL, envp, argv, argc);
 	d->input = readline(PROMPT);

@@ -15,7 +15,8 @@ SRCS_FILES		+=		parser/parser.c parser/parser_args.c \
 						parser/parser_utils.c parser/parser_variable.c
 SRCS_FILES		+=		tokenizer/tokenizer.c
 SRCS_FILES		+=		executor/executor.c executor/create_cmds.c \
-						executor/executor_utils.c
+						executor/executor_utils.c executor/get_ex_args.c \
+						executor/get_path.c
 
 LIBS			=		libs/
 LIBFT			=		$(LIBFT_DIR)libft.a
@@ -25,10 +26,10 @@ LFLAGS			=		-L $(LIBFT_DIR) -lft -lreadline
 
 ## Colors
 
+NO_COLOR		=		\033[0m
 BOLD_PURPLE		=		\033[1;35m
 BOLD_CYAN		=		\033[1;36m
 BOLD_YELLOW		=		\033[1;33m
-NO_COLOR		=		\033[0m
 DEF_COLOR		=		\033[0;39m
 GRAY			=		\033[0;90m
 RED				=		\033[0;91m

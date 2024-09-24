@@ -6,14 +6,14 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 20:06:58 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/21 18:30:54 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/21 20:09:05 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h" // ft_shell_error
-#include "minishell.h" // t_data, access
-#include "executor.h" // t_cmd
-#include "libft.h" // ft_calloc, ft_error, strrerror
+#include "minishell.h" // t_data, access, strerror
+#include "executor.h" // t_cmd, get_ex_args, next_param
+#include "libft.h" // ft_calloc, ft_error
 #include "token.h" // PIPE, INFD, OUTFD
 #include <fcntl.h> // open
 
@@ -57,27 +57,7 @@ int open_outfiles(t_data *d, int out)
 	return (out);
 }
 
-char **get_ex_args(char **params, char *tok)
-{
-	char	**res;
-	size_t	i;
-	size_t	x;
-
-	i = 0;
-	x = 0;
-	res = ft_calloc(sizeof(char *), count_args(tok));
-	if (!res)
-		ft_error("malloc failed", strerror(errno));
-	while (tok && tok[i] && tok[i] != PIPE)
-	{
-		if (tok[i] == CMD || tok[i] == ARG)
-			res[x++] = params[i];
-		++i;
-	}
-	return (res);
-}
-
-t_cmd	*init_cmd(t_data *d)
+t_cmd	*init_cmd(t_data *d, size_t n)
 {
 	t_cmd	*res;
 
@@ -87,7 +67,7 @@ t_cmd	*init_cmd(t_data *d)
 	res->data = d;
 	res->infd = open_infiles(res->data, res->infd);
 	res->outfd = open_outfiles(res->data, res->outfd);
-	res->argv = get_ex_args(d->params, d->tokens);
+	res->argv = get_ex_args(next_params(d->params, n), d->tokens);
 	res->path = get_path(ft_strjoin("/", res->argv[0]), d->env);
 	return (res);
 }
@@ -102,6 +82,9 @@ t_cmd	**create_cmds(size_t nb_cmds, t_data *d)
 	if (!res)
 		ft_error("malloc failed", strerror(errno));
 	while (i < nb_cmds)
-		res[i++] = init_cmd(d);
+	{
+		res[i] = init_cmd(d, i);
+		++i;
+	}
 	return (res);
 }

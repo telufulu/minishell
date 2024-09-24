@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 20:06:58 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/21 18:34:46 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/21 19:17:29 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,23 @@
 #include "token.h" // PIPE, INFD, OUTFD
 #include <fcntl.h> // open
 
+void	exec_cmds(t_cmd **c)
+{
+	int	i;
+
+	i = 0;
+	while (c && c[i])
+	{
+		ft_printf("%s\n", c[i++]->path);
+	}
+}
+
 void	executor(t_data *d)
 {
 	t_cmd	**c;
 
 	ft_printf("tokens: %s\n", d->tokens);
 	c = create_cmds(count_cmds(d->tokens), d);
-	if (c[0]->path)
-		ft_printf("%s\n", c[0]->path);
-	//ft_free_matrix((void **)c);
+	exec_cmds(c);
+	ft_free_matrix((void **)c);
 }
