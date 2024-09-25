@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 20:07:53 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/24 20:26:04 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/25 20:17:00 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,11 @@ typedef struct s_cmd
  * Files
  ******************************************************************************/
 // executor.c
-t_cmd	**executor(t_data *d);
+void	execute_cmd(t_data *d, size_t i);
+t_cmd	*init_cmd(t_data *d, size_t n);
+void	executor(t_data *d);
 
 // create_cmds.c
-int		open_infiles(t_data *d, int in);
-int		open_outfiles(t_data *d, int out);
-t_cmd	*init_cmd(t_data *d, size_t n);
 t_cmd	**create_cmds(size_t nb_cmds, t_data *d);
 
 // get_path.c
@@ -51,6 +50,8 @@ char	**get_ex_args(char **params, char *tok);
 char	**next_params(char **params, size_t n);
 
 // executor_utils.c
+int		open_infiles(t_data *d, int in);
+int		open_outfiles(t_data *d, int out);
 size_t	count_cmds(char *tokens);
 size_t	count_args(char *tokens);
 size_t	next_pipe(char *tokens);

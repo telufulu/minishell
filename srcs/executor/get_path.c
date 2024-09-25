@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 20:10:26 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/21 20:17:01 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/25 20:10:20 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,5 @@ char	*get_path(char *cmd, char **env)
 		++i;
 	}
 	ft_shell_error(cmd + 1, ": command not found");
-	free(cmd);
 	return (NULL);
 }
