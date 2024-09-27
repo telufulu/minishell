@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:35:36 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/09/19 17:58:03 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:46:14 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	check_quotes(t_parser *p)
 			return (0);
 		}
 	}
-	else if (*(p->s) == '&' || *(p->s) == '|')
+	else if (*(p->s) == '|')
 		return (2);
 	else
 		p->s++;
@@ -77,7 +77,7 @@ int	define_length(t_parser *p)
 	p->start = p->s;
 	if (is_meta_character(*(p->s)) && (*(p->s + 1) == *(p->s)))
 		p->s += 2;
-	else if (*(p->s) == '&' || *(p->s) == '|')
+	else if (*(p->s) == '|')
 		p->s++;
 	else if (is_meta_character(*(p->s)))
 		p->s++;
