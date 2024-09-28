@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 18:50:41 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/26 18:43:10 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/09/28 17:20:19 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_cmd	*init_cmd(t_data *d, size_t n)
 	return (res);
 }
 
-void	redirect()
+//void	redirect()
 
 void	execute_cmd(t_data *d, size_t i, size_t cmd_num)
 {
@@ -41,9 +41,9 @@ void	execute_cmd(t_data *d, size_t i, size_t cmd_num)
 	c = init_cmd(d, i);
 	if (c && (!c->path || c->argv))
 		exit(EXIT_SUCCESS);
-	if (i && cmd_num)
-		redirect(c);
-	if (c && execve(c->path, c->argv, c->data->env) == -1)
+	//if (i && cmd_num)
+	//	redirect(c);
+	if (cmd_num && c && execve(c->path, c->argv, c->data->env) == -1)
 		ft_error("execve failed", strerror(errno));
 	ft_free_matrix((void **)c);
 }
@@ -53,9 +53,8 @@ void	executor(t_data *d)
 	int		status;
 	size_t	i;
 	size_t	cmd_num;
+	//int		pipefd[2];
 	pid_t	pid;
-
-	pid_t father = getpid();
 
 	i = 0;
 	cmd_num = count_cmds(d->tokens);
@@ -66,7 +65,7 @@ void	executor(t_data *d)
 			ft_error("fork failed", strerror(errno));
 		else if (!pid)
 		{
-			execute_cmd(d, i);
+			execute_cmd(d, i, cmd_num);
 			exit(EXIT_SUCCESS);
 		}
 		++i;
