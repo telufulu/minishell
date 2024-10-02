@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:04:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/25 19:40:23 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/02 02:05:43 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@
 # include <errno.h>			// errno
 # include <termios.h>		// tcsetattr, tcgetattr
 # include <term.h>			// tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs
-# include <readline/readline.h>	//readline 
+# include <readline/readline.h>	//readline, rl_replace_line, rl_redisplay
+								//rl_on_new_line
 # include <readline/history.h>	//add_history
 
 /*
