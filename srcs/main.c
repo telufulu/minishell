@@ -6,12 +6,12 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/09/28 17:24:12 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/01 23:53:57 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"	//libc, t_data
-#include "libft.h"		//ft_strncmp, ft_free_matrix
+#include "minishell.h"	// libc, t_data
+#include "libft.h"		// ft_strncmp, ft_free_matrix
 #include "utils.h"		// init_shell
 #include "parser.h"		// main_parser
 #include "token.h"		// tokenizer
@@ -22,7 +22,7 @@ void	handle_sigint(int sig)
 	(void)sig;
 	write(STDOUT_FILENO, "\n", 1);
 	rl_on_new_line();
-	rl_replace_line("", 0);
+	//rl_replace_line("", 0);
 	rl_redisplay();
 }
 
@@ -51,9 +51,6 @@ int	main(int argc, char **argv, char **envp)
 	{
 		errno = 0;
 		if (*d->input)
-			add_history(d.input);
-		d.tokens = main_parser(&d);
-		if (d.tokens)
 		{
 			add_history(d->input);
 			d->params = main_parser(d);
@@ -65,8 +62,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	if (errno != 0)
 		ft_error("readline failed", strerror(errno));
-	else if (!d.input)
+	else if (!d->input)
 		write(STDOUT_FILENO, "exit\n", 5);
-	good_exit(&d);
 	return (0);
 }
