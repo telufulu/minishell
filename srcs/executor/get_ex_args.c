@@ -6,14 +6,38 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 19:27:48 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/21 19:56:12 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/04 16:56:15 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h" // count_args
-#include "token.h" // PIPE, CMD, ARG
-#include "libft.h" // ft_calloc, ft_error
-#include "minishell.h" // strerror
+#include "utils.h"		// ft_shgell_error
+#include "executor.h"	// count_args
+#include "token.h"		// PIPE, CMD, ARG
+#include "libft.h"		// ft_calloc, ft_error
+#include "minishell.h"	// strerror
+
+char	*get_path(char *cmd, char **env)
+{
+	char	*path;
+	char	*path_env;
+	char	**spl_path;
+	int		i;
+
+	i = 0;
+	path = NULL;
+	path_env = get_env(env, "PATH");
+	spl_path = ft_split(path_env, ':');
+	while (spl_path[i] && access(path, X_OK) == -1)
+	{
+		path = ft_strjoin(spl_path[i], cmd);
+		if (!access(path, X_OK))
+			return (free(cmd), path);
+		free(path);
+		++i;
+	}
+	ft_shell_error(cmd + 1, ": command not found");
+	return (NULL);
+}
 
 char	**next_params(char **params, size_t n)
 {

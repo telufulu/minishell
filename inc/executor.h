@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 20:07:53 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/03 20:22:22 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/04 16:52:41 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,10 @@ typedef struct s_cmd
  * Files
  ******************************************************************************/
 // executor.c
-//void	execute_cmd(t_data *d, size_t i, size_t cmd_num);
-//t_cmd	*init_cmd(t_data *d, size_t n);
 void	executor(t_data *d);
 
-// get_path.c
-char	*get_path(char *cmd, char **env);
-
 // get_ex_args.c
+char	*get_path(char *cmd, char **env);
 char	**get_ex_args(char **params, char *tok);
 char	**next_params(char **params, size_t n);
 
