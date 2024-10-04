@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:04:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/01 21:24:02 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/04 17:11:50 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,12 @@
 /*
  * Structs
  */
+typedef struct s_token t_token;
+
 typedef struct s_data
 {
+	t_token	**tokens;
 	char	*input;
-	char	**tokens;
 	char	**env;
 	int		index;
 	int		exit_status;
@@ -59,6 +61,8 @@ void	good_exit(t_data *d);
 // utils.c
 void	check_term(char **envp);
 void	init_shell(t_data *d, char **envp, char **argv, int argc);
+void	*free_tokens(t_token **tokens);
+void	print_tokens(t_token **tokens, int fd);
 
 // env.c
 char	*get_env(char **env, char *var);

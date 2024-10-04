@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 12:26:46 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/08/19 16:48:56 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/10/04 18:07:31 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	handle_single_quote(t_parser *p)
 {
 	while (*(++p->start) != '\'')
-		p->tokens[p->count][p->l++] = *(p->start);
+		p->tokens[p->count]->str[p->l++] = *(p->start);
 	p->start++;
 }
 
@@ -46,10 +46,10 @@ void	append_variable(t_parser *p, char *var)
 {
 	char	*tmp;
 
-	tmp = ft_realloc(p->tokens[p->count], p->length + ft_strlen(var) + 1);
-	p->tokens[p->count] = tmp;
-	if (!p->tokens[p->count])
+	tmp = ft_realloc(p->tokens[p->count]->str, p->length + ft_strlen(var) + 1);
+	p->tokens[p->count]->str = tmp;
+	if (!p->tokens[p->count]->str)
 		return ;
-	p->l += ft_strlcpy(&p->tokens[p->count][p->l], var, p->j + 1);
+	p->l += ft_strlcpy(&p->tokens[p->count]->str[p->l], var, p->j + 1);
 	free(var);
 }

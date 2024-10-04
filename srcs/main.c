@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/09/27 16:29:11 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/10/04 17:02:29 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ int	main(int argc, char **argv, char **envp)
 		d.tokens = main_parser(&d);
 		if (d.tokens)
 		{
-			ft_print_matrix(d.tokens, 1);
-			d.tokens = (char **)ft_free_matrix((void **)d.tokens);
+			print_tokens(d.tokens, 1);
+			d.tokens = free_tokens(d.tokens);
 		}
 		free(d.input);
 		d.input = readline(PROMPT);
