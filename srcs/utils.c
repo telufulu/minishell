@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 16:16:55 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/10/04 18:58:57 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/10/05 14:00:14 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,19 @@ void	check_term(char **envp)
 		ft_error("stdin is not a terminal", strerror(errno));
 }
 
-void	init_shell(t_data *d, char **envp, char **argv, int argc)
+t_data	*init_shell(t_data *d, char **envp, char **argv, int argc)
 {
 	if (argc > 1 && argv)
 		ft_error("minishell doesn't get any arguments", NULL);
+	d = ft_calloc(sizeof(t_data), 1);
+	if (!d)
+		ft_error("malloc failed creating shell", strerror(errno));
 	d->env = init_env(envp);
 	if (!d->env)
 		ft_error("malloc failed", NULL);
 	check_term(d->env);
 	d->exit_status = 0;
+	return (d);
 }
 
 void	*free_tokens(t_token **tokens)
@@ -66,7 +70,6 @@ void	print_tokens(t_token **tokens, int fd)
 	while (tokens && *tokens)
 	{
 		ft_putstr_fd((*tokens)->str, fd);
-/* TEST */
 		write(1, "\t\t", 2);
 		if ((*tokens)->type == COMMAND)
 			ft_putstr_fd("COMMAND", fd);
@@ -80,7 +83,6 @@ void	print_tokens(t_token **tokens, int fd)
 			ft_putstr_fd("HEREDOC", fd);
 		else if ((*tokens)->type == PIPE)
 			ft_putstr_fd("PIPE", fd);
-/* END OF TEST */
 		write(1, "\n", 1);
 		tokens++;
 	}

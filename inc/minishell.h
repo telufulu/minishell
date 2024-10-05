@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:04:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/04 17:11:50 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/10/05 13:17:45 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,19 @@ typedef struct s_data
  * Files
  */
 // main.c
-void	good_exit(t_data *d);
 
 // utils.c
 void	check_term(char **envp);
-void	init_shell(t_data *d, char **envp, char **argv, int argc);
+t_data	*init_shell(t_data *d, char **envp, char **argv, int argc);
 void	*free_tokens(t_token **tokens);
 void	print_tokens(t_token **tokens, int fd);
 
 // env.c
 char	*get_env(char **env, char *var);
 char	**init_env(char **envp);
+
+// signals.c
+void	handle_sigint(int sig);
+void	signal_handlers(void);
 
 #endif
