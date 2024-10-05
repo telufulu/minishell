@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:04:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/01 13:04:59 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/05 13:17:45 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
  * Includes
  */
 # include "libft.h"
+
 # include <unistd.h>
 # include <stdio.h>			// printf, perror
 # include <stdlib.h>		// malloc, free, exit, getenv
@@ -28,7 +29,8 @@
 # include <errno.h>			// errno
 # include <termios.h>		// tcsetattr, tcgetattr
 # include <term.h>			// tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs
-# include <readline/readline.h>	//add_history, readline 
+# include <readline/readline.h>	//readline 
+# include <readline/history.h>	//add_history
 
 /*
  * Defines
@@ -39,10 +41,34 @@
 /*
  * Structs
  */
+typedef struct s_token t_token;
+
+typedef struct s_data
+{
+	t_token	**tokens;
+	char	*input;
+	char	**env;
+	int		index;
+	int		exit_status;
+}				t_data;
 
 /*
  * Files
  */
 // main.c
+
+// utils.c
+void	check_term(char **envp);
+t_data	*init_shell(t_data *d, char **envp, char **argv, int argc);
+void	*free_tokens(t_token **tokens);
+void	print_tokens(t_token **tokens, int fd);
+
+// env.c
+char	*get_env(char **env, char *var);
+char	**init_env(char **envp);
+
+// signals.c
+void	handle_sigint(int sig);
+void	signal_handlers(void);
 
 #endif
