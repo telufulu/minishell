@@ -6,13 +6,14 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/10/05 14:00:28 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/05 15:24:22 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"	//libc, t_data, init_shell
 #include "libft.h"		//ft_strncmp, ft_free_matrix
 #include "parser.h"		// main_parser
+#include "lexer.h"		//init_cmds
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -29,6 +30,7 @@ int	main(int argc, char **argv, char **envp)
 			add_history(d->input);
 			d->tokens = main_parser(d);
 			print_tokens(d->tokens, 1);
+			d->cmd = main_lexer(d);
 		}
 		free(d->input);
 		d->input = readline(PROMPT);
