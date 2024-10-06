@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:23:04 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/05 15:30:26 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/06 17:27:25 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
  ******************************************************************************/
 typedef struct s_cmd
 {
-	struct s_cmd *next;
+	int				index;
+	struct s_cmd	*next;
 }				t_cmd;
 
 
@@ -36,6 +37,6 @@ t_cmd	*main_lexer(t_data *d);
 // lexer_utils.c
 t_cmd	*last_cmd(t_cmd *c);
 t_cmd	*new_cmd(void);
-void	add_cmd(t_cmd *c);
+t_cmd	*add_cmd(t_data *d);
 size_t	num_cmd(t_token **tokens);
 #endif

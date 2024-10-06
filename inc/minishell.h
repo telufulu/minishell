@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:04:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/05 15:25:15 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/06 17:16:02 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
  * Defines
  */
 # define SHELL_NAME "minishell"
-# define PROMPT "minishell$ "
+# define PROMPT "minishell-1.0$ "
 
 /*
  * Structs

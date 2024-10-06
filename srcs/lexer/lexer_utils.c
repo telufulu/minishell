@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:47:57 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/05 15:30:09 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/06 17:27:13 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,19 @@ t_cmd	*new_cmd(void)
 	return (res);
 }
 
-void	add_cmd(t_cmd *c)
+t_cmd	*add_cmd(t_data *d)
 {
-	t_cmd *last;
+	t_cmd	*last;
 
-	last = last_cmd(c);
-	last->next = new_cmd();
+	last = last_cmd(d->cmd);
+	if (!last)
+	{
+		d->cmd = new_cmd();
+		last = d->cmd;
+	}
+	else
+		last->next = new_cmd();
+	return (last);
 }
 
 size_t	num_cmd(t_token **tokens)
