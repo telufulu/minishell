@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:04:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/06 17:16:02 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/06 17:50:52 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	check_term(char **envp);
 t_data	*init_shell(t_data *d, char **envp, char **argv, int argc);
 void	*free_tokens(t_token **tokens);
 void	print_tokens(t_token **tokens, int fd);
+void	ft_shell_error(char *var, char *msg_error);
 
 // env.c
 char	*get_env(char **env, char *var);

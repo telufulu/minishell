@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:23:04 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/06 17:27:25 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/06 17:43:21 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 typedef struct s_cmd
 {
 	int				index;
+	char			*cmd;
+	char			*path;
 	struct s_cmd	*next;
 }				t_cmd;
 
