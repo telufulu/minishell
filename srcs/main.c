@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/10/06 17:54:57 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/07 20:31:34 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	main(int argc, char **argv, char **envp)
 			d->tokens = main_parser(d);
 			print_tokens(d->tokens, 1);
 			d->cmd = main_lexer(d);
+			free_tokens(d->tokens);
 		}
 		free(d->input);
 		d->input = readline(PROMPT);
@@ -39,5 +40,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_error("readline failed", strerror(errno));
 	else if (!d->input)
 		write(STDOUT_FILENO, "exit\n", 5);
+	d->env = (char **)ft_free_matrix((void **)d->env);
+	free(d);
 	return (0);
 }

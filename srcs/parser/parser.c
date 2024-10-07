@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:03:07 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/10/04 18:57:46 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/10/07 12:21:57 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,18 @@ int	handle_args(t_parser *p)
 	return (1);
 }
 
+int	check_tokens(t_parser *p)
+{
+	if (p->tokens[p->count - 1]->type == PIPE)
+		ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
+	else if (p->tokens[p->count - 1]->type != COMMAND)
+		ft_putstr_fd
+			("minishell: syntax error near unexpected token `newline'\n", 2);
+	else
+		return (1);
+	return (0);
+}
+
 t_token	**main_parser(t_data *d)
 {
 	t_parser	p;
@@ -61,6 +73,8 @@ t_token	**main_parser(t_data *d)
 			return (free_tokens(p.tokens));
 	}
 	p.tokens[p.count] = NULL;
+	if (!check_tokens(&p))
+		return (free_tokens(p.tokens));
 	p.tokens = ft_realloc(p.tokens, (p.count + 1) * sizeof(t_token *));
 	return (p.tokens);
 }
