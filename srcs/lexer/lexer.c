@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:22:30 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/07 22:48:02 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/08 18:58:06 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ t_cmd	*main_lexer(t_data *d)
 		last = last_cmd(d->cmd);
 		last->cmd = next_cmd(d->tokens, i);
 		last->path = get_path(sp_path, last->cmd);
+		last-infd 
 		ft_printf("cmd: %s\n", last->cmd);
 		ft_printf("path: %s\n", last->path);
 		last->index = i;
