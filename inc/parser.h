@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:44:12 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/10/07 12:11:20 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/10/08 12:27:27 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ typedef enum e_type
 {
 	COMMAND,
 	PIPE,
+	FD,
 	REDIRECT_IN,
 	REDIRECT_OUT,
 	APPEND,
-	HEREDOC
+	HEREDOC,
+	END_HEREDOC
 }			t_type;
 
 typedef struct s_token

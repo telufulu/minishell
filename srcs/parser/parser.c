@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:03:07 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/10/07 12:21:57 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/10/08 12:47:59 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,12 @@ int	handle_args(t_parser *p)
 int	check_tokens(t_parser *p)
 {
 	if (p->tokens[p->count - 1]->type == PIPE)
-		ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
+		ft_putstr_fd
+			("minishell: syntax error near unexpected token `|'\n", 2);
+	else if (p->tokens[p->count - 1]->type == FD)
+		return (1);
+	else if (p->tokens[p->count - 1]->type == END_HEREDOC)
+		return (1);
 	else if (p->tokens[p->count - 1]->type != COMMAND)
 		ft_putstr_fd
 			("minishell: syntax error near unexpected token `newline'\n", 2);
