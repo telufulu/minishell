@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/10/07 20:31:34 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/07 22:06:07 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	main(int argc, char **argv, char **envp)
 		{
 			add_history(d->input);
 			d->tokens = main_parser(d);
-			print_tokens(d->tokens, 1);
 			d->cmd = main_lexer(d);
 			free_tokens(d->tokens);
 		}
