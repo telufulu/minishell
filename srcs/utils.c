@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 16:16:55 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/10/07 22:45:36 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/08 18:37:08 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,12 @@ void	print_tokens(t_token **tokens, int fd)
 			ft_putstr_fd("APPEND", fd);
 		else if ((*tokens)->type == HEREDOC)
 			ft_putstr_fd("HEREDOC", fd);
+		else if ((*tokens)->type == END_HEREDOC)
+			ft_putstr_fd("END_HEREDOC", fd);
 		else if ((*tokens)->type == PIPE)
 			ft_putstr_fd("PIPE", fd);
+		else if ((*tokens)->type == FD)
+			ft_putstr_fd("FD", fd);
 		write(1, "\n", 1);
 		tokens++;
 	}
