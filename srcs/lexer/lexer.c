@@ -6,75 +6,28 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:22:30 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/08 18:58:06 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/09 15:40:03 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"	// t_data, ft_shell_error
-#include "parser.h"		// t_token
-#include "lexer.h"		// t_token, num_cmd
+#include "lexer.h"		// t_token, num_cmd, get_cmd, get_path
 #include "libft.h"		// ft_printf
+#include "parser.h"		// PIPE
 
-char	*next_cmd(t_token **tokens, int index)
+t_token	**next_cmd(t_token **tokens)
 {
-	int	i;
-
-	i = 0;
-	while (tokens && tokens[i])
+	while (tokens && *tokens && (*tokens))
 	{
-		while (index && tokens[i]->type)
-		{
-			if (tokens[i]->type == PIPE)
-				--index;
-			++i;
-		}
-		if (!index && tokens[i]->type == COMMAND)
-			return (tokens[i]->str);
-		++i;
-	}
-	return (NULL);
-}
-
-char	**split_path(char **env)
-{
-	char	*path_env;
-	char	**sp_path;
-	char	*aux;
-	int		i;
-
-	i = 0;
-	path_env = get_env(env, "PATH");
-	sp_path = ft_split(path_env, ':');
-	while (sp_path && sp_path[i])
-	{
-		aux = sp_path[i];
-		sp_path[i] = ft_strjoin(sp_path[i], "/");
-		free(aux);
-		++i;
-	}
-	return (sp_path);
-}
-
-char	*get_path(char **sp_path, char *cmd)
-{
-	char	*path;
-	int		i;
-
-	i = 0;
-	path = NULL;
-	while (sp_path[i] && access(path, X_OK) == -1)
-	{
-		path = ft_strjoin(sp_path[i], cmd);
-		if (!access(path, X_OK))
-			return (path);
-		free(path);
-		++i;
+		if ((*tokens)->type == PIPE)
+			return (tokens + 1);
+		++tokens;
 	}
 	return (NULL);
 }
 
 // si "ls | wc | " se abre >
-t_cmd	*main_lexer(t_data *d)
+t_cmd	*main_lexer(t_data *d, t_token **tokens)
 {
 	size_t	n_cmd;
 	size_t	i;
@@ -82,19 +35,20 @@ t_cmd	*main_lexer(t_data *d)
 	t_cmd	*last;
 
 	i = 0;
+	last = NULL;
 	n_cmd = num_cmd(d->tokens);
 	sp_path = split_path(d->env);
-	while (i < n_cmd)
+	while (i < n_cmd && tokens)
 	{
 		add_cmd(d);
 		last = last_cmd(d->cmd);
-		last->cmd = next_cmd(d->tokens, i);
+		last->cmd = get_cmd(tokens);
 		last->path = get_path(sp_path, last->cmd);
-		last-infd 
+		//last->infd = open_infd(); 
+		last->index = i++;
 		ft_printf("cmd: %s\n", last->cmd);
 		ft_printf("path: %s\n", last->path);
-		last->index = i;
-		i++;
+		tokens = next_cmd(tokens);//pointer moves to the next token before PIPE
 	}
 	ft_free_matrix((void **)sp_path);
 	return (NULL);
