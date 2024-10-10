@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:23:04 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/09 15:38:49 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/10 13:44:33 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,5 @@ size_t	num_cmd(t_token **tokens);
 char	*get_cmd(t_token **tokens);
 char	**split_path(char **env);
 char	*get_path(char **sp_path, char *cmd);
-int		open_fd(t_token **tokens, t_type tp);
+void	open_fd(int *fd, t_token **tokens, t_type tp);
 #endif

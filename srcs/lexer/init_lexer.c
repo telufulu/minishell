@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:28:44 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/09 15:38:43 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/10 15:13:13 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "lexer.h"		// t_token, num_cmd
 #include "libft.h"		// ft_printf
 #include "parser.h"		// PIPE
+#include <fcntl.h>		// open
 
 char	*get_cmd(t_token **tokens)
 {
@@ -64,13 +65,21 @@ char	*get_path(char **sp_path, char *cmd)
 	return (NULL);
 }
 
-int	open_fd(t_token **tokens, t_type tp)
+void	open_fd(int *fd, t_token **tokens, t_type tp)
 {
-	int	fd;
-
-	fd = 0;
-	if (tp && tokens)
-		return (1);
-	return (fd);
+	while (tokens && *tokens && (*tokens)->type != PIPE)
+	{
+		if ((*tokens)->type == tp)
+		{
+			++tokens;
+			if (tokens && *tokens && (*tokens)->type == FD)
+			{
+				if (*fd)
+					close(*fd);
+				*fd = open((*tokens)->str, O_CREAT | O_RDONLY, 0644);
+			}
+		}
+		++tokens;
+	}
 }
 
