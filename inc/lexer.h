@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:23:04 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/10 20:02:18 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/10 20:57:00 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_cmd	*last_cmd(t_cmd *c);
 t_cmd	*new_cmd(void);
 t_cmd	*add_cmd(t_data *d);
 size_t	num_cmd(t_token **tokens);
+void	free_cmds(t_cmd *c);
 
 // lexer_utils.h
 char	*get_cmd(t_token **tokens);

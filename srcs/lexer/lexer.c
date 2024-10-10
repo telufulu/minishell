@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:22:30 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/10 19:49:07 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/10 20:08:19 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ void	main_lexer(t_data *d, t_token **tokens)
 	sp_path = split_path(d->env);
 	while (i < n_cmd && tokens)
 	{
-		add_cmd(d);
-		last = last_cmd(d->cmd);
+		last = add_cmd(d);
 		last->cmd = get_cmd(tokens);
 		last->path = get_path(sp_path, last->cmd);
 		//open_fd(&last->infd, tokens, REDIRECT_IN); 
