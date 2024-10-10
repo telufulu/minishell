@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:23:04 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/10 13:44:33 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/10 19:27:26 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_cmd
  ******************************************************************************/
 // lexer.c
 t_token	**next_cmd(t_token **tokens);
-t_cmd	*main_lexer(t_data *d, t_token **tokens);
+void	main_lexer(t_data *d, t_token **tokens);
 
 // cmd_utils.c
 t_cmd	*last_cmd(t_cmd *c);

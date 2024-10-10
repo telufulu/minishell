@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:28:44 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/10 15:13:13 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/10 19:47:22 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ char	*get_path(char **sp_path, char *cmd)
 
 void	open_fd(int *fd, t_token **tokens, t_type tp)
 {
+	*fd = -1;
 	while (tokens && *tokens && (*tokens)->type != PIPE)
 	{
 		if ((*tokens)->type == tp)
@@ -74,12 +75,20 @@ void	open_fd(int *fd, t_token **tokens, t_type tp)
 			++tokens;
 			if (tokens && *tokens && (*tokens)->type == FD)
 			{
-				if (*fd)
+				if (*fd > 2)
 					close(*fd);
-				*fd = open((*tokens)->str, O_CREAT | O_RDONLY, 0644);
+				if (tp == REDIRECT_IN)
+				{
+					*fd = open((*tokens)->str, O_RDONLY, 0644);
+					if (*fd == -1)
+						ft_shell_error((*tokens)->str, strerror(errno));
+				}
+				else if (tp == REDIRECT_OUT)
+					*fd = open((*tokens)->str, O_CREAT | O_RDONLY, 0644);
 			}
+			else if (!tokens || !*tokens)
+				return ;
 		}
 		++tokens;
 	}
 }
-
