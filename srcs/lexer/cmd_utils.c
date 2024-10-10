@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:47:57 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/09 15:28:09 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/10 20:01:40 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_cmd	*last_cmd(t_cmd *c)
 
 t_cmd	*new_cmd(void)
 {
-	t_cmd *res;
+	t_cmd	*res;
 
 	res = ft_calloc(sizeof(t_cmd), 1);
 	if (!res)

@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:04:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/10 20:00:09 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/10 20:03:37 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
  * Structs
  */
 typedef struct s_token	t_token;
-typedef struct s_cmd 	t_cmd;
+typedef struct s_cmd	t_cmd;
 
 typedef struct s_data
 {
