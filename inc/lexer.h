@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:23:04 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/10 20:57:00 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/13 16:36:03 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ typedef struct s_cmd
 	int				index;
 	char			*cmd;
 	char			*path;
-	int				infd;
-	int				outfd;
+	char			*infd;
+	char			*outfd;
 	struct s_cmd	*next;
 }				t_cmd;
 
@@ -50,5 +50,6 @@ void	free_cmds(t_cmd *c);
 char	*get_cmd(t_token **tokens);
 char	**split_path(char **env);
 char	*get_path(char **sp_path, char *cmd);
-void	open_fd(int *fd, t_token **tokens, t_type tp);
+char	*get_fd(t_token **tokens, t_type tp);
+//void	open_fd(int *fd, t_token **tokens, t_type tp);
 #endif
