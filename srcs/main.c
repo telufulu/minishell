@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/10/13 14:20:15 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/13 16:37:36 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "parser.h"		// main_parser
 #include "lexer.h"		//init_cmds, free_cmds
 
-void	close_fds(t_cmd *cmd)
+/*void	close_fds(t_cmd *cmd)
 {
 	while (cmd)
 	{
@@ -25,11 +25,11 @@ void	close_fds(t_cmd *cmd)
 			close(cmd->outfd);
 		cmd = cmd->next;
 	}
-}
+}*/
 
 void	clean_loop(t_data *d)
 {
-	close_fds(d->cmd);
+	//close_fds(d->cmd);
 	free_cmds(d->cmd);
 	d->cmd = NULL;
 	free_tokens(d->tokens);
@@ -51,6 +51,7 @@ int	main(int argc, char **argv, char **envp)
 			add_history(d->input);
 			d->tokens = main_parser(d);
 			main_lexer(d, d->tokens);
+			printf("in: %s\tout: %s\n", d->cmd->infd, d->cmd->outfd);
 			clean_loop(d);
 		}
 		d->input = readline(PROMPT);

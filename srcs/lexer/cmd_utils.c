@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:47:57 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/13 13:47:25 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/13 16:36:41 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ t_cmd	*new_cmd(void)
 	res = ft_calloc(sizeof(t_cmd), 1);
 	if (!res)
 		ft_error("malloc failed", strerror(errno));
-	res->infd = STDIN_FILENO;
-	res->outfd = STDOUT_FILENO;
 	return (res);
 }
 
