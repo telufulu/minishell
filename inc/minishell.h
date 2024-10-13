@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:04:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/10 20:03:37 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/13 17:27:01 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  */
 # include "libft.h"
 
-# include <unistd.h>
+# include <unistd.h>			// fork
 # include <stdio.h>				// printf, perror
 # include <stdlib.h>			// malloc, free, exit, getenv
 # include <sys/wait.h>			// wait, waitpid, wait3, wait4

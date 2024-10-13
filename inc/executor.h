@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:29:13 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/13 16:42:33 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/13 18:13:00 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@
  ******************************************************************************/
 # include "minishell.h"	// t_data
 # include "lexer.h"		// t_cmd
-
+# include "parser.h"	// t_token
 /*******************************************************************************
  * Defines
  ******************************************************************************/
+# define RD 0
+# define WR 1
 
 /*******************************************************************************
  * Files
@@ -30,5 +32,6 @@
 void	main_executor(t_data *d, t_cmd *c);
 
 // utils_executor.c
-void	open_fd(int *fd, t_token **tokens, t_type tp);
+int		open_fd(int *fd, t_token **tokens, t_type tp);
+char	**get_argv(t_token **input);
 #endif
