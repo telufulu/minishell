@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/10/10 21:00:05 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/13 14:20:15 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	clean_loop(t_data *d)
 {
 	close_fds(d->cmd);
 	free_cmds(d->cmd);
+	d->cmd = NULL;
 	free_tokens(d->tokens);
 	free(d->input);
 }
@@ -50,7 +51,6 @@ int	main(int argc, char **argv, char **envp)
 			add_history(d->input);
 			d->tokens = main_parser(d);
 			main_lexer(d, d->tokens);
-			ft_printf("first cmd: %s\n", d->cmd->cmd);
 			clean_loop(d);
 		}
 		d->input = readline(PROMPT);

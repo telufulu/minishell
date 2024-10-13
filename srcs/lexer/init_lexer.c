@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:28:44 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/10 21:02:35 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/13 14:16:55 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ char	*get_path(char **sp_path, char *cmd)
 	{
 		path = ft_strjoin(sp_path[i], cmd);
 		if (!access(path, X_OK))
-			return (ft_strdup(path));
+		{
+			return (path);
+		}
 		free(path);
 		++i;
 	}
@@ -67,27 +69,14 @@ char	*get_path(char **sp_path, char *cmd)
 
 void	open_fd(int *fd, t_token **tokens, t_type tp)
 {
-	*fd = -1;
 	while (tokens && *tokens && (*tokens)->type != PIPE)
 	{
 		if ((*tokens)->type == tp)
 		{
 			++tokens;
-			if (tokens && *tokens && (*tokens)->type == FD)
-			{
-				if (*fd > 2)
-					close(*fd);
-				if (tp == REDIRECT_IN)
-				{
-					*fd = open((*tokens)->str, O_RDONLY, 0644);
-					if (*fd == -1)
-						ft_shell_error((*tokens)->str, strerror(errno));
-				}
-				else if (tp == REDIRECT_OUT)
-					*fd = open((*tokens)->str, O_CREAT | O_RDONLY, 0644);
-			}
-			else if (!tokens || !*tokens)
-				return ;
+			if (*fd > 2)
+				close(*fd);
+			*fd = open((*tokens)->str, O_CREAT | O_RDWR, 0644);
 		}
 		++tokens;
 	}
