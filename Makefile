@@ -14,7 +14,7 @@ SRCS_FILES		=		main.c utils.c env.c signals.c
 SRCS_FILES		+=		parser/parser.c parser/parser_args.c \
 						parser/parser_utils.c parser/parser_variable.c
 SRCS_FILES		+=		lexer/lexer.c lexer/cmd_utils.c lexer/init_lexer.c
-SRCS_FILES		+=		executor/main_executor.c
+SRCS_FILES		+=		executor/main_executor.c executor/utils_executor.c
 
 LIBS			=		libs/
 LIBFT			=		$(LIBFT_DIR)libft.a

@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:28:44 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/13 16:41:20 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/13 16:43:18 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,18 +85,3 @@ char	*get_fd(t_token **tokens, t_type tp)
 	}
 	return (res);
 }
-
-/*void	open_fd(int *fd, t_token **tokens, t_type tp)
-{
-	while (tokens && *tokens && (*tokens)->type != PIPE)
-	{
-		if ((*tokens)->type == tp)
-		{
-			++tokens;
-			if (*fd > 2)
-				close(*fd);
-			*fd = open((*tokens)->str, O_CREAT | O_RDWR, 0644);
-		}
-		++tokens;
-	}
-}*/

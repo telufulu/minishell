@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:29:13 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/13 16:07:26 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/13 16:42:33 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,6 @@
 // main_executor.c
 void	main_executor(t_data *d, t_cmd *c);
 
+// utils_executor.c
+void	open_fd(int *fd, t_token **tokens, t_type tp);
 #endif
