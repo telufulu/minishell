@@ -6,14 +6,15 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/10/13 14:20:15 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/13 16:05:23 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"	//libc, t_data, init_shell
-#include "libft.h"		//ft_strncmp, ft_free_matrix
+#include "minishell.h"	// libc, t_data, init_shell
+#include "libft.h"		// ft_strncmp, ft_free_matrix
 #include "parser.h"		// main_parser
-#include "lexer.h"		//init_cmds, free_cmds
+#include "lexer.h"		// free_cmds
+#include "executor.h"	// executor_main
 
 void	close_fds(t_cmd *cmd)
 {
@@ -51,6 +52,7 @@ int	main(int argc, char **argv, char **envp)
 			add_history(d->input);
 			d->tokens = main_parser(d);
 			main_lexer(d, d->tokens);
+			main_executor(d, d->cmd);
 			clean_loop(d);
 		}
 		d->input = readline(PROMPT);
