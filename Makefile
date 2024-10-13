@@ -43,8 +43,8 @@ all:	$(NAME)
 sanitize:				CFLAGS += $(SANITIZE) -g3
 sanitize:				clean all
 
-sanitize_leaks:			CFLAGS += $(SANITIZE)address -g3
-sanitize_leaks:			clean all
+sanitize_address:			CFLAGS += $(SANITIZE)address -g3
+sanitize_address:			clean all
 
 sanitize_threads:		CFLAGS += $(SANITIZE)thread -pthread
 sanitize_threads:		clean all
