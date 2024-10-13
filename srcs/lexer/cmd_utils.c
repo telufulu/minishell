@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:47:57 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/10 20:01:40 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/13 13:47:25 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ t_cmd	*new_cmd(void)
 	res = ft_calloc(sizeof(t_cmd), 1);
 	if (!res)
 		ft_error("malloc failed", strerror(errno));
+	res->infd = STDIN_FILENO;
+	res->outfd = STDOUT_FILENO;
 	return (res);
 }
 
@@ -40,10 +42,33 @@ t_cmd	*add_cmd(t_data *d)
 	{
 		d->cmd = new_cmd();
 		last = d->cmd;
+		return (last);
 	}
 	else
 		last->next = new_cmd();
-	return (last);
+	return (last->next);
+}
+
+void	free_cmds(t_cmd *c)
+{
+	t_cmd *aux;
+
+	while (c)
+	{
+		aux = c;
+		if (c->cmd)
+		{
+			free(c->cmd);
+			c->cmd = NULL;
+		}
+		if (c->path)
+		{
+			free(c->path);
+			c->path = NULL;
+		}
+		c = c->next;
+		free(aux);
+	}
 }
 
 size_t	num_cmd(t_token **tokens)
