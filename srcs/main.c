@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/10/13 16:37:36 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/13 23:15:42 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ int	main(int argc, char **argv, char **envp)
 			add_history(d->input);
 			d->tokens = main_parser(d);
 			main_lexer(d, d->tokens);
-			printf("in: %s\tout: %s\n", d->cmd->infd, d->cmd->outfd);
+			if (d->cmd->ex_argv[0])
+				ft_print_matrix(d->cmd->ex_argv, 1);
+			else
+				printf("SOS\n");
 			clean_loop(d);
 		}
 		d->input = readline(PROMPT);
