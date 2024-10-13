@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:22:30 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/13 16:41:54 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/13 17:10:59 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	main_lexer(t_data *d, t_token **tokens)
 		last->infd = get_fd(tokens, REDIRECT_IN);
 		last->outfd = get_fd(tokens, REDIRECT_OUT);
 		last->index = i++;
+		last->input = tokens;
 		tokens = next_cmd(tokens);
 	}
 	ft_free_matrix((void **)sp_path);
