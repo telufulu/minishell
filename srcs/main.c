@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/10/13 16:05:23 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/13 16:40:52 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "lexer.h"		// free_cmds
 #include "executor.h"	// executor_main
 
-void	close_fds(t_cmd *cmd)
+/*void	close_fds(t_cmd *cmd)
 {
 	while (cmd)
 	{
@@ -26,11 +26,11 @@ void	close_fds(t_cmd *cmd)
 			close(cmd->outfd);
 		cmd = cmd->next;
 	}
-}
+}*/
 
 void	clean_loop(t_data *d)
 {
-	close_fds(d->cmd);
+	//close_fds(d->cmd);
 	free_cmds(d->cmd);
 	d->cmd = NULL;
 	free_tokens(d->tokens);

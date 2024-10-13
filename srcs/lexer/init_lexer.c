@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:28:44 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/13 16:14:52 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/13 16:41:20 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,26 @@ char	*get_path(char **sp_path, char *cmd)
 	return (NULL);
 }
 
-void	open_fd(int *fd, t_token **tokens, t_type tp)
+char	*get_fd(t_token **tokens, t_type tp)
+{
+	char	*res;
+
+	res = NULL;
+	while (tokens && *tokens && (*tokens)->type != PIPE)
+	{
+		if ((*tokens)->type == tp)
+		{
+			++tokens;
+			if (tokens)
+				res = (*tokens)->str;
+		}
+		if (tokens)
+			++tokens;
+	}
+	return (res);
+}
+
+/*void	open_fd(int *fd, t_token **tokens, t_type tp)
 {
 	while (tokens && *tokens && (*tokens)->type != PIPE)
 	{
@@ -80,4 +99,4 @@ void	open_fd(int *fd, t_token **tokens, t_type tp)
 		}
 		++tokens;
 	}
-}
+}*/
