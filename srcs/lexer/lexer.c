@@ -6,13 +6,13 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:22:30 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/13 23:24:09 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/14 18:47:51 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"	// t_data, ft_shell_error
 #include "lexer.h"		// t_token, num_cmd, get_cmd, get_path
-#include "libft.h"		// ft_printf, new_matrix_node
+#include "libft.h"		// ft_printf, ft_new_matrix_str
 #include "parser.h"		// PIPE
 
 //pointer moves to the next token before PIPE and saves COMMANDS into an array
