@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:47:57 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/13 16:36:41 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/16 17:33:02 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_cmd	*add_cmd(t_data *d)
 
 void	free_cmds(t_cmd *c)
 {
-	t_cmd *aux;
+	t_cmd	*aux;
 
 	while (c)
 	{

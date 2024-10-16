@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:29:37 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/14 19:31:38 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/16 14:10:58 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	main_executor(t_data *d, t_cmd *c)
 	pid_t	pid;
 	int		status;
 	int		pipefd[2];
-	char	buffer[3];
+//	char	buffer[3];
 
-	buffer[2] = 0;
+//	buffer[2] = 0;
 	while (d && c)
 	{
 		pipe(pipefd);
