@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:22:30 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/14 18:47:51 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/16 18:06:35 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 //pointer moves to the next token before PIPE and saves COMMANDS into an array
 t_token	**next_cmd(t_token **tokens, t_cmd *c)
 {
-	while (tokens && *tokens && (*tokens))
+	while (tokens && *tokens)
 	{
 		if ((*tokens)->type == COMMAND)
 			c->ex_argv = ft_new_matrix_str(c->ex_argv, (*tokens)->str);

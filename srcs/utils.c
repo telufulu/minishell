@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 16:16:55 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/10/10 19:48:29 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/16 18:46:31 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,11 @@ void	*free_tokens(t_token **tokens)
 	i = -1;
 	while (tokens && tokens[++i])
 	{
-		free(tokens[i]->str);
-		tokens[i]->str = NULL;
+		if (tokens[i]->str)
+		{
+			free(tokens[i]->str);
+			tokens[i]->str = NULL;
+		}
 		free(tokens[i]);
 		tokens[i] = NULL;
 	}
