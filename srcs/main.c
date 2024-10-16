@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/10/16 19:17:02 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/10/16 19:34:10 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,21 @@
 
 void	clean_loop(t_data *d)
 {
-	//close_fds(d->cmd);
+//	close_fds(d->cmd);
 	if (d->tokens)
 		ft_free_matrix((void **)d->cmd->ex_argv);
 	free_cmds(d->cmd);
 	d->cmd = NULL;
 	free_tokens(d->tokens);
+}
+
+void	handle_input(t_data *d)
+{
+	add_history(d->input);
+	d->tokens = main_parser(d);
+	main_lexer(d, d->tokens);
+	main_executor(d, d->cmd);
+	clean_loop(d);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -49,13 +58,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		errno = 0;
 		if (*d->input)
-		{
-			add_history(d->input);
-			d->tokens = main_parser(d);
-			main_lexer(d, d->tokens);
-			main_executor(d, d->cmd);
-			clean_loop(d);
-		}
+			handle_input(d);
 		free(d->input);
 		d->input = readline(PROMPT);
 	}

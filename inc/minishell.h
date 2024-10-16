@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:04:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/13 17:27:01 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/16 19:24:41 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ typedef struct s_data
  * Files
  */
 // main.c
+//void	close_fds(t_cmd *cmd);
+void	clean_loop(t_data *d);
+void	handle_input(t_data *d);
 
 // utils.c
 void	check_term(char **envp);

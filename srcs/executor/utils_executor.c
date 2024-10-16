@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 16:42:54 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/13 18:13:50 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/16 19:33:15 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	**get_argv(t_token **input)
 	if (aux && (*aux)->str)
 	{
 		free((*aux)->str);
-		(*aux)->str = NULL; 
+		(*aux)->str = NULL;
 	}
 	return (res);
 }
