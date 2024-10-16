@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/10/16 19:34:10 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/10/16 20:58:35 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	handle_input(t_data *d)
 {
 	add_history(d->input);
 	d->tokens = main_parser(d);
+	if (!d->tokens)
+		return ;
 	main_lexer(d, d->tokens);
 	main_executor(d, d->cmd);
 	clean_loop(d);
