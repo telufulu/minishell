@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/10/16 18:11:42 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/10/16 19:17:02 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	clean_loop(t_data *d)
 	free_cmds(d->cmd);
 	d->cmd = NULL;
 	free_tokens(d->tokens);
-	free(d->input);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -57,6 +56,7 @@ int	main(int argc, char **argv, char **envp)
 			main_executor(d, d->cmd);
 			clean_loop(d);
 		}
+		free(d->input);
 		d->input = readline(PROMPT);
 	}
 	if (errno != 0)
