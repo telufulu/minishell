@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/10/16 20:58:35 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/10/18 01:21:32 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,8 @@
 #include "lexer.h"		// free_cmds
 #include "executor.h"	// executor_main
 
-/*void	close_fds(t_cmd *cmd)
-{
-	while (cmd)
-	{
-		if (cmd->infd > 2)
-			close(cmd->infd);
-		if (cmd->outfd > 2)
-			close(cmd->outfd);
-		cmd = cmd->next;
-	}
-}*/
-
 void	clean_loop(t_data *d)
 {
-//	close_fds(d->cmd);
 	if (d->tokens)
 		ft_free_matrix((void **)d->cmd->ex_argv);
 	free_cmds(d->cmd);
