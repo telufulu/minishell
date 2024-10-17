@@ -6,13 +6,13 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 16:42:54 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/16 19:33:15 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/10/17 21:50:10 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>	// open
-#include "parser.h"	// t_token, t_type
-
+#include "executor.h"	// RD, WR
+#include <fcntl.h>		// open
+#include "parser.h"		// t_token, t_type
 int	open_fd(int *fd, t_token **tokens, t_type tp)
 {
 	while (tokens && *tokens && (*tokens)->type != PIPE)
@@ -51,4 +51,28 @@ char	**get_argv(t_token **input)
 		(*aux)->str = NULL;
 	}
 	return (res);
+}
+
+void	redir_child(int oldfd, int *pipefd, t_bool next)
+{
+	if (oldfd != -1)
+	{
+		dup2(oldfd, STDIN_FILENO);
+		close(oldfd);
+	}
+	if (next)
+	{
+		dup2(pipefd[WR], STDOUT_FILENO);
+		close(pipefd[WR]);
+	}
+	close(pipefd[RD]);
+}
+
+int	redir_father(int oldfd, int *pipefd, t_bool next)
+{
+	if (oldfd != -1)
+		close(oldfd);
+	if (next)
+		close(pipefd[WR]);
+	return (pipefd[RD]);
 }

@@ -6,11 +6,11 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:29:37 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/17 20:22:31 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/17 21:45:31 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h"	// open_fd, WR, RD
+#include "executor.h"	// open_fd, WR, RD, redir_child, redir_father
 #include "lexer.h"		// t_cmd
 #include "parser.h"		// t_token, REDIRECT_IN
 #include "minishell.h"	// t_data, ft_shell_error, execve
@@ -23,6 +23,7 @@ void	main_executor(t_data *d, t_cmd *c)
 	int		pipefd[2];
 	int		oldfd;
 
+	oldfd = -1;
 	while (d && c)
 	{
 		pipe(pipefd);
@@ -31,23 +32,14 @@ void	main_executor(t_data *d, t_cmd *c)
 			ft_error("fork failed", strerror(errno));
 		else if (!pid)
 		{
-			if (c->next)
-			{
-				close(pipefd[RD]);
-				dup2(pipefd[WR], STDOUT_FILENO);
-				close(pipefd[WR]);
-			}
-			if (c->index)
-			{
-				dup2(oldfd, STDIN_FILENO);
-			}
+			redir_child(oldfd, pipefd, (c->next != NULL));
 			execve(c->path, c->ex_argv, d->env);
 			exit(EXIT_FAILURE);
 		}
 		else
 		{
 			waitpid(pid, &status, 0);
-			oldfd = dup(pipefd[RD]);
+			oldfd = redir_father(oldfd, pipefd, (c->next != NULL));
 			c = c->next;
 		}
 	}
