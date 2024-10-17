@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:29:37 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/16 19:33:39 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/10/17 20:22:31 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ void	main_executor(t_data *d, t_cmd *c)
 	pid_t	pid;
 	int		status;
 	int		pipefd[2];
-//	char	buffer[3];
-//
-//	buffer[2] = 0;
+	int		oldfd;
+
 	while (d && c)
 	{
 		pipe(pipefd);
@@ -32,19 +31,24 @@ void	main_executor(t_data *d, t_cmd *c)
 			ft_error("fork failed", strerror(errno));
 		else if (!pid)
 		{
-			close(pipefd[RD]);
-			if ((!c->index && c->next) || (c->index && c->next))
-				dup2(STDOUT_FILENO, pipefd[WR]);
-			else if ((c->next && c->index) || c->index)
-				dup2(STDIN_FILENO, pipefd[RD]);
+			if (c->next)
+			{
+				close(pipefd[RD]);
+				dup2(pipefd[WR], STDOUT_FILENO);
+				close(pipefd[WR]);
+			}
+			if (c->index)
+			{
+				dup2(oldfd, STDIN_FILENO);
+			}
 			execve(c->path, c->ex_argv, d->env);
-			exit(EXIT_SUCCESS);
+			exit(EXIT_FAILURE);
 		}
 		else
 		{
+			waitpid(pid, &status, 0);
+			oldfd = dup(pipefd[RD]);
 			c = c->next;
-			close(pipefd[WR]);
-			wait(&status);
 		}
 	}
 }
