@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:29:37 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/18 01:34:32 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/18 01:43:25 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static int	father_process(pid_t pid, int *oldfd, int *pipefd, t_cmd *c)
 
 	waitpid(pid, &status, 0);
 	*oldfd = redir_father(*oldfd, pipefd, (c->next != NULL));
-	c = c->next;
 	return (status);
 }
 
@@ -52,6 +51,7 @@ void	main_executor(t_data *d, t_cmd *c)
 			child_process(&oldfd, pipefd, c, d->env);
 		else
 			status = father_process(pid, &oldfd, pipefd, c);
+		c = c->next;
 	}
 	close(oldfd);
 }
