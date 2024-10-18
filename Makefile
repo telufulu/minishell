@@ -16,6 +16,7 @@ SRCS_FILES		+=		parser/parser.c parser/parser_args.c \
 SRCS_FILES		+=		lexer/lexer.c lexer/cmd_utils.c lexer/init_lexer.c
 SRCS_FILES		+=		executor/main_executor.c executor/utils_executor.c \
 						executor/redirections.c
+SRCS_FILES		+=		builtings/my_execve.c builtings/ls_built.c
 
 LIBS			=		libs/
 LIBFT			=		$(LIBFT_DIR)libft.a
@@ -63,6 +64,7 @@ $(OBJS_DIR)%.o:	$(SRCS_DIR)%.c
 	mkdir -p $(OBJS_DIR)lexer
 	mkdir -p $(OBJS_DIR)parser
 	mkdir -p $(OBJS_DIR)executor
+	mkdir -p $(OBJS_DIR)builtings
 	$(CC) $(CFLAGS) -c $< -o $@
 	echo  "\33[2K\r$(GRAY)$(CC) $(CFLAGS) $(LFLAGS) -c $< -o $@$(DEF_COLOR)"
 
