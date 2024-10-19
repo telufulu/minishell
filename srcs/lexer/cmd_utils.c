@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:47:57 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/16 17:33:02 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/10/19 19:10:36 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,7 @@ void	free_cmds(t_cmd *c)
 	while (c)
 	{
 		aux = c;
-		if (c->cmd)
-		{
-			free(c->cmd);
-			c->cmd = NULL;
-		}
-		if (c->path)
-		{
-			free(c->path);
-			c->path = NULL;
-		}
+		c->ex_argv = (char **)ft_free_matrix((void **)c->ex_argv);
 		c = c->next;
 		free(aux);
 	}

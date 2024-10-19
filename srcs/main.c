@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/10/18 01:21:32 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/19 19:40:06 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,6 @@
 #include "lexer.h"		// free_cmds
 #include "executor.h"	// executor_main
 
-void	clean_loop(t_data *d)
-{
-	if (d->tokens)
-		ft_free_matrix((void **)d->cmd->ex_argv);
-	free_cmds(d->cmd);
-	d->cmd = NULL;
-	free_tokens(d->tokens);
-}
-
 void	handle_input(t_data *d)
 {
 	add_history(d->input);
@@ -33,7 +24,6 @@ void	handle_input(t_data *d)
 		return ;
 	main_lexer(d, d->tokens);
 	main_executor(d, d->cmd);
-	clean_loop(d);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -43,18 +33,17 @@ int	main(int argc, char **argv, char **envp)
 	d = init_shell(NULL, envp, argv, argc);
 	signal_handlers();
 	d->input = readline(PROMPT);
-	while (d->input && ft_strncmp(d->input, "exit", 5))
+	if (!d->input)
+		ft_error("readline failed", strerror(errno));
+	while (d->input)
 	{
-		errno = 0;
 		if (*d->input)
 			handle_input(d);
 		free(d->input);
+		free_cmds(d->cmd);
+		d->cmd = NULL;
 		d->input = readline(PROMPT);
 	}
-	if (errno != 0)
-		ft_error("readline failed", strerror(errno));
-	else if (!d->input)
-		write(STDOUT_FILENO, "exit\n", 5);
 	d->env = (char **)ft_free_matrix((void **)d->env);
 	free(d);
 	return (0);

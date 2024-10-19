@@ -6,13 +6,13 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:28:44 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/13 23:23:59 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/19 15:05:41 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"	// t_data, ft_shell_error
 #include "lexer.h"		// t_token, num_cmd
-#include "libft.h"		// ft_printf, ft_strdup
+#include "libft.h"		// ft_printf, ft_strdup, ft_strcmp
 #include "parser.h"		// PIPE
 #include <fcntl.h>		// open
 
@@ -54,13 +54,13 @@ char	*get_path(char **sp_path, char *cmd)
 
 	i = 0;
 	path = NULL;
+	if (!access(cmd, X_OK) || !ft_strncmp(cmd, "exit", 4))
+		return (cmd);
 	while (sp_path[i] && access(path, X_OK) == -1)
 	{
 		path = ft_strjoin(sp_path[i], cmd);
 		if (!access(path, X_OK))
-		{
 			return (path);
-		}
 		free(path);
 		++i;
 	}

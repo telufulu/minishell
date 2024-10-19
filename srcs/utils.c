@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 16:16:55 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/10/16 18:46:31 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/10/19 19:47:48 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	print_tokens(t_token **tokens, int fd)
 	}
 }
 
-void	ft_shell_error(char *var, char *msg_error)
+void	ft_shell_error(char *var, char *msg_error, int exit_status)
 {
 	ft_putstr_fd(SHELL_NAME, 2);
 	ft_putstr_fd(": ", 2);
@@ -107,5 +107,5 @@ void	ft_shell_error(char *var, char *msg_error)
 	if (msg_error && *msg_error)
 		ft_putstr_fd(msg_error, 2);
 	ft_putstr_fd("\n", 2);
-	exit(EXIT_FAILURE);
+	exit(exit_status);
 }

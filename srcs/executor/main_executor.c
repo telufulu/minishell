@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:29:37 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/18 02:08:49 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/19 19:59:25 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,35 @@
 #include "lexer.h"		// t_cmd
 #include "parser.h"		// t_token, REDIRECT_IN
 #include "minishell.h"	// t_data, ft_shell_error, execve
-#include "libft.h"		// ft_error
+#include "libft.h"		// ft_error, ft_strcmp
 #include "builtings.h"	// my_execve
 
 static void	child_process(int *oldfd, int *pipefd, t_cmd *c, char **env)
 {
 	redin_child(oldfd, c);
 	redout_child(pipefd, (c->next != NULL), c);
-	my_execve(c, env);
-	exit(EXIT_FAILURE);
+	errno = my_execve(c, env);
+	exit(errno);
 }
 
-static int	father_process(pid_t pid, int *oldfd, int *pipefd, t_cmd *c)
+void	father_process(pid_t pid, int *oldfd, int *pipefd, t_cmd *c)
 {
-	int	status;
-
-	waitpid(pid, &status, 0);
+	waitpid(pid, &c->data->exit_status, 0);
 	*oldfd = redir_father(*oldfd, pipefd, (c->next != NULL));
-	return (status);
 }
 
 void	main_executor(t_data *d, t_cmd *c)
 {
 	pid_t	pid;
-	int		status;
 	int		pipefd[2];
 	int		oldfd;
 
 	oldfd = -1;
 	while (d && c)
 	{
+		d->exit_status = 0;
+		if (!c->next && !ft_strncmp("exit", c->cmd, 5))
+			exit(exit_built(c, d->env));
 		pipe(pipefd);
 		pid = fork();
 		if (pid < 0)
@@ -51,7 +50,7 @@ void	main_executor(t_data *d, t_cmd *c)
 		else if (!pid)
 			child_process(&oldfd, pipefd, c, d->env);
 		else
-			status = father_process(pid, &oldfd, pipefd, c);
+			father_process(pid, &oldfd, pipefd, c);
 		c = c->next;
 	}
 	close(oldfd);
