@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:29:37 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/18 01:43:25 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/24 19:48:11 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	main_executor(t_data *d, t_cmd *c)
 	int		pipefd[2];
 	int		oldfd;
 
+	(void)status;
 	oldfd = -1;
 	while (d && c)
 	{
