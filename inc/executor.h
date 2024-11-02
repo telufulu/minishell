@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:29:13 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/18 01:33:40 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/26 14:15:32 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 void	main_executor(t_data *d, t_cmd *c);
 
 // utils_executor.c
-char	**get_argv(t_token **input);
 void	write_fd(int old, int new);
+
 // redirections.c
 void	redin_child(int *oldfd, t_cmd *c);
 void	redout_child(int *pipefd, t_bool next, t_cmd *c);

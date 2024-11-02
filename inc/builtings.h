@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 01:47:24 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/19 18:08:03 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/26 14:13:32 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 /******************************************************************************
  * Includes
  *****************************************************************************/
-# define N_BUILTINGS 2
+# define N_BUILTINGS 3
 
 /******************************************************************************
  * Structs
@@ -43,5 +43,8 @@ int	my_execve(t_cmd *c, char **env);
 // basic_builtings.c
 int	exit_built(t_cmd *c, char **env);
 int	env_built(t_cmd *c, char **env);
+
+// echo_built.c
+int	echo_built(t_cmd *c, char **env);
 
 #endif

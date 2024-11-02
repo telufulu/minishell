@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 01:47:05 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/19 20:00:38 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/27 19:57:38 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 
 static void	init_builtings(t_builts *builtings, char **env)
 {
-	builtings[0] = (t_builts){"env", &env_built, env};
-	builtings[1] = (t_builts){"exit", &exit_built, env};
+	builtings[0] = (t_builts){"echo", &echo_built, env};
+	builtings[1] = (t_builts){"env", &env_built, env};
+	builtings[2] = (t_builts){"exit", &exit_built, env};
 }
 
 int	my_execve(t_cmd *c, char **env)
@@ -30,11 +31,14 @@ int	my_execve(t_cmd *c, char **env)
 	init_builtings(builts, env);
 	while (i < N_BUILTINGS)
 	{
-		if (!ft_strncmp(builts[i].cmd, c->cmd, ft_strlen(c->cmd)))
+		if (!ft_strncmp(builts[i].cmd, c->cmd, 6))
 			return (builts[i].built(c, env));
 		++i;
 	}
 	if (!c->path)
+	{
+		//ft_free_matrix((void **)c->ex_argv);
 		ft_shell_error(c->cmd, "command not found", errno);
+	}
 	return (execve(c->path, c->ex_argv, env));
 }

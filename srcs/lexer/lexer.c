@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:22:30 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/19 18:39:18 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/02 01:03:54 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,16 @@
 //pointer moves to the next token before PIPE and saves COMMANDS into an array
 t_token	**next_cmd(t_token **tokens, t_cmd *c)
 {
+	char	**aux;
+
 	while (tokens && *tokens)
 	{
 		if ((*tokens)->type == COMMAND)
-			c->ex_argv = ft_new_matrix_str(c->ex_argv, (*tokens)->str);
+		{
+			aux = c->ex_argv;
+			c->ex_argv = ft_matrixjoin(c->ex_argv, (*tokens)->str);
+			ft_free_matrix(aux);
+		}
 		else if ((*tokens)->type == PIPE)
 			return (tokens + 1);
 		++tokens;
@@ -52,5 +58,5 @@ void	main_lexer(t_data *d, t_token **tokens)
 		last->data = d;
 		tokens = next_cmd(tokens, last);
 	}
-	ft_free_matrix((void **)sp_path);
+	ft_free_matrix(sp_path);
 }

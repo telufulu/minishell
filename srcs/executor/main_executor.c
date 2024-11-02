@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:29:37 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/19 19:59:25 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/10/27 19:54:10 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ static void	child_process(int *oldfd, int *pipefd, t_cmd *c, char **env)
 {
 	redin_child(oldfd, c);
 	redout_child(pipefd, (c->next != NULL), c);
-	errno = my_execve(c, env);
-	exit(errno);
+	exit(my_execve(c, env));
 }
 
 void	father_process(pid_t pid, int *oldfd, int *pipefd, t_cmd *c)
@@ -40,7 +39,6 @@ void	main_executor(t_data *d, t_cmd *c)
 	oldfd = -1;
 	while (d && c)
 	{
-		d->exit_status = 0;
 		if (!c->next && !ft_strncmp("exit", c->cmd, 5))
 			exit(exit_built(c, d->env));
 		pipe(pipefd);
@@ -51,6 +49,7 @@ void	main_executor(t_data *d, t_cmd *c)
 			child_process(&oldfd, pipefd, c, d->env);
 		else
 			father_process(pid, &oldfd, pipefd, c);
+		//ft_free_matrix((void **)c->ex_argv);
 		c = c->next;
 	}
 	close(oldfd);
