@@ -17,7 +17,7 @@ SRCS_FILES		+=		lexer/lexer.c lexer/cmd_utils.c lexer/init_lexer.c
 SRCS_FILES		+=		executor/main_executor.c executor/utils_executor.c \
 						executor/redirections.c
 SRCS_FILES		+=		builtings/my_execve.c builtings/basic_builtings.c \
-						builtings/echo_built.c
+						builtings/echo_built.c builtings/cd_built.c
 
 LIBS			=		libs/
 LIBFT			=		$(LIBFT_DIR)libft.a

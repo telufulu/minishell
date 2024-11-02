@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 01:47:05 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/27 19:57:38 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/02 01:21:01 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	init_builtings(t_builts *builtings, char **env)
 	builtings[0] = (t_builts){"echo", &echo_built, env};
 	builtings[1] = (t_builts){"env", &env_built, env};
 	builtings[2] = (t_builts){"exit", &exit_built, env};
+	builtings[3] = (t_builts){"cd", &exit_built, env};
 }
 
 int	my_execve(t_cmd *c, char **env)
