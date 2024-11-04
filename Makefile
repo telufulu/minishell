@@ -74,6 +74,7 @@ clean:
 	rm -rf $(OBJS_DIR)
 	make clean -C $(LIBFT_DIR) --no-print-directory
 	find . -name "*.swap" -delete
+	find . -name "*.swp" -delete
 	find . -name ".DS_Store" -delete
 	find . -name "*.gch" -delete
 	find . -name "*._." -delete

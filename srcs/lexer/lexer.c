@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:22:30 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/02 01:03:54 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/04 18:30:19 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "libft.h"		// ft_printf, ft_new_matrix_str
 #include "parser.h"		// PIPE
 
-//pointer moves to the next token before PIPE and saves COMMANDS into an array
 t_token	**next_cmd(t_token **tokens, t_cmd *c)
 {
 	char	**aux;

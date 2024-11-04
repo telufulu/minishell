@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 13:25:13 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/02 01:17:27 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/04 18:27:51 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	echo_built(t_cmd *c, char **env)
 				ft_putchar_fd(' ', STDOUT_FILENO);
 		}
 	}
-	if (!flag)
+	if (!flag || !c->ex_argv[1])
 		ft_putchar_fd('\n', STDOUT_FILENO);
 	return (EXIT_SUCCESS);
 }

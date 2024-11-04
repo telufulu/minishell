@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 01:47:05 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/02 12:46:48 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/03 18:01:08 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,36 @@
 #include "libft.h"		// ft_strcmp
 #include "builtings.h"	// t_builts
 
-static void	init_builtings(t_builts *builtings, char **env)
+t_builts	*init_builtings(t_builts *builtings, char **env)
 {
 	builtings[0] = (t_builts){"echo", &echo_built, env};
 	builtings[1] = (t_builts){"env", &env_built, env};
 	builtings[2] = (t_builts){"exit", &exit_built, env};
 	builtings[3] = (t_builts){"cd", &cd_built, env};
+	return (builtings);
 }
 
-int	my_execve(t_cmd *c, char **env)
+t_bool	is_built(t_builts *builts, char *cmd)
 {
-	int			i;
-	t_builts	builts[N_BUILTINGS];
+	int	i;
 
 	i = 0;
-	init_builtings(builts, env);
+	while (i < N_BUILTINGS)
+	{
+		if (!ft_strncmp(builts[i].cmd, cmd, 5))
+			return (TRUE);
+		++i;
+	}
+	return (FALSE);
+}
+
+int	my_execve(t_cmd *c, t_builts *builts, char **env)
+{
+	int			i;
+
+	i = 0;
+	if (!c->cmd)
+		return (EXIT_SUCCESS);
 	while (i < N_BUILTINGS)
 	{
 		if (!ft_strncmp(builts[i].cmd, c->cmd, 6))

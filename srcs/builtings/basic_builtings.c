@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 00:51:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/26 13:25:30 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/03 17:50:06 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 
 int	exit_built(t_cmd *c, char **env)
 {
-	if (c && env)
+	if (!c->next && !c->index && env)
+	{
 		ft_putstr_fd("exit\n", STDOUT_FILENO);
+		c->data->exit_status = EXIT_SUCCESS;
+		exit(c->data->exit_status);
+	}
 	return (EXIT_SUCCESS);
 }
 

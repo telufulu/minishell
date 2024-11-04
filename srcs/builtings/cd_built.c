@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 01:21:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/02 13:30:47 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/03 17:01:15 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,16 @@ static void	check_path(t_cmd *c, char **env)
 		c->ex_argv = ft_matrixjoin(c->ex_argv, get_env(env, "HOME"));
 		ft_free_matrix(aux);
 	}
-	// access a la ruta. Si no existe, "no such file or directory"
-	if (access(c->ex_argv[1], R_OK))
-		ft_shell_error(c->ex_argv[1], "no such file or directory", errno);
 }
 
 int	cd_built(t_cmd *c, char **env)
 {
 	check_path(c, env);
-	ft_printf("path: %s\n", c->ex_argv[1]);
+	//ft_printf("path: %s\n", c->ex_argv[1]);
 	//
 	// moverme a la dirección con chdir
-	//
+	if (!c->ex_argv[1] || access(c->ex_argv[1], R_OK) || chdir(c->ex_argv[1]))
+		ft_shell_error(c->ex_argv[1], "no such file or directory", errno);
 	// actualizar el PWD del entorno y guardar el OLDPWD. Si el PWD nuevo es el
 	// mismo que antes (cd .) no se crea/modifica el OLDPWD
 	return (EXIT_SUCCESS);

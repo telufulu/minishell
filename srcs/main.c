@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/02 01:00:07 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/04 18:49:37 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,27 @@
 #include "lexer.h"		// free_cmds
 #include "executor.h"	// executor_main
 
-void	handle_input(t_data *d)
+static void	*free_cmd(t_cmd *cmd)
+{
+	t_cmd	*aux;
+
+	while (cmd)
+	{
+		aux = cmd;
+		if (cmd->cmd)
+			free(cmd->cmd);
+		ft_free_matrix(cmd->ex_argv);
+		if (cmd->infd)
+			free(cmd->infd);
+		if (cmd->outfd)
+			free(cmd->outfd);
+		cmd = cmd->next;
+		free(aux);
+	}
+	return (NULL);
+}
+
+static void	handle_input(t_data *d)
 {
 	add_history(d->input);
 	d->tokens = main_parser(d);
@@ -39,9 +59,11 @@ int	main(int argc, char **argv, char **envp)
 	{
 		if (*d->input)
 			handle_input(d);
+		d->cmd = free_cmd(d->cmd);
 		free(d->input);
-		d->cmd = NULL;
 		d->input = readline(PROMPT);
+		if (!d->input)
+			ft_error("readline failed", strerror(errno));
 	}
 	d->env = ft_free_matrix(d->env);
 	free(d);

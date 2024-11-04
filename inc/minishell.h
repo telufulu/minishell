@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:04:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/19 19:57:42 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/04 18:36:18 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
  * Includes
  */
 # include "libft.h"
-
 # include <unistd.h>			// fork
 # include <stdio.h>				// printf, perror
 # include <stdlib.h>			// malloc, free, exit, getenv
@@ -44,24 +43,23 @@
  */
 typedef struct s_token	t_token;
 typedef struct s_cmd	t_cmd;
+typedef struct s_builts	t_builts;
 
 typedef struct s_data
 {
-	t_token	**tokens;
-	t_cmd	*cmd;
-	char	*input;
-	char	**env;
-	int		index;
-	int		exit_status;
+	t_token		**tokens;
+	t_cmd		*cmd;
+	t_builts	*builts;
+	char		*input;
+	char		**env;
+	int			index;
+	int			exit_status;
 }				t_data;
 
 /*
  * Files
  */
 // main.c
-//void	close_fds(t_cmd *cmd);
-void	clean_loop(t_data *d);
-void	handle_input(t_data *d);
 
 // utils.c
 void	check_term(char **envp);

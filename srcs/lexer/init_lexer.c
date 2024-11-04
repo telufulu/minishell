@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:28:44 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/19 15:05:41 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/04 18:43:56 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*get_path(char **sp_path, char *cmd)
 	path = NULL;
 	if (!access(cmd, X_OK) || !ft_strncmp(cmd, "exit", 4))
 		return (cmd);
-	while (sp_path[i] && access(path, X_OK) == -1)
+	while (sp_path[i])
 	{
 		path = ft_strjoin(sp_path[i], cmd);
 		if (!access(path, X_OK))
