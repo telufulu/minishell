@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:29:37 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/04 18:21:53 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:31:51 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,19 @@ static void	child_process(int *oldfd, int *pipefd, t_cmd *c, char **env)
 {
 	redin_child(oldfd, c);
 	redout_child(pipefd, (c->next != NULL), c);
-	if (!c->next && is_built(c->data->builts, c->cmd))
+	if (!c->outfd && !c->next && is_built(c->data->builts, c->cmd))
 		exit(EXIT_SUCCESS);
 	else
+	{
 		c->data->exit_status = my_execve(c, c->data->builts, env);
-	exit(c->data->exit_status);
+		exit(c->data->exit_status);
+	}
 }
 
 static void	father_process(pid_t pid, int *oldfd, int *pipefd, t_cmd *c)
 {
 	waitpid(pid, &c->data->exit_status, 0);
-	if (!c->next && is_built(c->data->builts, c->cmd))
+	if (!c->next && is_built(c->data->builts, c->cmd) && !c->outfd)
 		c->data->exit_status = my_execve(c, c->data->builts, c->data->env);
 	*oldfd = redir_father(*oldfd, pipefd, (c->next != NULL));
 }
