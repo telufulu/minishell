@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 16:42:54 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/08 14:28:50 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/08 18:43:35 by augustindelab    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,4 @@ void	restore_terminal_settings(void)
 	check_error(tcgetattr(STDIN_FILENO, &termios_p), "tcgetattr");
 	termios_p.c_lflag |= ECHOCTL;
 	check_error(tcsetattr(STDIN_FILENO, TCSANOW, &termios_p), "tcsetattr");
-}
-
-int	get_exit_status(int status)
-{
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
-	else if (WIFSIGNALED(status))
-		return (128 + WTERMSIG(status));
-	else
-		return (status);
 }
