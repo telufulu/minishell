@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:04:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/04 18:36:18 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:02:26 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ char	**init_env(char **envp);
 // signals.c
 void	handle_sigint(int sig);
 void	signal_handlers(void);
+void	handle_empty_string(t_data *d);
 
 #endif
