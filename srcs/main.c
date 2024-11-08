@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/08 11:55:12 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:07:51 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ int	main(int argc, char **argv, char **envp)
 	d = init_shell(NULL, envp, argv, argc);
 	signal_handlers();
 	d->input = readline(PROMPT);
-	if (!d->input)
-		ft_error("readline failed", strerror(errno));
+	handle_empty_string(d);
 	while (d->input)
 	{
 		if (*d->input)
@@ -62,8 +61,7 @@ int	main(int argc, char **argv, char **envp)
 		d->cmd = free_cmd(d->cmd);
 		free(d->input);
 		d->input = readline(PROMPT);
-		if (!d->input)
-			ft_error("readline failed", strerror(errno));
+		handle_empty_string(d);
 	}
 	d->env = ft_free_matrix(d->env);
 	free(d);
