@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:29:37 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/06 17:31:51 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/08 14:50:08 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,15 @@
 
 static void	child_process(int *oldfd, int *pipefd, t_cmd *c, char **env)
 {
+	restore_terminal_settings();
+	reset_signal_handlers_to_default();
 	redin_child(oldfd, c);
 	redout_child(pipefd, (c->next != NULL), c);
 	if (!c->outfd && !c->next && is_built(c->data->builts, c->cmd))
-		exit(EXIT_SUCCESS);
+	{
+		c->data->exit_status = my_execve(c, c->data->builts, env);
+		exit(c->data->exit_status);
+	}
 	else
 	{
 		c->data->exit_status = my_execve(c, c->data->builts, env);
@@ -32,17 +37,20 @@ static void	child_process(int *oldfd, int *pipefd, t_cmd *c, char **env)
 
 static void	father_process(pid_t pid, int *oldfd, int *pipefd, t_cmd *c)
 {
-	waitpid(pid, &c->data->exit_status, 0);
-	if (!c->next && is_built(c->data->builts, c->cmd) && !c->outfd)
-		c->data->exit_status = my_execve(c, c->data->builts, c->data->env);
+	int	status;
+
+	ignore_signals_in_parent();
+	waitpid(pid, &status, 0);
+	restore_parent_signal_handlers();
+	c->data->exit_status = get_exit_status(status);
 	*oldfd = redir_father(*oldfd, pipefd, (c->next != NULL));
 }
 
 void	main_executor(t_data *d, t_cmd *c)
 {
-	pid_t	pid;
-	int		pipefd[2];
-	int		oldfd;
+	pid_t		pid;
+	int			pipefd[2];
+	int			oldfd;
 	t_builts	builts[N_BUILTINGS];
 
 	d->builts = init_builtings(builts, d->env);
