@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:44:12 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/10/16 17:46:36 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/08 21:32:26 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ char	next_quote(const char *s);
 char	*substitute_variable(t_parser *p, char *result);
 char	*handle_variable(t_parser *p, char limiter);
 t_token	**main_parser(t_data *d);
+void	*my_realloc(void *ptr, size_t size);
 void	handle_single_quote(t_parser *p);
 void	handle_double_quote(t_parser *p);
 void	handle_variable_expansion(t_parser *p);

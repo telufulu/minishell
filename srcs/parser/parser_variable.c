@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 11:47:01 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/08 17:56:37 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/08 21:36:16 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*substitute_variable(t_parser *p, char *result)
 		env_length = ft_strlen(p->env_value);
 		if (env_length > (size_t)ft_strlen(p->varname))
 		{
-			result = ft_realloc(result, p->length + env_length + 1);
+			result = my_realloc(result, p->length + env_length + 1);
 			if (!result && *(p->varname) == '?')
 				free(p->env_value);
 			if (!result)
@@ -73,7 +73,6 @@ char	*handle_variable(t_parser *p, char limiter)
 	char		*result;
 	const char	*s;
 
-	result = NULL;
 	s = p->start;
 	result = malloc(p->length + 1);
 	if (!result)
