@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/08 13:07:51 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/08 16:30:54 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,14 @@ static void	handle_input(t_data *d)
 	if (!d->tokens)
 		return ;
 	main_lexer(d, d->tokens);
+	free_tokens(d->tokens);
 	main_executor(d, d->cmd);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	*d;
-
+	
 	d = init_shell(NULL, envp, argv, argc);
 	signal_handlers();
 	d->input = readline(PROMPT);

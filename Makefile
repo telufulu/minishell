@@ -10,7 +10,7 @@ OBJS_DIR		=		objs/
 SRCS			=		$(addprefix $(SRCS_DIR), $(SRCS_FILES))
 OBJS			=		$(addprefix $(OBJS_DIR), $(OBJS_FILES))
 OBJS_FILES		=		$(SRCS_FILES:%.c=%.o)
-SRCS_FILES		=		main.c utils.c env.c signals.c
+SRCS_FILES		=		main.c utils.c env.c signals.c signals_utils.c
 SRCS_FILES		+=		parser/parser.c parser/parser_args.c \
 						parser/parser_utils.c parser/parser_variable.c
 SRCS_FILES		+=		lexer/lexer.c lexer/cmd_utils.c lexer/init_lexer.c

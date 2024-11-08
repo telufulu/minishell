@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:04:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/08 13:02:26 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/08 14:31:58 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <sys/wait.h>			// wait, waitpid, wait3, wait4
 # include <signal.h>			// signal, sigaction, kill
 # include <sys/stat.h>			// stat, lstat, fstat
+# include <sys/ioctl.h>
 # include <dirent.h>			// opendir, readdir, closedir
 # include <string.h>			// strerror
 # include <errno.h>				// errno
@@ -76,5 +77,12 @@ char	**init_env(char **envp);
 void	handle_sigint(int sig);
 void	signal_handlers(void);
 void	handle_empty_string(t_data *d);
+
+// signals_utils.c
+void	set_signal_handler(int signum, void (*handler)(int));
+void	reset_signal_handlers_to_default(void);
+void	ignore_signals_in_parent(void);
+void	restore_parent_signal_handlers(void);
+void	check_error(int retval, const char *msg);
 
 #endif

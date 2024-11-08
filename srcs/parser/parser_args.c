@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 12:26:46 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/10/04 18:07:31 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/08 17:59:33 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	handle_variable_expansion(t_parser *p)
 	char	*var;
 
 	var = handle_variable(p, next_quote(p->start));
+	if (!var)
+		return ;
 	append_variable(p, var);
 	p->start += p->i;
 }
@@ -46,10 +48,11 @@ void	append_variable(t_parser *p, char *var)
 {
 	char	*tmp;
 
-	tmp = ft_realloc(p->tokens[p->count]->str, p->length + ft_strlen(var) + 1);
+//	tmp = ft_realloc(p->tokens[p->count]->str, p->length + ft_strlen(var));
+	tmp = ft_realloc(p->tokens[p->count]->str, ft_strlen(var) + 1);
+	if (!tmp)
+		return (free(var));
 	p->tokens[p->count]->str = tmp;
-	if (!p->tokens[p->count]->str)
-		return ;
 	p->l += ft_strlcpy(&p->tokens[p->count]->str[p->l], var, p->j + 1);
 	free(var);
 }
