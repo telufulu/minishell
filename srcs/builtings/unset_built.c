@@ -6,14 +6,14 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:37:58 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/07 12:13:13 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/08 17:50:52 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"		// t_cmd
 #include "minishell.h"	//get_env
 
-static int	find_arg(char **env, char *var)
+int	find_arg(char **env, char *var)
 {
 	int	i;
 
@@ -38,7 +38,7 @@ static int	not_valid(char *env)
 		aux = env;
 		while (*aux != '=')
 			++aux;
-		printf("bash: unset: '%s': not a valid identifier\n", aux + 1);
+		ft_built_error(c->cmd, "not a valid identifier", errno);
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

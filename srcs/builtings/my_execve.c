@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 01:47:05 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/07 12:53:49 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/08 17:50:03 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,39 +26,17 @@ t_builts	*init_builtings(t_builts *builtings, char **env)
 	return (builtings);
 }
 
-t_bool	is_built(t_builts *builts, char *cmd)
-{
-	int	i;
-
-	i = 0;
-	while (i < N_BUILTINGS)
-	{
-		if (!ft_strncmp(builts[i].cmd, cmd, 6))
-			return (TRUE);
-		++i;
-	}
-	return (FALSE);
-}
-
 static void	exit_execve(t_cmd *c)
 {
-	char	*msg_error;
-
-	msg_error = NULL;
-	if (access(c->ex_argv[0], R_OK) && ft_strchr(c->ex_argv[0], '/'))
-	{
-		msg_error = "No such file or directory";
-		c->data->exit_status = errno;
-	}
-	else
-	{
-		msg_error = "command not found";
-		c->data->exit_status = errno;
-	}
 	if (c->next)
 		ft_shell_error(c->cmd, msg_error, errno);
 	else
-		printf("bash: %s: %s\n", c->cmd, msg_error);
+	{
+		if (access(c->ex_argv[0], R_OK) && ft_strchr(c->ex_argv[0], '/'))
+			ft_built_error(c->cmd, "no such file or directory", errno);
+		else
+			ft_built_error(c->cmd, "command not found", errno);
+	}
 }
 
 int	my_execve(t_cmd *c, t_builts *builts, char **env)
