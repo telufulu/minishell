@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:03:07 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/08 16:22:15 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/08 20:59:31 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	handle_args(t_parser *p)
 			return (p->tokens[p->count]->str = NULL, 0);
 		if (p->length > 0)
 		{
-			p->tokens[p->count]->str = malloc(p->length + 1);
-			if (!p->tokens[p->count]->str)
-				return (0);
+//			p->tokens[p->count]->str = ft_calloc(1, p->length + 1);
+//			if (!p->tokens[p->count]->str)
+//				return (0);
 			p->l = 0;
 			while (p->start < p->s)
 			{

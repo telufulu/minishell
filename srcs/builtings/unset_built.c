@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:37:58 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/08 17:50:52 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/08 19:28:27 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	not_valid(char *env)
 		aux = env;
 		while (*aux != '=')
 			++aux;
-		ft_built_error(c->cmd, "not a valid identifier", errno);
+//		ft_built_error(c->cmd, "not a valid identifier", errno);
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
