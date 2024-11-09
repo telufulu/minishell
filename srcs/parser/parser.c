@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:03:07 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/09 14:12:14 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/09 14:27:09 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,6 @@ t_token	**main_parser(t_data *d)
 	p.tokens[p.count] = NULL;
 	if (!check_tokens(&p))
 		return (free_tokens(p.tokens));
-	p.tokens = realloc(p.tokens, (p.count + 1) * sizeof(t_token *));
+	p.tokens = ft_realloc(p.tokens, (p.count + 1) * sizeof(t_token *));
 	return (p.tokens);
 }
