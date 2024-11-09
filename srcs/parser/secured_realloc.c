@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 21:29:06 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/09 13:39:15 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/09 14:27:34 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	*my_memmove(void *dst, const void *src, size_t len)
 	return (dst);
 }
 
-void	*my_realloc(void *ptr, size_t old_size, size_t new_size)
+void	*secured_realloc(void *ptr, size_t old_size, size_t new_size)
 {
 	void	*result;
 
