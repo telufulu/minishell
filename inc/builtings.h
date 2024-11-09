@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 01:47:24 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/08 17:41:51 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/09 14:37:35 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,23 @@ t_bool		is_built(t_builts *builts, char *cmd);
 int			ft_built_error(char *var, char *msg_error, int exit_status);
 
 // cd_built.c
-int	cd_built(t_cmd *c, char **env);
+int			cd_built(t_cmd *c, char **env);
 
 // echo_built.c
-int	echo_built(t_cmd *c, char **env);
+int			echo_built(t_cmd *c, char **env);
 
 // basic_builtings.c
-int	exit_built(t_cmd *c, char **env);
-int	env_built(t_cmd *c, char **env);
+int			exit_built(t_cmd *c, char **env);
+int			env_built(t_cmd *c, char **env);
 
 //unset_built.c
-int	unset_built(t_cmd *c, char **env);
-int	find_arg(char **env, char *var);
+int			unset_built(t_cmd *c, char **env);
+int			find_arg(char **env, char *var);
 
 //export_built.c
-int		export_built(t_cmd *c, char **env);
-char	*new_var(char *input, int len);
-char	*get_var(char *arg);
-t_bool	is_quote(char c);
+int			export_built(t_cmd *c, char **env);
+char		*new_var(char *input, int len);
+char		*get_var(char *arg);
+t_bool		is_quote(char c);
+
 #endif

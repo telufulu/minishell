@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:29:13 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/08 14:35:35 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/09 18:20:48 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	main_executor(t_data *d, t_cmd *c);
 
 // utils_executor.c
 void	write_fd(int old, int new);
-void	restore_terminal_settings(void);
 int		get_exit_status(int status);
 
 // redirections.c
