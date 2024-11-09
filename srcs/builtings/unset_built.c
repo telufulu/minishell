@@ -6,11 +6,12 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:37:58 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/08 19:28:27 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/09 14:23:36 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"		// t_cmd
+#include "builtings.h"	// t_builts
 #include "minishell.h"	//get_env
 
 int	find_arg(char **env, char *var)

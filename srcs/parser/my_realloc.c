@@ -6,12 +6,12 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 21:29:06 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/08 21:34:52 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/09 13:39:15 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
+//
 static void	*my_memcpy(void *dst, const void *src, size_t n)
 {
 	unsigned char	*ptr_dst;
@@ -51,21 +51,25 @@ static void	*my_memmove(void *dst, const void *src, size_t len)
 	return (dst);
 }
 
-void	*my_realloc(void *ptr, size_t size)
+void	*my_realloc(void *ptr, size_t old_size, size_t new_size)
 {
 	void	*result;
 
-	if (size == 0)
+	if (new_size == 0)
 	{
-		free(ptr);
+		if (ptr != NULL)
+			free((char *)ptr - sizeof(size_t));
 		return (NULL);
 	}
-	result = malloc(size);
+	result = malloc(new_size + 1);
 	if (!result)
 		return (NULL);
 	if (ptr)
 	{
-		my_memmove(result, ptr, size);
+		if (old_size < new_size)
+			my_memmove(result, ptr, old_size);
+		else
+			my_memmove(result, ptr, new_size);
 		free(ptr);
 	}
 	return (result);

@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 12:26:46 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/08 21:01:33 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/09 13:39:26 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	append_variable(t_parser *p, char *var)
 {
 	char	*tmp;
 
-//	tmp = ft_realloc(p->tokens[p->count]->str, ft_strlen(var));
 	tmp = ft_calloc(1, ft_strlen(var) + 1);
 	if (!tmp)
 		return (free(var));
