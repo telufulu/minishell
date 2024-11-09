@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:44:12 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/09 14:28:04 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/09 17:28:53 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_parser
 	const char	*s;
 	const char	*start;
 	const char	*end;
-	char		varname[256];
+	char		varname[25];
 	char		*env_value;
 	size_t		input_size;
 	size_t		length;
