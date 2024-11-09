@@ -45,7 +45,6 @@ static void	handle_input(t_data *d)
 	if (!d->tokens)
 		return ;
 	main_lexer(d, d->tokens);
-	free_tokens(d->tokens);
 	main_executor(d, d->cmd);
 	free_tokens(d->tokens);
 	d->cmd = free_cmd(d->cmd);
