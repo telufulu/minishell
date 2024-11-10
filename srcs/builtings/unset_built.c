@@ -6,12 +6,13 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:37:58 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/08 17:50:52 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/08 17:54:41 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"		// t_cmd
 #include "minishell.h"	//get_env
+#include "builtings.h"	// ft_built_error
 
 int	find_arg(char **env, char *var)
 {
@@ -38,7 +39,7 @@ static int	not_valid(char *env)
 		aux = env;
 		while (*aux != '=')
 			++aux;
-		ft_built_error(c->cmd, "not a valid identifier", errno);
+		ft_built_error(env, "not a valid identifier", errno);
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

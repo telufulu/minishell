@@ -6,14 +6,14 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 01:47:05 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/08 17:50:03 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/08 17:53:36 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"	//ft_shell_error
 #include "lexer.h"		// t_cmd
 #include "libft.h"		// ft_strcmp
-#include "builtings.h"	// t_builts
+#include "builtings.h"	// t_builts, ft_built_error
 
 t_builts	*init_builtings(t_builts *builtings, char **env)
 {
@@ -28,15 +28,10 @@ t_builts	*init_builtings(t_builts *builtings, char **env)
 
 static void	exit_execve(t_cmd *c)
 {
-	if (c->next)
-		ft_shell_error(c->cmd, msg_error, errno);
+	if (access(c->ex_argv[0], R_OK) && ft_strchr(c->ex_argv[0], '/'))
+		ft_built_error(c->cmd, "no such file or directory", errno);
 	else
-	{
-		if (access(c->ex_argv[0], R_OK) && ft_strchr(c->ex_argv[0], '/'))
-			ft_built_error(c->cmd, "no such file or directory", errno);
-		else
-			ft_built_error(c->cmd, "command not found", errno);
-	}
+		ft_built_error(c->cmd, "command not found", errno);
 }
 
 int	my_execve(t_cmd *c, t_builts *builts, char **env)
