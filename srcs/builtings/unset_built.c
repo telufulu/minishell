@@ -13,6 +13,7 @@
 #include "lexer.h"		// t_cmd
 #include "builtings.h"	// t_builts
 #include "minishell.h"	//get_env
+#include "builtings.h"	// ft_built_error
 
 int	find_arg(char **env, char *var)
 {
@@ -39,7 +40,7 @@ static int	not_valid(char *env)
 		aux = env;
 		while (*aux != '=')
 			++aux;
-//		ft_built_error(c->cmd, "not a valid identifier", errno);
+		ft_built_error(env, "not a valid identifier", errno);
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

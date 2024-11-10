@@ -13,7 +13,7 @@
 #include "minishell.h"	//ft_shell_error
 #include "lexer.h"		// t_cmd
 #include "libft.h"		// ft_strcmp
-#include "builtings.h"	// t_builts
+#include "builtings.h"	// t_builts, ft_built_error
 
 t_builts	*init_builtings(t_builts *builtings, char **env)
 {
@@ -30,13 +30,10 @@ static void	exit_execve(t_cmd *c)
 {
 	if (c->next)
 		ft_shell_error(c->cmd, "ERROR", errno);
+	if (access(c->ex_argv[0], R_OK) && ft_strchr(c->ex_argv[0], '/'))
+		ft_built_error(c->cmd, "no such file or directory", errno);
 	else
-	{
-		if (access(c->ex_argv[0], R_OK) && ft_strchr(c->ex_argv[0], '/'))
-			ft_built_error(c->cmd, "no such file or directory", errno);
-		else
-			ft_built_error(c->cmd, "command not found", errno);
-	}
+		ft_built_error(c->cmd, "command not found", errno);
 }
 
 int	my_execve(t_cmd *c, t_builts *builts, char **env)
