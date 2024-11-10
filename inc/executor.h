@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:29:13 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/09 18:20:48 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/10 17:04:27 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,5 @@ int		get_exit_status(int status);
 void	redin_child(int *oldfd, t_cmd *c);
 void	redout_child(int *pipefd, t_bool next, t_cmd *c);
 int		redir_father(int oldfd, int *pipefd, t_bool next);
+
 #endif

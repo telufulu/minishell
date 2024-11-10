@@ -1,6 +1,6 @@
 NAME			=		minishell
 CC				=		cc
-CFLAGS			=		-Wall -Werror -Wextra -I$(INC) -I$(LIBFT_DIR)inc/
+CFLAGS			=		-Wall -Werror -Wextra -g3 -I$(INC) -I$(LIBFT_DIR)inc/
 SANITIZE		=		-fsanitize=
 INC				=		inc/
 

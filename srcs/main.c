@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/09 19:44:08 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/10 16:34:37 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,19 @@ static void	*free_cmd(t_cmd *cmd)
 	while (cmd)
 	{
 		aux = cmd;
+
 		if (cmd->cmd)
 		{
+			printf("\nI am freeing1: %p\n", cmd->cmd);
 			free(cmd->cmd);
 			cmd->cmd = NULL;
 		}
 		ft_free_matrix(cmd->ex_argv);
 		if (cmd->path)
+		{
 			free(cmd->path);
+			cmd->path = NULL;
+		}
 		cmd = cmd->next;
 		free(aux);
 		aux = NULL;
