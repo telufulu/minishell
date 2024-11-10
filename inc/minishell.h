@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:04:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/04 18:36:18 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/09 19:38:30 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <sys/wait.h>			// wait, waitpid, wait3, wait4
 # include <signal.h>			// signal, sigaction, kill
 # include <sys/stat.h>			// stat, lstat, fstat
+# include <sys/ioctl.h>
 # include <dirent.h>			// opendir, readdir, closedir
 # include <string.h>			// strerror
 # include <errno.h>				// errno
@@ -65,7 +66,6 @@ typedef struct s_data
 void	check_term(char **envp);
 t_data	*init_shell(t_data *d, char **envp, char **argv, int argc);
 void	*free_tokens(t_token **tokens);
-void	print_tokens(t_token **tokens, int fd);
 void	ft_shell_error(char *var, char *msg_error, int exit_status);
 
 // env.c
@@ -75,5 +75,13 @@ char	**init_env(char **envp);
 // signals.c
 void	handle_sigint(int sig);
 void	signal_handlers(void);
+void	handle_empty_string(t_data *d);
+
+// signals_utils.c
+void	set_signal_handler(int signum, void (*handler)(int));
+void	reset_signal_handlers_to_default(void);
+void	ignore_signals_in_parent(void);
+void	restore_parent_signal_handlers(void);
+void	check_error(int retval, const char *msg);
 
 #endif

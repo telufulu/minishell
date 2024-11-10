@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 11:47:01 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/08/30 15:55:41 by augustindelab    ###   ########.fr       */
+/*   Updated: 2024/11/09 17:11:27 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,22 @@ int	get_varname(t_parser *p, const char *s)
 {
 	size_t		k;
 
+	k = 0;
 	if (s[p->i] == '$' && (p->i + 1 < p->length))
 	{
 		if (ft_isalnum(s[p->i + 1]) || s[p->i + 1] == '_')
 		{
 			(p->i)++;
-			k = 0;
 			while (p->i < p->length && (ft_isalnum(s[p->i]) || s[p->i] == '_'))
 				p->varname[k++] = s[(p->i)++];
 			p->varname[k] = '\0';
+			p->env_value = get_env(p->env, p->varname);
 			return (1);
 		}
 		else if (s[p->i + 1] == '?')
 		{
-			*(p->varname) = '?';
+			p->env_value = ft_itoa(p->exit_code);
+			p->varname[k] = '\0';
 			p->i += 2;
 			return (1);
 		}
@@ -42,28 +44,25 @@ int	get_varname(t_parser *p, const char *s)
 char	*substitute_variable(t_parser *p, char *result)
 {
 	size_t	env_length;
+	size_t	k;
 
-	if (*(p->varname) == '?')
-		p->env_value = ft_itoa(p->exit_code);
-	else
-		p->env_value = get_env(p->env, p->varname);
 	if (p->env_value)
 	{
 		env_length = ft_strlen(p->env_value);
-		if (env_length > (size_t)ft_strlen(p->varname))
+		result = secured_realloc(result, p->length, p->length + env_length);
+		if (!result)
 		{
-			result = ft_realloc(result, p->length + env_length + 1);
-			if (!result && *(p->varname) == '?')
-				free(p->env_value);
-			if (!result)
-				return (NULL);
-			p->length += env_length;
+			if (!p->varname[0])
+				return (free(p->env_value), NULL);
+			return (NULL);
 		}
-		while (*p->env_value)
-			result[(p->j)++] = *(p->env_value)++;
+		p->length += env_length;
+		k = 0;
+		while (p->env_value[k])
+			result[(p->j)++] = p->env_value[k++];
 		result[p->j] = '\0';
-		if (*(p->varname) == '?')
-			free(p->env_value - env_length);
+		if (!p->varname[0])
+			free(p->env_value);
 	}
 	return (result);
 }
@@ -74,7 +73,7 @@ char	*handle_variable(t_parser *p, char limiter)
 	const char	*s;
 
 	s = p->start;
-	result = malloc(p->length + 1);
+	result = malloc(++p->length);
 	if (!result)
 		return (NULL);
 	p->i = 0;

@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/04 18:49:37 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/10 19:56:08 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,19 @@ static void	*free_cmd(t_cmd *cmd)
 	{
 		aux = cmd;
 		if (cmd->cmd)
+		{
 			free(cmd->cmd);
+			cmd->cmd = NULL;
+		}
 		ft_free_matrix(cmd->ex_argv);
-		if (cmd->infd)
-			free(cmd->infd);
-		if (cmd->outfd)
-			free(cmd->outfd);
+		if (cmd->path)
+		{
+			free(cmd->path);
+			cmd->path = NULL;
+		}
 		cmd = cmd->next;
 		free(aux);
+		aux = NULL;
 	}
 	return (NULL);
 }
@@ -44,6 +49,8 @@ static void	handle_input(t_data *d)
 		return ;
 	main_lexer(d, d->tokens);
 	main_executor(d, d->cmd);
+	free_tokens(d->tokens);
+	d->cmd = free_cmd(d->cmd);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -53,18 +60,16 @@ int	main(int argc, char **argv, char **envp)
 	d = init_shell(NULL, envp, argv, argc);
 	signal_handlers();
 	d->input = readline(PROMPT);
-	if (!d->input)
-		ft_error("readline failed", strerror(errno));
+	handle_empty_string(d);
 	while (d->input)
 	{
 		if (*d->input)
 			handle_input(d);
-		d->cmd = free_cmd(d->cmd);
 		free(d->input);
 		d->input = readline(PROMPT);
-		if (!d->input)
-			ft_error("readline failed", strerror(errno));
+		handle_empty_string(d);
 	}
+	rl_clear_history();
 	d->env = ft_free_matrix(d->env);
 	free(d);
 	return (0);

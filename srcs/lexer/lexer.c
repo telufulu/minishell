@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:22:30 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/04 18:30:19 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/10 18:58:28 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	main_lexer(t_data *d, t_token **tokens)
 
 	i = 0;
 	last = NULL;
-	n_cmd = num_cmd(d->tokens);
+	n_cmd = num_cmd(tokens);
 	sp_path = split_path(d->env);
 	while (i < n_cmd && tokens)
 	{

@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 16:16:55 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/10/25 16:17:14 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/09 19:37:52 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 void	check_term(char **envp)
 {
-	char	*tty;
+	struct termios	term;
+	char			*tty;
 
 	if (isatty(STDIN_FILENO) && envp)
 	{
@@ -31,6 +32,9 @@ void	check_term(char **envp)
 	}
 	else
 		ft_error("stdin is not a terminal", strerror(errno));
+	tcgetattr(STDIN_FILENO, &term);
+	term.c_lflag &= ~ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
 
 t_data	*init_shell(t_data *d, char **envp, char **argv, int argc)
@@ -68,32 +72,32 @@ void	*free_tokens(t_token **tokens)
 	return (NULL);
 }
 
-void	print_tokens(t_token **tokens, int fd)
-{
-	while (tokens && *tokens)
-	{
-		ft_putstr_fd((*tokens)->str, fd);
-		write(1, "\t\t", 2);
-		if ((*tokens)->type == COMMAND)
-			ft_putstr_fd("COMMAND", fd);
-		else if ((*tokens)->type == REDIRECT_IN)
-			ft_putstr_fd("REDIRECT_IN", fd);
-		else if ((*tokens)->type == REDIRECT_OUT)
-			ft_putstr_fd("REDIRECT_OUT", fd);
-		else if ((*tokens)->type == APPEND)
-			ft_putstr_fd("APPEND", fd);
-		else if ((*tokens)->type == HEREDOC)
-			ft_putstr_fd("HEREDOC", fd);
-		else if ((*tokens)->type == END_HEREDOC)
-			ft_putstr_fd("END_HEREDOC", fd);
-		else if ((*tokens)->type == PIPE)
-			ft_putstr_fd("PIPE", fd);
-		else if ((*tokens)->type == FD)
-			ft_putstr_fd("FD", fd);
-		write(1, "\n", 1);
-		tokens++;
-	}
-}
+//void	print_tokens(t_token **tokens, int fd)
+//{
+//	while (tokens && *tokens)
+//	{
+//		ft_putstr_fd((*tokens)->str, fd);
+//		write(1, "\t\t", 2);
+//		if ((*tokens)->type == COMMAND)
+//			ft_putstr_fd("COMMAND", fd);
+//		else if ((*tokens)->type == REDIRECT_IN)
+//			ft_putstr_fd("REDIRECT_IN", fd);
+//		else if ((*tokens)->type == REDIRECT_OUT)
+//			ft_putstr_fd("REDIRECT_OUT", fd);
+//		else if ((*tokens)->type == APPEND)
+//			ft_putstr_fd("APPEND", fd);
+//		else if ((*tokens)->type == HEREDOC)
+//			ft_putstr_fd("HEREDOC", fd);
+//		else if ((*tokens)->type == END_HEREDOC)
+//			ft_putstr_fd("END_HEREDOC", fd);
+//		else if ((*tokens)->type == PIPE)
+//			ft_putstr_fd("PIPE", fd);
+//		else if ((*tokens)->type == FD)
+//			ft_putstr_fd("FD", fd);
+//		write(1, "\n", 1);
+//		tokens++;
+//	}
+//}
 
 void	ft_shell_error(char *var, char *msg_error, int exit_status)
 {
