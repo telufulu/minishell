@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:29:37 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/10 18:06:47 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/10 18:57:43 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 #include "libft.h"		// ft_error, ft_strcmp
 #include "builtings.h"	// my_execve, is_built
 
-static void	child_process(int *oldfd, int *pipefd, t_cmd *c, char **env)
+static void	child_process(t_pipes *pip, t_cmd *c, char **env)
 {
 	reset_signal_handlers_to_default();
-	redin_child(oldfd, c);
-	redout_child(pipefd, (c->next != NULL), c);
+	redin_child(&pip->oldfd, c);
+	redout_child(pip->pipefd, (c->next != NULL), c);
 	if (!c->outfd && !c->next && is_built(c->data->builts, c->cmd))
 		exit(EXIT_SUCCESS);
 	else
@@ -31,64 +31,57 @@ static void	child_process(int *oldfd, int *pipefd, t_cmd *c, char **env)
 	}
 }
 
-//static void	father_process(pid_t pid, int *oldfd, int *pipefd, t_cmd *c)
-//{
-//	if (!c->next && is_built(c->data->builts, c->cmd) && !c->outfd)
-//		c->data->exit_status = my_execve(c, c->data->builts, c->data->env);
-//	*oldfd = redir_father(*oldfd, pipefd, (c->next != NULL));
-//}
-
-void wait_for_children(pid_t *pid_array, int cmd_count, t_data *d)
+static void	wait_for_children(t_pipes *pip, t_data *d)
 {
-    int status;
+	int	status;
 	int	i;
 
 	ignore_signals_in_parent();
 	i = -1;
-    while (++i < cmd_count)
-    {
-        waitpid(pid_array[i], &status, 0);
-        d->exit_status = get_exit_status(status);
-    }
+	while (++i < pip->cmd_count)
+	{
+		waitpid(pip->pid_array[i], &status, 0);
+		d->exit_status = get_exit_status(status);
+	}
 	restore_parent_signal_handlers();
 }
 
-void main_executor(t_data *d, t_cmd *c)
+static void	create_child_process(t_pipes *pip, t_cmd *c, char **env)
 {
-    pid_t      pid_array[256];
-    pid_t      pid;
-    int        cmd_count = 0;
-    int        pipefd[2];
-    int        oldfd;
-    t_builts   builts[N_BUILTINGS];
-
-    d->builts = init_builtings(builts, d->env);
-    oldfd = -1;
-    while (d && c)
-    {
-        d->exit_status = 0;
-        if (pipe(pipefd) < 0)
-            ft_error("pipe failed", strerror(errno));
-        pid = fork();
-        if (pid < 0)
-            ft_error("fork failed", strerror(errno));
-        else if (!pid)
-            child_process(&oldfd, pipefd, c, d->env);
-        else
-        {
-            pid_array[cmd_count++] = pid;
-//            father_process(pid, &oldfd, pipefd, c);
-			if (!c->next && is_built(c->data->builts, c->cmd) && !c->outfd)
-				c->data->exit_status = my_execve(c, c->data->builts, c->data->env);
-			oldfd = redir_father(oldfd, pipefd, (c->next != NULL));
-        }
-        c = c->next;
-    }
-	if (oldfd != -1)
-		close(oldfd);
-	wait_for_children(pid_array, cmd_count, d);
+	if (pipe(pip->pipefd) < 0)
+		ft_error("pipe failed", strerror(errno));
+	pip->pid = fork();
+	if (pip->pid < 0)
+		ft_error("fork failed", strerror(errno));
+	else if (pip->pid == 0)
+		child_process(pip, c, env);
 }
 
+void	main_executor(t_data *d, t_cmd *c)
+{
+	t_pipes		pip;
+	t_builts	builts[N_BUILTINGS];
+
+	d->builts = init_builtings(builts, d->env);
+	pip.oldfd = -1;
+	pip.cmd_count = 0;
+	while (d && c)
+	{
+		d->exit_status = 0;
+		create_child_process(&pip, c, d->env);
+		if (pip.pid > 0)
+		{
+			pip.pid_array[pip.cmd_count++] = pip.pid;
+			if (!c->next && is_built(c->data->builts, c->cmd) && !c->outfd)
+				d->exit_status = my_execve(c, c->data->builts, d->env);
+			pip.oldfd = redir_father(pip.oldfd, pip.pipefd, (c->next != NULL));
+		}
+		c = c->next;
+	}
+	if (pip.oldfd != -1)
+		close(pip.oldfd);
+	wait_for_children(&pip, d);
+}
 
 //void	main_executor(t_data *d, t_cmd *c)
 //{
