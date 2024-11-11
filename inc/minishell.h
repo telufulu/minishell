@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:04:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/09 19:38:30 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/11 18:58:13 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_data
 void	check_term(char **envp);
 t_data	*init_shell(t_data *d, char **envp, char **argv, int argc);
 void	*free_tokens(t_token **tokens);
+void	secure_free(void **ptr);
 void	ft_shell_error(char *var, char *msg_error, int exit_status);
 
 // env.c

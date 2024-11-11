@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:47:57 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/27 19:52:41 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/11 11:23:38 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,15 @@ size_t	num_cmd(t_token **tokens)
 		++i;
 	}
 	return (len);
+}
+
+int	is_token(t_token **tokens, t_type type)
+{
+	while (*tokens)
+	{
+		if ((*tokens)->type == type)
+			return (1);
+		tokens++;
+	}
+	return (0);
 }
