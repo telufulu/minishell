@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/10 19:56:08 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/11 18:37:25 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,12 @@ static void	*free_cmd(t_cmd *cmd)
 	while (cmd)
 	{
 		aux = cmd;
-		if (cmd->cmd)
-		{
-			free(cmd->cmd);
-			cmd->cmd = NULL;
-		}
+		secure_free((void **)&cmd->cmd);
 		ft_free_matrix(cmd->ex_argv);
-		if (cmd->path)
-		{
-			free(cmd->path);
-			cmd->path = NULL;
-		}
+		secure_free((void **)&cmd->path);
+		secure_free((void **)&cmd->heredoc);
 		cmd = cmd->next;
-		free(aux);
-		aux = NULL;
+		secure_free((void **)&aux);
 	}
 	return (NULL);
 }

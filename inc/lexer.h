@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:23:04 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/04 18:41:37 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/11 15:58:31 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ typedef struct s_cmd
 	char			**ex_argv;
 	char			*infd;
 	char			*outfd;
+	char			*heredoc;
+	int				heredoc_fd;
 	int				index;
 	t_token			**input;
 	t_data			*data;
@@ -47,12 +49,13 @@ t_cmd	*last_cmd(t_cmd *c);
 t_cmd	*new_cmd(void);
 t_cmd	*add_cmd(t_data *d);
 size_t	num_cmd(t_token **tokens);
-void	free_cmds(t_cmd *c);
+int		is_token(t_token **tokens, t_type type);
 
 // init_lexer.c
 char	*get_cmd(t_token **tokens);
 char	**split_path(char **env);
 char	*get_path(char **sp_path, char *cmd);
 char	*get_fd(t_token **tokens, t_type tp);
+char	*get_heredoc(t_token **tokens);
 
 #endif

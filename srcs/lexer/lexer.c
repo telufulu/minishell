@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:22:30 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/10 18:58:28 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/11 18:04:14 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ t_token	**next_cmd(t_token **tokens, t_cmd *c)
 		}
 		else if ((*tokens)->type == PIPE)
 			return (tokens + 1);
+		else if ((*tokens)->type == HEREDOC)
+			return (tokens + 2);
 		++tokens;
 	}
 	return (NULL);
@@ -52,6 +54,7 @@ void	main_lexer(t_data *d, t_token **tokens)
 		last->path = get_path(sp_path, last->cmd);
 		last->infd = get_fd(tokens, REDIRECT_IN);
 		last->outfd = get_fd(tokens, REDIRECT_OUT);
+		last->heredoc = get_heredoc(tokens);
 		last->index = i++;
 		last->input = tokens;
 		last->data = d;

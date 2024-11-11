@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 13:09:55 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/09 17:53:36 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/11 13:40:06 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	signal_handlers(void)
 		perror("sigaction");
 		exit(EXIT_FAILURE);
 	}
+	signal(SIGQUIT, SIG_IGN);
 }
 
 void	handle_empty_string(t_data *d)

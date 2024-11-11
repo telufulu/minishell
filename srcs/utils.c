@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 16:16:55 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/09 19:37:52 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/11 18:37:59 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,4 +112,13 @@ void	ft_shell_error(char *var, char *msg_error, int exit_status)
 		ft_putstr_fd(msg_error, 2);
 	ft_putstr_fd("\n", 2);
 	exit(exit_status);
+}
+
+void	secure_free(void **ptr)
+{
+	if (ptr != NULL && *ptr != NULL)
+	{
+		free(*ptr);
+		*ptr = NULL;
+	}
 }

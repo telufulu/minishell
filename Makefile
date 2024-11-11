@@ -20,7 +20,7 @@ SRCS_FILES		+=		executor/main_executor.c executor/utils_executor.c \
 SRCS_FILES		+=		builtings/my_execve.c builtings/basic_builtings.c \
 						builtings/echo_built.c builtings/cd_built.c \
 						builtings/unset_built.c builtings/export_built.c \
-						builtings/builts_utils.c
+						builtings/heredoc_built.c builtings/builts_utils.c
 
 LIBS			=		libs/
 LIBFT			=		$(LIBFT_DIR)libft.a
