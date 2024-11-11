@@ -6,7 +6,7 @@
 /*   By: telufulu <Lufu@student.42madrid.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 17:07:28 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/11 03:16:42 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/11 20:24:04 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,39 +42,26 @@ int	ft_built_error(char *var, char *msg_error, int exit_status)
 	return (exit_status);
 }
 
-static void	check_var(char *var)
+char	*reset_var(t_cmd *c, char *var, char *new_value, char **env)
 {
-	if (!ft_strncmp(var, ".", 2) || \
-			!ft_strncmp(var, "..", 3))
-	{
-		if (!ft_strncmp(var, ".", 2))
-			return (get_env(env, "PWD"));
-		else	
-			return (get_env(env, "OLDPWD"));
-	}
-	return (var)
-}
-
-char	*reset_var(char *var, char *new_value, char **env)
-{
+	char	*temp;
 	int		i;
-	char	*var_env;
 
 	i = 0;
-	var = check_var(var);
-	while (env[i] && ft_strncmp(env[i], var, ft_strlen(var)))
-		++i;
-	if (!env[i])
-		return (NULL);
-	free(env[i]);
-	env[i] = ft_strjoin(var, "=");
-	if (new_value)
+	temp = ft_strjoin(var, "=");
+	if (!temp)
+		ft_error("malloc failed", strerror(errno));
+	new_value = ft_strjoin(temp, new_value);
+	if (!get_env(env, var))
+		c->data->env = ft_matrixjoin(env, new_value);
+	else
 	{
-		var_env = env[i];
-		env[i] = ft_strjoin(env[i], new_value);
-		if (!env[i])
-			return (NULL);
-		free(var_env);
+		while (ft_strncmp(env[i], var, ft_strlen(var)))
+			++i;
+		free(env[i]);
+		env[i] = ft_strdup(new_value);
 	}
-	return (env[i]);
+	free(temp);
+	free(new_value);
+	return (NULL);
 }
