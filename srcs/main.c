@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/10 19:56:08 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/11 00:58:58 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	main(int argc, char **argv, char **envp)
 		d->input = readline(PROMPT);
 		handle_empty_string(d);
 	}
-	rl_clear_history();
+//	rl_clear_history();
 	d->env = ft_free_matrix(d->env);
 	free(d);
 	return (0);

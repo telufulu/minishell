@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 01:47:24 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/09 14:37:35 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/11 01:11:37 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int			my_execve(t_cmd *c, t_builts *builts, char **env);
 // builts_utils.c
 t_bool		is_built(t_builts *builts, char *cmd);
 int			ft_built_error(char *var, char *msg_error, int exit_status);
+char		*reset_var(char *var, char *new_value, char **env);
 
 // cd_built.c
 int			cd_built(t_cmd *c, char **env);
