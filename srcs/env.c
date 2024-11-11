@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 20:10:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/11 20:41:24 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/12 00:56:31 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,19 @@ char	*get_env(char **env, char *var)
 	return (NULL);
 }
 
+int	env_except(char *envp, char **res, int *i)
+{
+	if (ft_strnstr(envp, "OLDPWD", 6))
+		return (1);
+	else if (ft_strnstr(envp, "SHLVL", 5))
+	{
+		++(*i);
+		*res = ft_strjoin("SHLVL=", ft_itoa(ft_atoi(envp + 6) + 1));
+		return (1);
+	}
+	return (0);
+}
+
 char	**init_env(char **envp)
 {
 	char	**res;
@@ -41,14 +54,11 @@ char	**init_env(char **envp)
 		return (NULL);
 	while (envp && envp[j])
 	{
-		if (ft_strnstr(envp[j], "OLDPWD", 6))
+		if (env_except(envp[j], res + i, &i))
 			++j;
 		else
 		{
-			//if (ft_strnstr(envp[j], "SHLVL", 5))
-			//	res[i] = ft_strjoin("SHLVL=", ft_itoa(ft_atoi(res[i] + 6) + 1));
-			//else
-				res[i] = ft_strdup(envp[j]);
+			res[i] = ft_strdup(envp[j]);
 			if (!res[i])
 				return (ft_free_matrix(res));
 			++i;
