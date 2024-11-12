@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:50:34 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/12 20:10:19 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/12 20:28:26 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	handle_heredoc(t_cmd *cmd)
 			write(STDOUT_FILENO, "\n", 1);
 			break ;
 		}
-		if (ft_strncmp(line, cmd->heredoc, 20) == 0)
+		if (ft_strcmp(line, cmd->heredoc) == 0)
 		{
 			free(line);
 			break ;

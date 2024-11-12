@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 16:16:55 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/12 20:06:25 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/12 21:15:14 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	ft_shell_error(char *var, char *msg_error, int exit_status)
 	if (var && *var)
 	{
 		ft_putstr_fd(var, 2);
- 		ft_putstr_fd(": ", 2);
+		ft_putstr_fd(": ", 2);
 	}
 	if (msg_error && *msg_error)
 		ft_putstr_fd(msg_error, 2);
