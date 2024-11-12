@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:22:30 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/10 18:58:28 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:25:22 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	main_lexer(t_data *d, t_token **tokens)
 		last->path = get_path(sp_path, last->cmd);
 		last->infd = get_fd(tokens, REDIRECT_IN);
 		last->outfd = get_fd(tokens, REDIRECT_OUT);
+		last->heredoc = get_heredoc(tokens);
 		last->index = i++;
 		last->input = tokens;
 		last->data = d;

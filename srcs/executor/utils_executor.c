@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 16:42:54 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/09 18:20:18 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:23:49 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,18 @@ int	get_exit_status(int status)
 		return (128 + WTERMSIG(status));
 	else
 		return (status);
+}
+
+int	find_heredoc(t_cmd *c)
+{
+	t_cmd	*tmp;
+
+	tmp = c;
+	while (tmp)
+	{
+		if (tmp->heredoc)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
 }

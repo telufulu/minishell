@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:28:44 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/10 19:35:17 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:25:55 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,34 @@ char	*get_fd(t_token **tokens, t_type tp)
 		if ((*tokens)->type == tp)
 		{
 			++tokens;
-			if (tokens)
+			if (tokens && (*tokens)->type == FD)
 				res = (*tokens)->str;
 		}
 		if (tokens)
 			++tokens;
 	}
 	return (res);
+}
+
+char	*get_heredoc(t_token **tokens)
+{
+	char	*end_heredoc;
+
+	end_heredoc = NULL;
+	if (!is_token(tokens, HEREDOC))
+		return (NULL);
+	if (*tokens && (*tokens)->type == HEREDOC)
+	{
+		tokens++;
+		if (*tokens && (*tokens)->type == END_HEREDOC)
+		{
+			end_heredoc = ft_strdup((*tokens)->str);
+			if (!end_heredoc)
+				ft_error("malloc failed", strerror(errno));
+			tokens++;
+		}
+		else
+			ft_error("Syntax error: No Heredoc delimiter", strerror(errno));
+	}
+	return (end_heredoc);
 }

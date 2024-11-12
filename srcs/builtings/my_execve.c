@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 01:47:05 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/12 01:07:26 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/12 20:05:45 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	my_execve(t_cmd *c, t_builts *builts, char **env)
 	int	i;
 
 	i = -1;
-	if (!c->cmd)
+	if (!c->cmd || !c->ex_argv)
 		return (EXIT_SUCCESS);
 	while (++i < N_BUILTINGS)
 		if (!ft_strncmp(builts[i].cmd, c->cmd, 6))

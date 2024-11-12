@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 01:47:24 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/12 01:07:54 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/12 20:05:19 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,10 @@ int			export_built(t_cmd *c, char **env);
 char		*new_var(char *input, int len);
 char		*get_var(char *arg);
 t_bool		is_quote(char c);
+
+// heredoc._built.c
+int			handle_heredoc(t_cmd *cmd);
+void		setup_heredoc_signals(void);
+void		restore_signals(void);
 
 #endif
