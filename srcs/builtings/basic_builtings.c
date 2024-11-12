@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 00:51:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/10 15:37:47 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/12 01:09:11 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,17 @@ int	env_built(t_cmd *c, char **env)
 {
 	if (env && c)
 		ft_print_matrix(env, STDOUT_FILENO);
+	return (EXIT_SUCCESS);
+}
+
+int	pwd_built(t_cmd *c, char **env)
+{
+	char	buff[1000];
+
+	if (env && c)
+	{
+		ft_putstr_fd(getcwd(buff, 1000), STDOUT_FILENO);
+		ft_putchar_fd('\n', STDOUT_FILENO);
+	}
 	return (EXIT_SUCCESS);
 }

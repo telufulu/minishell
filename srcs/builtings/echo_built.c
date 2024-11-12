@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 13:25:13 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/04 18:27:51 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/12 01:01:00 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	echo_built(t_cmd *c, char **env)
 	flag = 0;
 	if (env && c->ex_argv && c->ex_argv[i])
 	{
-		flag = !ft_strncmp(c->ex_argv[i], "-n", 3);
+		flag = !ft_strncmp(c->ex_argv[i], "-n", 2);
 		if (flag)
 			++i;
 		while (c->ex_argv[i])

@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 16:16:55 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/12 13:05:02 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/12 20:06:25 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,32 +72,32 @@ void	*free_tokens(t_token **tokens)
 	return (NULL);
 }
 
-//void	print_tokens(t_token **tokens, int fd)
-//{
-//	while (tokens && *tokens)
-//	{
-//		ft_putstr_fd((*tokens)->str, fd);
-//		write(1, "\t\t", 2);
-//		if ((*tokens)->type == COMMAND)
-//			ft_putstr_fd("COMMAND", fd);
-//		else if ((*tokens)->type == REDIRECT_IN)
-//			ft_putstr_fd("REDIRECT_IN", fd);
-//		else if ((*tokens)->type == REDIRECT_OUT)
-//			ft_putstr_fd("REDIRECT_OUT", fd);
-//		else if ((*tokens)->type == APPEND)
-//			ft_putstr_fd("APPEND", fd);
-//		else if ((*tokens)->type == HEREDOC)
-//			ft_putstr_fd("HEREDOC", fd);
-//		else if ((*tokens)->type == END_HEREDOC)
-//			ft_putstr_fd("END_HEREDOC", fd);
-//		else if ((*tokens)->type == PIPE)
-//			ft_putstr_fd("PIPE", fd);
-//		else if ((*tokens)->type == FD)
-//			ft_putstr_fd("FD", fd);
-//		write(1, "\n", 1);
-//		tokens++;
-//	}
-//}
+/*void	print_tokens(t_token **tokens, int fd)
+{
+	while (tokens && *tokens)
+	{
+		ft_putstr_fd((*tokens)->str, fd);
+		write(1, "\t\t", 2);
+		if ((*tokens)->type == COMMAND)
+			ft_putstr_fd("COMMAND", fd);
+		else if ((*tokens)->type == REDIRECT_IN)
+			ft_putstr_fd("REDIRECT_IN", fd);
+		else if ((*tokens)->type == REDIRECT_OUT)
+			ft_putstr_fd("REDIRECT_OUT", fd);
+		else if ((*tokens)->type == APPEND)
+			ft_putstr_fd("APPEND", fd);
+		else if ((*tokens)->type == HEREDOC)
+			ft_putstr_fd("HEREDOC", fd);
+		else if ((*tokens)->type == END_HEREDOC)
+			ft_putstr_fd("END_HEREDOC", fd);
+		else if ((*tokens)->type == PIPE)
+			ft_putstr_fd("PIPE", fd);
+		else if ((*tokens)->type == FD)
+			ft_putstr_fd("FD", fd);
+		write(1, "\n", 1);
+		tokens++;
+	}
+}*/
 
 void	ft_shell_error(char *var, char *msg_error, int exit_status)
 {
@@ -106,7 +106,7 @@ void	ft_shell_error(char *var, char *msg_error, int exit_status)
 	if (var && *var)
 	{
 		ft_putstr_fd(var, 2);
-		ft_putstr_fd(": ", 2);
+ 		ft_putstr_fd(": ", 2);
 	}
 	if (msg_error && *msg_error)
 		ft_putstr_fd(msg_error, 2);
