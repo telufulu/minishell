@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:50:34 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/12 20:28:26 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/12 22:20:18 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	heredoc_sigint_handler(int sig)
 {
 	(void)sig;
 	g_heredoc_sig = 1;
+	rl_done = 1;
 }
 
 void	setup_heredoc_signals(void)
@@ -63,7 +64,7 @@ int	handle_heredoc(t_cmd *cmd)
 			write(STDOUT_FILENO, "\n", 1);
 			break ;
 		}
-		if (ft_strcmp(line, cmd->heredoc) == 0)
+		if (ft_strncmp(line, cmd->heredoc, 20) == 0)
 		{
 			free(line);
 			break ;

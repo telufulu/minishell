@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:28:44 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/12 21:00:59 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/12 21:42:01 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,10 @@ char	*get_fd(t_token **tokens, t_type tp)
 		{
 			++tokens;
 			if (tokens && (*tokens)->type == FD)
+			{
+				close(open((*tokens)->str, O_CREAT, 0644));
 				res = (*tokens)->str;
+			}
 		}
 		if (tokens)
 			++tokens;
