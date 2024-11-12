@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 20:10:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/09/01 19:04:54 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/12 21:22:55 by augustindelab    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	**init_env(char **envp)
 	{
 		res[i] = ft_strdup(envp[i]);
 		if (!res[i])
-			return ((char **)ft_free_matrix((void **)res));
+			return ((char **)ft_free_matrix(res));
 		if (ft_strnstr(res[i], "SHLVL", 5))
 			res[i][6]++;
 		i++;

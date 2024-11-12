@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:22:30 by telufulu          #+#    #+#             */
-/*   Updated: 2024/10/16 20:58:13 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/12 21:26:14 by augustindelab    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_token	**next_cmd(t_token **tokens, t_cmd *c)
 	while (tokens && *tokens)
 	{
 		if ((*tokens)->type == COMMAND)
-			c->ex_argv = ft_new_matrix_str(c->ex_argv, (*tokens)->str);
+			c->ex_argv = ft_matrixjoin(c->ex_argv, (*tokens)->str);
 		else if ((*tokens)->type == PIPE)
 			return (tokens + 1);
 		++tokens;
@@ -51,5 +51,5 @@ void	main_lexer(t_data *d, t_token **tokens)
 		last->input = tokens;
 		tokens = next_cmd(tokens, last);
 	}
-	ft_free_matrix((void **)sp_path);
+	ft_free_matrix(sp_path);
 }
