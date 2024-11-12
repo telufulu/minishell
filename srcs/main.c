@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/10/18 01:21:32 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/12 21:12:39 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void	clean_loop(t_data *d)
 {
 	if (d->tokens)
-		ft_free_matrix((void **)d->cmd->ex_argv);
+		ft_free_matrix(d->cmd->ex_argv);
 	free_cmds(d->cmd);
 	d->cmd = NULL;
 	free_tokens(d->tokens);
@@ -55,7 +55,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_error("readline failed", strerror(errno));
 	else if (!d->input)
 		write(STDOUT_FILENO, "exit\n", 5);
-	d->env = (char **)ft_free_matrix((void **)d->env);
+	d->env = ft_free_matrix(d->env);
 	free(d);
 	return (0);
 }
