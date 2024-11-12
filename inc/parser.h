@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:44:12 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/09 17:28:53 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/12 13:07:25 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int		handle_doublequote(t_parser *p);
 int		is_heredoc(t_parser *p);
 int		check_meta_character(t_parser *p);
 int		check_quotes(t_parser *p);
+int		check_order(t_parser *p);
 int		check_tokens(t_parser *p);
 int		define_length(t_parser *p);
 char	next_quote(const char *s);

@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:22:30 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/11 18:04:14 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:25:22 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ t_token	**next_cmd(t_token **tokens, t_cmd *c)
 		}
 		else if ((*tokens)->type == PIPE)
 			return (tokens + 1);
-		else if ((*tokens)->type == HEREDOC)
-			return (tokens + 2);
 		++tokens;
 	}
 	return (NULL);

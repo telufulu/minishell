@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:03:07 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/09 18:09:10 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/12 15:40:10 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,36 @@ int	handle_args(t_parser *p)
 	return (1);
 }
 
+int	check_order(t_parser *p)
+{
+	t_token	*current;
+	t_token	*next;
+
+	while ((int)p->i < p->count - 1)
+	{
+		current = p->tokens[p->i++];
+		next = p->tokens[p->i];
+		if (current->type == REDIRECT_IN || current->type == REDIRECT_OUT)
+		{
+			if (next == NULL || next->type != FD)
+				return (printf
+					("Syntax error: unexpected token '%s'\n", next->str), 0);
+		}
+		else if (current->type == PIPE)
+		{
+			if (next == NULL || next->type == PIPE)
+				return (printf
+					("Syntax error: unexpected token '%s'\n", next->str), 0);
+		}
+	}
+	return (1);
+}
+
 int	check_tokens(t_parser *p)
 {
+	p->i = 0;
+	if (!check_order(p))
+		return (0);
 	if (p->tokens[0]->type == PIPE
 		|| p->tokens[p->count - 1]->type == PIPE)
 		ft_putstr_fd
@@ -77,7 +105,7 @@ t_token	**main_parser(t_data *d)
 	}
 	p.tokens[p.count] = NULL;
 	if (!check_tokens(&p))
-		return (free_tokens(p.tokens));
+		return (d->exit_status = 258, free_tokens(p.tokens));
 	p.tokens = ft_realloc(p.tokens, (p.count + 1) * sizeof(t_token *));
 	return (p.tokens);
 }

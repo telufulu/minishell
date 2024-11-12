@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:29:37 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/12 11:28:25 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:23:55 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	create_child_process(t_pipes *pip, t_cmd *c, char **env)
 
 static int	handle_command(t_data *d, t_pipes *pip, t_cmd *c, char **env)
 {
-	if (c->heredoc)
+	if (find_heredoc(c))
 	{
 		c->heredoc_fd = handle_heredoc(c);
 		if (c->heredoc_fd == -1)
