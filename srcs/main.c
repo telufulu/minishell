@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/12 21:22:09 by augustindelab    ###   ########.fr       */
+/*   Updated: 2024/11/12 21:31:33 by augustindelab    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_error("readline failed", strerror(errno));
 	else if (!d->input)
 		write(STDOUT_FILENO, "exit\n", 5);
-	d->env = (char **)ft_free_matrix(d->env);
+	d->env = ft_free_matrix(d->env);
 	free(d);
 	return (0);
 }
