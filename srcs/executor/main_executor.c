@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:29:37 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/11 21:35:14 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/12 11:28:25 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	handle_command(t_data *d, t_pipes *pip, t_cmd *c, char **env)
 		pip->pid_array[pip->cmd_count++] = pip->pid;
 		if (!c->next && is_built(c->data->builts, c->cmd) && !c->outfd)
 			d->exit_status = my_execve(c, c->data->builts, d->env);
-		pip->oldfd = redir_father(pip->oldfd, pip->pipefd);
+		pip->oldfd = redir_father(pip->oldfd, pip->pipefd, (c->next != NULL));
 		if (c->heredoc_fd != -1)
 		{
 			close(c->heredoc_fd);
