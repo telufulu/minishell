@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 20:10:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/12 00:56:31 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/12 21:06:31 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,16 @@ char	*get_env(char **env, char *var)
 
 int	env_except(char *envp, char **res, int *i)
 {
+	char	*aux;
+
 	if (ft_strnstr(envp, "OLDPWD", 6))
 		return (1);
 	else if (ft_strnstr(envp, "SHLVL", 5))
 	{
 		++(*i);
-		*res = ft_strjoin("SHLVL=", ft_itoa(ft_atoi(envp + 6) + 1));
+		aux = ft_itoa(ft_atoi(envp + 6) + 1);
+		*res = ft_strjoin("SHLVL=", aux);
+		free(aux);
 		return (1);
 	}
 	return (0);
