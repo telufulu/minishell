@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:28:44 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/12 17:25:55 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/13 18:17:00 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ char	**split_path(char **env)
 
 	i = 0;
 	path_env = get_env(env, "PATH");
+	if (!path_env)
+		return (NULL);
 	sp_path = ft_split(path_env, ':');
 	while (sp_path && sp_path[i])
 	{
@@ -54,7 +56,7 @@ char	*get_path(char **sp_path, char *cmd)
 
 	i = 0;
 	path = NULL;
-	if (!cmd)
+	if (!cmd || !sp_path)
 		return (NULL);
 	if (!access(cmd, X_OK) || !ft_strncmp(cmd, "exit", 4))
 		return (ft_strdup(cmd));
@@ -80,7 +82,10 @@ char	*get_fd(t_token **tokens, t_type tp)
 		{
 			++tokens;
 			if (tokens && (*tokens)->type == FD)
+			{
+				close(open((*tokens)->str, O_CREAT, 0644));
 				res = (*tokens)->str;
+			}
 		}
 		if (tokens)
 			++tokens;
@@ -95,6 +100,8 @@ char	*get_heredoc(t_token **tokens)
 	end_heredoc = NULL;
 	if (!is_token(tokens, HEREDOC))
 		return (NULL);
+	while (*tokens && ((*tokens)->type != HEREDOC && (*tokens)->type != PIPE))
+		tokens++;
 	if (*tokens && (*tokens)->type == HEREDOC)
 	{
 		tokens++;

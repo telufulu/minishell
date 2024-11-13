@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:23:04 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/11 15:58:31 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:39:07 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_cmd
 	char			**ex_argv;
 	char			*infd;
 	char			*outfd;
+	char			*appendfd;
 	char			*heredoc;
 	int				heredoc_fd;
 	int				index;

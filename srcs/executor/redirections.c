@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 21:53:09 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/12 19:52:33 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:22:01 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,12 @@ void	redout_child(int *pipefd, t_bool next, t_cmd *c)
 {
 	int	outfile_fd;
 
-	if (c->outfd)
+	if (c->outfd || c->appendfd)
 	{
-		outfile_fd = open(c->outfd, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		if (c->outfd)
+			outfile_fd = open(c->outfd, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		else
+			outfile_fd = open(c->appendfd, O_CREAT | O_WRONLY | O_APPEND, 0644);
 		if (outfile_fd < 0)
 			ft_shell_error(c->outfd, "Permission denied", errno);
 		dup2(outfile_fd, STDOUT_FILENO);

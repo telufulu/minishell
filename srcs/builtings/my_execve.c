@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 01:47:05 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/12 20:05:45 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/13 18:43:11 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static void	exit_execve(t_cmd *c)
 	if (c->next)
 		ft_shell_error(c->cmd, "ERROR", errno);
 	if (access(c->ex_argv[0], R_OK) && ft_strchr(c->ex_argv[0], '/'))
+		ft_built_error(c->cmd, "no such file or directory", errno);
+	else if (!get_env(c->data->env, "PATH"))
 		ft_built_error(c->cmd, "no such file or directory", errno);
 	else
 		ft_built_error(c->cmd, "command not found", errno);
