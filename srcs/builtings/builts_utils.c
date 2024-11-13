@@ -6,7 +6,7 @@
 /*   By: telufulu <Lufu@student.42madrid.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 17:07:28 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/12 20:43:48 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/14 00:15:11 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,11 @@ char	*reset_var(t_cmd *c, char *var, char *new_value, char **env)
 		ft_error("malloc failed", strerror(errno));
 	new_value = ft_strjoin(temp, new_value);
 	if (!get_env(env, var))
-		c->data->env = ft_matrixjoin(c->data->env, new_value);
+	{
+		c->data->env = ft_matrixjoin(env, new_value);
+		ft_free_matrix(env);
+		env = c->data->env;
+	}
 	else
 	{
 		while (ft_strncmp(env[i], var, ft_strlen(var)))
