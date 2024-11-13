@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:37:58 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/12 20:07:19 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/14 00:02:42 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,15 @@ int	find_arg(char **env, char *var)
 int	unset_built(t_cmd *c, char **env)
 {
 	int		i;
+	int		j;
 
 	i = 0;
-	if (c->ex_argv[1] && *c->ex_argv[1])
+	j = 1;
+	while (c->ex_argv[j] && *c->ex_argv[j])
 	{
-		if (ft_strchr(c->ex_argv[1], '=') || ft_strchr(c->ex_argv[1], '/'))
-			ft_built_error(c->ex_argv[1], "not a valid identifier", errno);
-		i = find_arg(env, c->ex_argv[1]);
+		if (ft_strchr(c->ex_argv[j], '=') || ft_strchr(c->ex_argv[j], '/'))
+			ft_built_error(c->ex_argv[j], "not a valid identifier", errno);
+		i = find_arg(env, c->ex_argv[j]);
 		if (i < 0)
 			return (EXIT_SUCCESS);
 		while (env[i])
@@ -50,6 +52,7 @@ int	unset_built(t_cmd *c, char **env)
 		}
 		free(env[i]);
 		env[i] = NULL;
+		++j;
 	}
 	return (EXIT_SUCCESS);
 }

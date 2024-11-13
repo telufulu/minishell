@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 20:10:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/12 00:56:31 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/13 21:05:15 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ char	**init_env(char **envp)
 			++j;
 		}
 	}
+	res[i++] = ft_strdup("OLDPWD");
 	res[i] = NULL;
 	return (res);
 }
