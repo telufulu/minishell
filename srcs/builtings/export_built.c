@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:48:17 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/08 17:00:47 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/13 23:59:43 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,113 @@
 #include "minishell.h"	// strerror
 #include "builtings.h"	// env_built
 
+static char	**order_env(char **env, size_t len)
+{
+	size_t	i;
+	char	*ref;
+	int		flag;
+
+	flag = 1;
+	while (flag)
+	{
+		flag = 0;
+		i = 0;
+		while (i < len - 1 && env && env[i])
+		{
+			if (env[i + 1] && ft_strcmp(env[i], env[i + 1]) > 0)
+			{
+				ref = ft_strdup(env[i]);
+				free(env[i]);
+				env[i] = ft_strdup(env[i + 1]);
+				free(env[i + 1]);
+				env[i + 1] = ft_strdup(ref);
+				free(ref);
+				flag = 1;
+			}
+			++i;
+		}
+	}
+	return (env);
+}
+
+static void	print_export(char **env)
+{
+	size_t	len;
+	size_t	i;
+
+	i = 0;
+	len = ft_matrix_len(env);
+	env = order_env(env, len);
+	while (i < len && env && env[i])
+	{
+		if (*env[i])
+		{
+			ft_putstr_fd("declare -x ", STDOUT_FILENO);
+			ft_putstr_fd(env[i], STDOUT_FILENO);
+			ft_putchar_fd('\n', STDOUT_FILENO);
+		}
+		++i;
+	}
+	ft_free_matrix(env);
+}
+
+static int	error_handler(char *args)
+{
+	int	j;
+
+	j = 1;
+	if (!ft_isalpha(*args) && *args != '_')
+		return (ft_built_error(args, "not a valid identifier", errno));
+	while (args[j])
+	{
+		if (!ft_isalnum(args[j]) && \
+				args[j] != '_' && args[j] != '=')
+			return (ft_built_error(args, "not a valid identifier", errno));
+		++j;
+	}
+	return (0);
+}
+
+static int	var_exists(char **env, char **old_arg, char *arg)
+{
+	int		i;
+
+	i = 0;
+	while (arg[i] && arg[i] != '=')
+		++i;
+	if (arg[i] == '=')
+		arg[i] = 0;
+	if (get_env(env, arg))
+	{
+		free(*old_arg);
+		*old_arg = ft_strdup(arg);
+		free(arg);
+		return (1);
+	}
+	free(arg);
+	return (0);
+}
+
 int	export_built(t_cmd *c, char **env)
 {
-	if (c && env)
-		return (EXIT_SUCCESS);
+	int		i;
+	char	*aux;
+
+	i = 1;
+	if (c->ex_argv && !c->ex_argv[1])
+		print_export(ft_matrixdup(env, ft_matrix_len(env)));
+	while (c->ex_argv && c->ex_argv[i])
+	{
+		if (c->ex_argv[i] && error_handler(c->ex_argv[i]))
+			return (EXIT_FAILURE);
+		aux = get_env(env, c->ex_argv[i]);
+		if (!var_exists(env, &aux, ft_strdup(c->ex_argv[i])))
+		{
+			c->data->env = ft_matrixjoin(env, c->ex_argv[i]);
+			free(env);
+			env = c->data->env;
+		}
+		++i;
+	}
 	return (EXIT_FAILURE);
 }

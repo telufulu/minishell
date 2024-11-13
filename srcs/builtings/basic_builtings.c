@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 00:51:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/13 11:24:54 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:59:45 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,19 @@ int	exit_built(t_cmd *c, char **env)
 
 int	env_built(t_cmd *c, char **env)
 {
-	if (env && c)
-		ft_print_matrix(env, STDOUT_FILENO);
+	int	i;
+
+	i = 0;
+	(void)c;
+	while (env && env[i])
+	{
+		if (ft_strchr(env[i], '=') && c)
+		{
+			ft_putstr_fd(env[i], STDOUT_FILENO);
+			ft_putchar_fd('\n', STDOUT_FILENO);
+		}
+		++i;
+	}
 	return (EXIT_SUCCESS);
 }
 

@@ -71,6 +71,7 @@ char	**init_env(char **envp)
 			++j;
 		}
 	}
+	res[i++] = ft_strdup("OLDPWD");
 	res[i] = NULL;
 	return (res);
 }
