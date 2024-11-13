@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:03:07 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/12 18:23:00 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/13 11:12:22 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	check_order(t_parser *p)
 int	check_tokens(t_parser *p)
 {
 	p->i = 0;
-	if (!check_order(p))
+	if (!p->count || !check_order(p))
 		return (0);
 	if (p->tokens[0]->type == PIPE
 		|| p->tokens[p->count - 1]->type == PIPE)
