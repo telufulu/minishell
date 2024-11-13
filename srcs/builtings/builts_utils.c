@@ -6,7 +6,7 @@
 /*   By: telufulu <Lufu@student.42madrid.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 17:07:28 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/13 16:04:13 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/14 00:21:19 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ char	*reset_var(t_cmd *c, char *var, char *new_value, char **env)
 	{
 		c->data->env = ft_matrixjoin(env, new_value);
 		ft_free_matrix(env);
+		env = c->data->env;
 	}
 	else
 	{
