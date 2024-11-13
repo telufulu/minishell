@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:29:37 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/13 12:59:29 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:21:40 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static void	child_process(t_pipes *pip, t_cmd *c, char **env)
 	reset_signal_handlers_to_default();
 	redin_child(&pip->oldfd, c, c->heredoc_fd);
 	redout_child(pip->pipefd, (c->next != NULL), c);
-	if (!c->outfd && !c->next && is_built(c->data->builts, c->cmd))
+	if (!c->outfd && !c->appendfd && !c->next
+		&& is_built(c->data->builts, c->cmd))
 		exit(EXIT_SUCCESS);
 	else
 	{
@@ -72,7 +73,8 @@ static int	handle_command(t_data *d, t_pipes *pip, t_cmd *c, char **env)
 	if (pip->pid > 0)
 	{
 		pip->pid_array[pip->cmd_count++] = pip->pid;
-		if (!c->next && is_built(c->data->builts, c->cmd) && !c->outfd)
+		if (!c->next && is_built(c->data->builts, c->cmd)
+			&& !c->outfd && !c->appendfd)
 			d->exit_status = my_execve(c, c->data->builts, d->env);
 		pip->oldfd = redir_father(pip->oldfd, pip->pipefd, (c->next != NULL));
 		if (c->heredoc_fd != -1)
