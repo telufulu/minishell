@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:50:34 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/12 22:20:18 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/14 00:23:22 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	heredoc_sigint_handler(int sig)
 {
 	(void)sig;
 	g_heredoc_sig = 1;
-	rl_done = 1;
+//	rl_done = 1;
 }
 
 void	setup_heredoc_signals(void)
