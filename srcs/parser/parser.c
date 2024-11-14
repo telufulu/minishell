@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:03:07 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/13 11:12:22 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/14 16:11:24 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,10 @@ int	check_order(t_parser *p)
 				return (printf
 					("Syntax error: unexpected token '%s'\n", next->str), 0);
 		}
+		else if (current->type == HEREDOC)
+			if (next == NULL || next->type != END_HEREDOC)
+				return (printf
+					("Syntax error: unexpected token '%s'\n", next->str), 0);
 	}
 	return (1);
 }
