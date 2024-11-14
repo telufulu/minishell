@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:48:17 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/13 23:59:43 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/14 01:49:20 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	print_export(char **env)
 	env = order_env(env, len);
 	while (i < len && env && env[i])
 	{
-		if (*env[i])
+		if (env[i] && *env[i])
 		{
 			ft_putstr_fd("declare -x ", STDOUT_FILENO);
 			ft_putstr_fd(env[i], STDOUT_FILENO);
@@ -70,14 +70,16 @@ static int	error_handler(char *args)
 	int	j;
 
 	j = 1;
-	if (!ft_isalpha(*args) && *args != '_')
+	if (args && !ft_isalpha(*args) && *args != '_')
 		return (ft_built_error(args, "not a valid identifier", errno));
-	while (args[j])
+	while (args && args[j])
 	{
-		if (!ft_isalnum(args[j]) && \
-				args[j] != '_' && args[j] != '=')
+		if (args[j] == '=')
+			++j;
+		else if (!ft_isalnum(args[j]) && args[j] != '_')
 			return (ft_built_error(args, "not a valid identifier", errno));
-		++j;
+		else
+			++j;
 	}
 	return (0);
 }
@@ -85,20 +87,27 @@ static int	error_handler(char *args)
 static int	var_exists(char **env, char **old_arg, char *arg)
 {
 	int		i;
+	char	*aux;
 
 	i = 0;
-	while (arg[i] && arg[i] != '=')
+	aux = ft_strdup(arg);
+	if (!aux)
+		ft_error("malloc failed", strerror(errno));
+	while (aux[i] && aux[i] != '=')
 		++i;
-	if (arg[i] == '=')
-		arg[i] = 0;
-	if (get_env(env, arg))
+	if (aux[i] == '=')
+		aux[i] = 0;
+	if (get_env(env, aux))
 	{
 		free(*old_arg);
 		*old_arg = ft_strdup(arg);
-		free(arg);
+		if (!*old_arg)
+			ft_error("malloc failed", strerror(errno));
+		ft_printf("old_arg: %s\n", *old_arg);
+		free(aux);
 		return (1);
 	}
-	free(arg);
+	free(aux);
 	return (0);
 }
 
@@ -115,8 +124,9 @@ int	export_built(t_cmd *c, char **env)
 		if (c->ex_argv[i] && error_handler(c->ex_argv[i]))
 			return (EXIT_FAILURE);
 		aux = get_env(env, c->ex_argv[i]);
-		if (!var_exists(env, &aux, ft_strdup(c->ex_argv[i])))
+		if (!var_exists(env, &aux, c->ex_argv[i]))
 		{
+			ft_printf("AAAAAAAAAAAA %s\n", get_env(env, "MAMA"));
 			c->data->env = ft_matrixjoin(env, c->ex_argv[i]);
 			free(env);
 			env = c->data->env;
