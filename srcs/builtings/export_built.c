@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:48:17 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/15 16:33:09 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/15 16:58:30 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,16 @@ static void	print_export(char **env)
 
 	i = 0;
 	len = ft_matrix_len(env);
-	if (len)
+	env = order_env(env, len);
+	while (i < len && env && env[i])
 	{
-		env = order_env(env, len);
-		while (i < len && env && env[i])
+		if (env[i] && *env[i])
 		{
-			if (env[i] && *env[i])
-			{
-				ft_putstr_fd("declare -x ", STDOUT_FILENO);
-				ft_putstr_fd(env[i], STDOUT_FILENO);
-				ft_putchar_fd('\n', STDOUT_FILENO);
-			}
-			++i;
+			ft_putstr_fd("declare -x ", STDOUT_FILENO);
+			ft_putstr_fd(env[i], STDOUT_FILENO);
+			ft_putchar_fd('\n', STDOUT_FILENO);
 		}
+		++i;
 	}
 	ft_free_matrix(env);
 }
