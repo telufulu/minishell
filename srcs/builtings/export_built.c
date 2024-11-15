@@ -6,11 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:48:17 by telufulu          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/11/15 17:25:48 by telufulu         ###   ########.fr       */
-=======
-/*   Updated: 2024/11/15 16:58:30 by telufulu         ###   ########.fr       */
->>>>>>> 6f27660 (working)
+/*   Updated: 2024/11/15 17:31:02 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +50,7 @@ static void	print_export(char **env)
 	size_t	i;
 
 	i = 0;
-<<<<<<< HEAD
 	len = ft_matrix_len(env) + 1;
-=======
-	len = ft_matrix_len(env);
->>>>>>> 6f27660 (working)
 	env = order_env(env, len);
 	while (i < len && env && env[i])
 	{
