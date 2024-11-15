@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:29:37 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/13 20:21:40 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/15 13:16:27 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,8 @@ static void	wait_for_children(t_pipes *pip, t_data *d)
 static void	create_child_process(t_pipes *pip, t_cmd *c, char **env)
 {
 	if (c->next)
-	{
 		if (pipe(pip->pipefd) < 0)
 			ft_error("pipe failed", strerror(errno));
-	}
 	pip->pid = fork();
 	if (pip->pid < 0)
 		ft_error("fork failed", strerror(errno));

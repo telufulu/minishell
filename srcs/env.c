@@ -6,13 +6,13 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 20:10:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/13 16:13:39 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/14 01:50:25 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h" //t_data
-#include "libft.h" // ft_calloc, ft_strdup, ft_strnstr, ft_strlen, 
-					// ft_free_matrix
+#include "libft.h" // ft_calloc, ft_strdup, ft_strnstr, ft_strlen,
+				   // ft_free_matrix
 
 char	*get_env(char **env, char *var)
 {
@@ -23,8 +23,12 @@ char	*get_env(char **env, char *var)
 		return (NULL);
 	while (*env)
 	{
-		if (ft_strncmp(*env, var, var_len) == 0 && (*env)[var_len] == '=')
-			return (*env + var_len + 1);
+		if (ft_strncmp(*env, var, var_len) == 0)
+		{
+			if ((*env)[var_len] == '=')
+				return (*env + var_len + 1);
+			return (*env + var_len);
+		}
 		env++;
 	}
 	return (NULL);
@@ -55,7 +59,7 @@ char	**init_env(char **envp)
 
 	i = 0;
 	j = 0;
-	res = ft_calloc(sizeof(char *), ft_matrix_len(envp) + 1);
+	res = ft_calloc(sizeof(char *), ft_matrix_len(envp) + 2);
 	if (!res)
 		return (NULL);
 	while (envp && envp[j])

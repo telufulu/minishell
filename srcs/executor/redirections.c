@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 21:53:09 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/13 20:22:01 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/15 14:14:07 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,10 @@ void	redout_child(int *pipefd, t_bool next, t_cmd *c)
 			close(outfile_fd);
 	}
 	else if (next)
+	{
+		close(pipefd[RD]);
 		dup2(pipefd[WR], STDOUT_FILENO);
+	}
 }
 
 int	redir_father(int oldfd, int *pipefd, t_bool next)
