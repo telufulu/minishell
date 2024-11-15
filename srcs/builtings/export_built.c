@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:48:17 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/15 17:39:01 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/15 18:31:07 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,37 +84,43 @@ static int	error_handler(char *args)
 	return (0);
 }
 
-static int	var_exists(char **env, char **old_arg, char *arg)
+static void	reset_arg(char **env, char *var, char *arg)
 {
-	int		i;
 	char	*aux;
+	int		i;
 
 	i = 0;
-	aux = ft_strdup(arg);
-	if (!aux)
-		ft_error("malloc failed", strerror(errno));
-	while (aux[i] && aux[i] != '=')
+	while (ft_strncmp(env[i], var, ft_strlen(arg) - 1))
 		++i;
-	if (aux[i] == '=')
-		aux[i] = 0;
-	if (get_env(env, aux))
-	{
-		free(*old_arg);
-		*old_arg = ft_strdup(arg);
-		if (!*old_arg)
-			ft_error("malloc failed", strerror(errno));
-		ft_printf("old_arg: %s\n", *old_arg);
+	aux = env[i];
+	env[i] = ft_strdup(arg);
+	if (aux)
 		free(aux);
-		return (1);
-	}
-	free(aux);
-	return (0);
+	if (!env[i])
+		ft_error("malloc failed", strerror(errno));
+	if (var)
+		free(var);
+}
+
+static char	*clean_arg(char *arg)
+{
+	int	i;
+
+	i = 0;
+	if (!arg)
+		ft_error("malloc failed", strerror(errno));
+	while (arg[i] && arg[i] != '=')
+		++i;
+	if (arg[i] == '=')
+		arg[i] = 0;
+	return (arg);
 }
 
 int	export_built(t_cmd *c, char **env)
 {
 	int		i;
 	char	*aux;
+	char	*clean;
 
 	i = 1;
 	if (c->ex_argv && !c->ex_argv[1])
@@ -123,13 +129,16 @@ int	export_built(t_cmd *c, char **env)
 	{
 		if (c->ex_argv[i] && error_handler(c->ex_argv[i]))
 			return (EXIT_FAILURE);
-		aux = get_env(env, c->ex_argv[i]);
-		if (!var_exists(env, &aux, c->ex_argv[i]))
+		clean = clean_arg(ft_strdup(c->ex_argv[i]));
+		aux = get_env(env, clean);
+		if (!aux)
 		{
 			c->data->env = ft_matrixjoin(env, c->ex_argv[i]);
 			ft_free_matrix(env);
 			env = c->data->env;
 		}
+		else
+			reset_arg(env, clean, c->ex_argv[i]);
 		++i;
 	}
 	return (EXIT_FAILURE);
