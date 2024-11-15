@@ -6,7 +6,7 @@
 /*   By: telufulu <Lufu@student.42madrid.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 17:07:28 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/15 19:53:58 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/15 20:22:15 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	reset_arg(char **env, char *var, char *arg)
 	int		i;
 
 	i = 0;
-	while (ft_strncmp(env[i], var, ft_strlen(arg) - 1))
+	while (ft_strcmp(env[i], var))
 		++i;
 	aux = env[i];
 	env[i] = ft_strdup(arg);
