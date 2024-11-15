@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:37:58 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/15 17:21:00 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/15 18:34:37 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	find_arg(char **env, char *var)
 	i = 0;
 	while (env && env[i])
 	{
-		//if (ft_strnstr(env[i], var, var_len) && env[i][var_len] == '=')
 		if (ft_strnstr(env[i], var, var_len))
 			return (i);
 		++i;

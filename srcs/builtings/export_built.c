@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:48:17 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/15 18:31:07 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/15 18:35:43 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,43 +63,6 @@ static void	print_export(char **env)
 		++i;
 	}
 	ft_free_matrix(env);
-}
-
-static int	error_handler(char *args)
-{
-	int	j;
-
-	j = 1;
-	if (args && !ft_isalpha(*args) && *args != '_')
-		return (ft_built_error(args, "not a valid identifier", errno));
-	while (args && args[j])
-	{
-		if (args[j] == '=')
-			++j;
-		else if (!ft_isalnum(args[j]) && args[j] != '_')
-			return (ft_built_error(args, "not a valid identifier", errno));
-		else
-			++j;
-	}
-	return (0);
-}
-
-static void	reset_arg(char **env, char *var, char *arg)
-{
-	char	*aux;
-	int		i;
-
-	i = 0;
-	while (ft_strncmp(env[i], var, ft_strlen(arg) - 1))
-		++i;
-	aux = env[i];
-	env[i] = ft_strdup(arg);
-	if (aux)
-		free(aux);
-	if (!env[i])
-		ft_error("malloc failed", strerror(errno));
-	if (var)
-		free(var);
 }
 
 static char	*clean_arg(char *arg)

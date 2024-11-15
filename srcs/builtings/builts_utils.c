@@ -6,12 +6,49 @@
 /*   By: telufulu <Lufu@student.42madrid.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 17:07:28 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/15 16:45:40 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/15 18:35:13 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtings.h"
 #include "minishell.h"	//get_env
+
+int	error_handler(char *args)
+{
+	int	j;
+
+	j = 1;
+	if (args && !ft_isalpha(*args) && *args != '_')
+		return (ft_built_error(args, "not a valid identifier", errno));
+	while (args && args[j])
+	{
+		if (args[j] == '=')
+			++j;
+		else if (!ft_isalnum(args[j]) && args[j] != '_')
+			return (ft_built_error(args, "not a valid identifier", errno));
+		else
+			++j;
+	}
+	return (0);
+}
+
+void	reset_arg(char **env, char *var, char *arg)
+{
+	char	*aux;
+	int		i;
+
+	i = 0;
+	while (ft_strncmp(env[i], var, ft_strlen(arg) - 1))
+		++i;
+	aux = env[i];
+	env[i] = ft_strdup(arg);
+	if (aux)
+		free(aux);
+	if (!env[i])
+		ft_error("malloc failed", strerror(errno));
+	if (var)
+		free(var);
+}
 
 t_bool	is_built(t_builts *builts, char *cmd)
 {
