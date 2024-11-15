@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 20:10:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/14 01:50:25 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/15 15:49:30 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*get_env(char **env, char *var)
 	size_t	var_len;
 
 	var_len = ft_strlen(var);
-	if (!*env)
+	if (!env)
 		return (NULL);
 	while (*env)
 	{
