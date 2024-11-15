@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:48:17 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/15 20:11:48 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/15 20:26:33 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,12 @@ static void	print_variable(const char *variable)
 		ft_putstr_fd("declare -x ", STDOUT_FILENO);
 		while (variable[j] && variable[j] != '=')
 			ft_putchar_fd(variable[j++], STDOUT_FILENO);
-		ft_putchar_fd(variable[j++], STDOUT_FILENO);
 		if (variable[j])
 		{
+			ft_putchar_fd(variable[j++], STDOUT_FILENO);
 			ft_putchar_fd('"', STDOUT_FILENO);
-			ft_putstr_fd((char *)(variable + j), STDOUT_FILENO);
+			while (variable[j])
+				ft_putchar_fd(variable[j++], STDOUT_FILENO);
 			ft_putchar_fd('"', STDOUT_FILENO);
 		}
 		ft_putchar_fd('\n', STDOUT_FILENO);
