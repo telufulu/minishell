@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 20:10:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/15 16:14:07 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/15 16:21:41 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	env_except(char *envp, char **res, int *i)
 	{
 		++(*i);
 		aux = ft_itoa(ft_atoi(envp + 6) + 1);
+		free(*res);
 		*res = ft_strjoin("SHLVL=", aux);
 		free(aux);
 		return (1);

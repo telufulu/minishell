@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:48:17 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/14 01:49:20 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/15 15:50:46 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ int	export_built(t_cmd *c, char **env)
 		aux = get_env(env, c->ex_argv[i]);
 		if (!var_exists(env, &aux, c->ex_argv[i]))
 		{
-			ft_printf("AAAAAAAAAAAA %s\n", get_env(env, "MAMA"));
 			c->data->env = ft_matrixjoin(env, c->ex_argv[i]);
 			free(env);
 			env = c->data->env;
