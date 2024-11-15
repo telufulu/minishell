@@ -6,7 +6,7 @@
 /*   By: aude-la- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:21:05 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/15 18:39:02 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/15 18:41:37 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int argc, char **argv, char **envp)
 	t_data	*d;
 
 	d = init_shell(NULL, envp, argv, argc);
-	signal_handlers(d);
+	signal_handlers();
 	d->input = readline(PROMPT);
 	handle_empty_string(d);
 	while (d->input)

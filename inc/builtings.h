@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 01:47:24 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/15 18:35:22 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/15 18:47:32 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int			my_execve(t_cmd *c, t_builts *builts, char **env);
 t_bool		is_built(t_builts *builts, char *cmd);
 int			ft_built_error(char *var, char *msg_error, int exit_status);
 char		*reset_var(t_cmd *c, char *var, char *new_value, char **env);
-void	reset_arg(char **env, char *var, char *arg);
-int	error_handler(char *args)
+void		reset_arg(char **env, char *var, char *arg);
+int			error_handler(char *args);
 
 // echo_built.c
 int			echo_built(t_cmd *c, char **env);
