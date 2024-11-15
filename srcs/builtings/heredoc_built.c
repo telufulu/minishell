@@ -6,48 +6,13 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:50:34 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/15 16:05:02 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/15 16:12:47 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"	// open_fd, WR, RD, redir_child, redir_father
 #include "lexer.h"		// t_cmd
 #include "builtings.h"	// expand_variables
-
-volatile sig_atomic_t	g_heredoc_sig = 0;
-
-static void	heredoc_sigint_handler(int sig)
-{
-	(void)sig;
-	g_heredoc_sig = 1;
-//	rl_done = 1;
-}
-
-void	setup_heredoc_signals(void)
-{
-	struct sigaction	sa;
-
-	sa.sa_handler = heredoc_sigint_handler;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
-	sigaction(SIGINT, &sa, NULL);
-	sa.sa_handler = SIG_IGN;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
-	sigaction(SIGQUIT, &sa, NULL);
-}
-
-void	restore_signals(void)
-{
-	struct sigaction	sa;
-
-	sa.sa_handler = SIG_DFL;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
-	sigaction(SIGINT, &sa, NULL);
-	sigaction(SIGQUIT, &sa, NULL);
-	g_heredoc_sig = 0;
-}
 
 char	*expand_variables(t_data *d, char *input)
 {

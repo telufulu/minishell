@@ -6,13 +6,12 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 20:10:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/15 15:49:30 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/15 16:14:07 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h" //t_data
 #include "libft.h" // ft_calloc, ft_strdup, ft_strnstr, ft_strlen,
-				   // ft_free_matrix
 
 char	*get_env(char **env, char *var)
 {
