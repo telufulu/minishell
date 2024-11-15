@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:48:17 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/15 18:35:43 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/15 19:57:18 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int	export_built(t_cmd *c, char **env)
 			c->data->env = ft_matrixjoin(env, c->ex_argv[i]);
 			ft_free_matrix(env);
 			env = c->data->env;
+			free(clean);
 		}
 		else
 			reset_arg(env, clean, c->ex_argv[i]);
