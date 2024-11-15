@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:48:17 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/15 20:06:52 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/15 20:11:48 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,37 +43,6 @@ static char	**order_env(char **env, size_t len)
 	}
 	return (env);
 }
-
-//static void	print_export(char **env)
-//{
-//	size_t	len;
-//	size_t	i;
-//	size_t	j;
-//
-//	i = 0;
-//	len = ft_matrix_len(env) + 1;
-//	env = order_env(env, len);
-//	while (i < len && env && env[i])
-//	{
-//		if (env[i] && *env[i])
-//		{
-//			j = 0;
-//			ft_putstr_fd("declare -x ", STDOUT_FILENO);
-//			while (env[i][j] && env[i][j] != '=')
-//				ft_putchar_fd(env[i][j++], STDOUT_FILENO);
-//			ft_putchar_fd(env[i][j++], STDOUT_FILENO);
-//			if (env[i][j])
-//			{
-//				ft_putchar_fd('"', STDOUT_FILENO);
-//				ft_putstr_fd(env[i] + j, STDOUT_FILENO);
-//				ft_putchar_fd('"', STDOUT_FILENO);
-//			}
-//			ft_putchar_fd('\n', STDOUT_FILENO);
-//		}
-//		++i;
-//	}
-//	ft_free_matrix(env);
-//}
 
 static void	print_variable(const char *variable)
 {
