@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 01:47:24 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/14 17:51:25 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/15 13:39:55 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,9 @@ char		*get_var(char *arg);
 t_bool		is_quote(char c);
 
 // heredoc_built.c
-int			handle_heredoc(t_cmd *cmd);
+int			create_heredoc(t_cmd *cmd);
+void		handle_heredoc(t_cmd *cmd, int *pipe);
 char		*expand_variables(t_data *d, char *input);
-void		setup_heredoc_signals(void);
-void		restore_signals(void);
 
 // heredoc_variable.c
 char		*initialize_result(t_heredoc *hd);
@@ -93,5 +92,6 @@ int			add_char_to_result(t_heredoc *hd, char c);
 int			check_delim(t_cmd *cmd);
 int			check_line(char *line, char *end);
 void		handle_quote(char *result, char **start, size_t *i, char c);
+void		setup_heredoc_signals(void);
 
 #endif
