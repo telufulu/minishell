@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:29:37 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/15 16:12:31 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/15 19:47:39 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,21 +86,26 @@ static int	handle_command(t_data *d, t_pipes *pip, t_cmd *c, char **env)
 
 void	main_executor(t_data *d, t_cmd *c)
 {
-	t_pipes		pip;
+	t_pipes		*pip;
 	t_builts	builts[N_BUILTINGS];
 
 	d->builts = init_builtings(builts, d->env);
-	pip.oldfd = -1;
-	pip.cmd_count = 0;
+	pip = ft_calloc(sizeof(t_pipes), 1);
+	pip->oldfd = -1;
+	pip->pip_array = malloc(sizeof(pid_t) * d->n_cmd);
+	if (!pip->pid_array)
+		ft_error("malloc failed", strerror(errno));
 	while (d && c)
 	{
 		d->exit_status = 0;
 		c->heredoc_fd = -1;
-		if (handle_command(d, &pip, c, d->env) == -1)
+		if (handle_command(d, pip, c, d->env) == -1)
 			return ;
 		c = c->next;
 	}
-	if (pip.oldfd != -1)
-		close(pip.oldfd);
-	wait_for_children(&pip, d);
+	if (pip->oldfd != -1)
+		close(pip->oldfd);
+	wait_for_children(pip, d);
+	free(pip->pid_array);
+	free(pip);
 }

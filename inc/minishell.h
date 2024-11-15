@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:04:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/15 18:14:45 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/15 19:44:59 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_data
 	char		**env;
 	int			index;
 	int			exit_status;
+	size_t		n_cmd;
 }				t_data;
 
 /*
