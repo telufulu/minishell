@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:29:37 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/15 19:47:39 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/15 19:50:57 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	main_executor(t_data *d, t_cmd *c)
 	d->builts = init_builtings(builts, d->env);
 	pip = ft_calloc(sizeof(t_pipes), 1);
 	pip->oldfd = -1;
-	pip->pip_array = malloc(sizeof(pid_t) * d->n_cmd);
+	pip->pid_array = malloc(sizeof(pid_t) * d->n_cmd);
 	if (!pip->pid_array)
 		ft_error("malloc failed", strerror(errno));
 	while (d && c)

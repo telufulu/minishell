@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 14:22:30 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/15 19:48:31 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/15 19:50:10 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ t_token	**next_cmd(t_token **tokens, t_cmd *c)
 
 void	main_lexer(t_data *d, t_token **tokens)
 {
-	size_t	n_cmd;
 	size_t	i;
 	char	**sp_path;
 	t_cmd	*last;
