@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:48:17 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/15 16:58:30 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/15 17:39:01 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	print_export(char **env)
 	size_t	i;
 
 	i = 0;
-	len = ft_matrix_len(env);
+	len = ft_matrix_len(env) + 1;
 	env = order_env(env, len);
 	while (i < len && env && env[i])
 	{
@@ -118,7 +118,7 @@ int	export_built(t_cmd *c, char **env)
 
 	i = 1;
 	if (c->ex_argv && !c->ex_argv[1])
-		print_export(ft_matrixdup(env, ft_matrix_len(env)));
+		print_export(ft_matrixdup(env, ft_matrix_len(env) + 1));
 	while (c->ex_argv && c->ex_argv[i])
 	{
 		if (c->ex_argv[i] && error_handler(c->ex_argv[i]))
@@ -127,7 +127,7 @@ int	export_built(t_cmd *c, char **env)
 		if (!var_exists(env, &aux, c->ex_argv[i]))
 		{
 			c->data->env = ft_matrixjoin(env, c->ex_argv[i]);
-			free(env);
+			ft_free_matrix(env);
 			env = c->data->env;
 		}
 		++i;
