@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 01:47:24 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/12 20:05:19 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/14 17:51:25 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,15 @@ typedef struct s_builts
 	int		(*built)(t_cmd *, char **env);
 	char	**env;
 }				t_builts;
+
+typedef struct s_heredoc
+{
+	char	*result;
+	int		i;
+	size_t	len;
+	size_t	j;
+	char	varname[256];
+}			t_heredoc;
 
 /******************************************************************************
  * Files
@@ -67,9 +76,22 @@ char		*new_var(char *input, int len);
 char		*get_var(char *arg);
 t_bool		is_quote(char c);
 
-// heredoc._built.c
+// heredoc_built.c
 int			handle_heredoc(t_cmd *cmd);
+char		*expand_variables(t_data *d, char *input);
 void		setup_heredoc_signals(void);
 void		restore_signals(void);
+
+// heredoc_variable.c
+char		*initialize_result(t_heredoc *hd);
+size_t		extract_varname(char *input, t_heredoc *hd);
+size_t		process_variable(t_data *d, char *input, t_heredoc *hd);
+int			append_env_value(t_heredoc *hd, char *env_value);
+int			add_char_to_result(t_heredoc *hd, char c);
+
+// heredoc_utils.c
+int			check_delim(t_cmd *cmd);
+int			check_line(char *line, char *end);
+void		handle_quote(char *result, char **start, size_t *i, char c);
 
 #endif
