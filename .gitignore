@@ -4,3 +4,4 @@ objs/
 .DS_Store
 .pruebas.c
 minishell
+.42_minishell_tester
