@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 00:51:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/17 15:22:58 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/17 15:52:27 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,14 @@ int	env_built(t_cmd *c, char **env)
 int	pwd_built(t_cmd *c, char **env)
 {
 	char	buff[1000];
+	char	*res;
 
 	if (env && c)
 	{
-		ft_putstr_fd(getcwd(buff, 1000), STDOUT_FILENO);
+		res = getcwd(buff, 1000);
+		if (!res)
+			res = get_env(env, "PWD");
+		ft_putstr_fd(res, STDOUT_FILENO);
 		ft_putchar_fd('\n', STDOUT_FILENO);
 	}
 	return (EXIT_SUCCESS);

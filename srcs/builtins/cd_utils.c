@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 01:21:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/17 15:30:49 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/17 15:56:15 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*relative_dots(char *env)
 	char	*res;
 
 	len = ft_strlen(env) - 1;
-	if (env[len] == '.')
+	while (env[len] == '.')
 		len -= 2;
 	while (env[len] != '/')
 		--len;
@@ -62,17 +62,10 @@ int	check_env_error(char *env, t_bool one_dot)
 
 char	*check_dots(char *new, char *env, char **envi)
 {
-	char	*res;
-
 	if (!ft_strncmp(new, ".", 2) || !ft_strncmp(new, "./", 3))
 	{
 		if (check_env_error(env, TRUE))
-		{
-			res = get_env(envi, "PWD");
-			if (res[ft_strlen(res) - 1] == '.')
-				return (ft_strdup(res));
 			return (ft_strjoin(get_env(envi, "PWD"), "/."));
-		}
 		return (ft_strdup(env));
 	}
 	else if (!ft_strncmp(new, "..", 3) || !ft_strncmp(new, "../", 4))
