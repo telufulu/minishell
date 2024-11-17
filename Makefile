@@ -17,11 +17,12 @@ SRCS_FILES		+=		parser/parser.c parser/parser_args.c \
 SRCS_FILES		+=		lexer/lexer.c lexer/cmd_utils.c lexer/init_lexer.c
 SRCS_FILES		+=		executor/main_executor.c executor/utils_executor.c \
 						executor/redirections.c
-SRCS_FILES		+=		builtings/my_execve.c builtings/basic_builtings.c \
-						builtings/echo_built.c builtings/cd_built.c \
-						builtings/unset_built.c builtings/export_built.c \
-						builtings/heredoc_built.c builtings/builts_utils.c \
-						builtings/heredoc_variable.c builtings/heredoc_utils.c
+SRCS_FILES		+=		builtins/my_execve.c builtins/basic_builtins.c \
+						builtins/echo_built.c builtins/cd_built.c \
+						builtins/unset_built.c builtins/export_built.c \
+						builtins/heredoc_built.c builtins/builts_utils.c \
+						builtins/heredoc_variable.c builtins/heredoc_utils.c \
+						builtins/cd_utils.c
 
 LIBS			=		libs/
 LIBFT			=		$(LIBFT_DIR)libft.a
@@ -69,7 +70,7 @@ $(OBJS_DIR)%.o:	$(SRCS_DIR)%.c
 	mkdir -p $(OBJS_DIR)lexer
 	mkdir -p $(OBJS_DIR)parser
 	mkdir -p $(OBJS_DIR)executor
-	mkdir -p $(OBJS_DIR)builtings
+	mkdir -p $(OBJS_DIR)builtins
 	$(CC) $(CFLAGS) -c $< -o $@
 	echo  "\33[2K\r$(GRAY)$(CC) $(CFLAGS) $(LFLAGS) -c $< -o $@$(DEF_COLOR)"
 

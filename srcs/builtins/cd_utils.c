@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd_built.c                                         :+:      :+:    :+:   */
+/*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 01:21:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/15 16:47:44 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/17 15:30:49 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,28 @@
 #include "lexer.h"		// t_cmd
 #include "minishell.h"	// ft_shell_error, get_env, strerror, errno
 #include "libft.h"		// ft_matrixjoin, ft_strnstr, ft_strdup
-#include "builtings.h"
+#include "builtins.h"
 
-static void	check_path(t_cmd *c, char **env)
+void	check_path(t_cmd *c, char **env)
 {
-	char	**aux;
+	char	*aux;
 
 	if (c->ex_argv && !c->ex_argv[1] && get_env(env, "HOME"))
 	{
-		aux = c->ex_argv;
-		c->ex_argv = ft_matrixjoin(c->ex_argv, get_env(env, "HOME"));
-		ft_free_matrix(aux);
+		aux = c->ex_argv[1];
+		c->ex_argv[1] = ft_strdup(get_env(env, "HOME"));
+		free(aux);
 	}
 }
 
-static char	*relative_dots(char *env)
+char	*relative_dots(char *env)
 {
 	size_t	len;
 	char	*res;
 
 	len = ft_strlen(env) - 1;
+	if (env[len] == '.')
+		len -= 2;
 	while (env[len] != '/')
 		--len;
 	res = ft_calloc(sizeof(char), len + 1);
@@ -43,47 +45,41 @@ static char	*relative_dots(char *env)
 	return (res);
 }
 
-static char	*new_pwd(char *env, char *new)
+int	check_env_error(char *env, t_bool one_dot)
 {
-	int		i;
-
-	i = 0;
-	if (!ft_strncmp(new, ".", 2) || !ft_strncmp(new, "./", 3))
-		return (ft_strdup(env));
-	else if (!ft_strncmp(new, "..", 3) || !ft_strncmp(new, "../", 4))
-		return (relative_dots(env));
-	while (env && env[i] && new && new[i] && env[i] == new[i])
-		++i;
-	if (!new[i])
-		return (ft_strdup(new));
-	env = ft_strjoin(env, "/");
-	new = ft_strjoin(env, new + i);
-	free(env);
-	return (new);
+	if (!env)
+	{
+		if (one_dot)
+		{
+			ft_putstr_fd("cd: error retrieving current directory: ", 2);
+			ft_putstr_fd("getcwd: cannot access parent directories: ", 2);
+			ft_putstr_fd("No such file or directory\n", 2);
+		}
+		return (1);
+	}
+	return (0);
 }
 
-int	cd_built(t_cmd *c, char **env)
+char	*check_dots(char *new, char *env, char **envi)
 {
-	char	*pwd;
-	char	*old_pwd;
-	char	buffer[1000];
+	char	*res;
 
-	check_path(c, env);
-	old_pwd = ft_strdup(get_env(env, "PWD"));
-	pwd = new_pwd(getcwd(buffer, 1000), c->ex_argv[1]);
-	if (!c->ex_argv[1] || access(c->ex_argv[1], R_OK) || chdir(c->ex_argv[1]))
+	if (!ft_strncmp(new, ".", 2) || !ft_strncmp(new, "./", 3))
 	{
-		if (pwd)
-			free(pwd);
-		if (old_pwd)
-			free(old_pwd);
-		return (ft_built_error(c->ex_argv[1], "no such file or directory", \
-					errno), 1);
+		if (check_env_error(env, TRUE))
+		{
+			res = get_env(envi, "PWD");
+			if (res[ft_strlen(res) - 1] == '.')
+				return (ft_strdup(res));
+			return (ft_strjoin(get_env(envi, "PWD"), "/."));
+		}
+		return (ft_strdup(env));
 	}
-	reset_var(c, "PWD", pwd, c->data->env);
-	if (get_env(env, "OLDPWD"))
-		reset_var(c, "OLDPWD", old_pwd, c->data->env);
-	free(pwd);
-	free(old_pwd);
-	return (EXIT_SUCCESS);
+	else if (!ft_strncmp(new, "..", 3) || !ft_strncmp(new, "../", 4))
+	{
+		if (check_env_error(env, FALSE))
+			return (relative_dots(get_env(envi, "PWD")));
+		return (relative_dots(env));
+	}
+	return (NULL);
 }

@@ -6,13 +6,13 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:34:54 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/15 14:18:20 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/17 15:24:32 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"	// open_fd, WR, RD, redir_child, redir_father
 #include "lexer.h"		// t_cmd
-#include "builtings.h"	// expand_variables
+#include "builtins.h"	// expand_variables
 
 void	handle_quote(char *result, char **start, size_t *i, char c)
 {

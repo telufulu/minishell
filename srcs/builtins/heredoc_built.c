@@ -6,13 +6,13 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:50:34 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/15 16:21:57 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/17 15:25:33 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"	// open_fd, WR, RD, redir_child, redir_father
 #include "lexer.h"		// t_cmd
-#include "builtings.h"	// expand_variables
+#include "builtins.h"	// expand_variables
 
 char	*expand_variables(t_data *d, char *input)
 {

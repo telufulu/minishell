@@ -6,14 +6,14 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:48:17 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/15 19:59:38 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/17 15:45:38 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"		// t_cmd
 #include "libft.h"		// ft_strncmp, ft_strlen, t_bool, TRUE, FALSE
 #include "minishell.h"	// strerror
-#include "builtings.h"	// env_built
+#include "builtins.h"	// env_built
 
 static char	**order_env(char **env, size_t len)
 {
@@ -44,6 +44,13 @@ static char	**order_env(char **env, size_t len)
 	return (env);
 }
 
+static void	print_quotes(char *env)
+{
+	ft_putchar_fd('"', STDOUT_FILENO);
+	ft_putstr_fd(env, STDOUT_FILENO);
+	ft_putchar_fd('"', STDOUT_FILENO);
+}
+
 static void	print_export(char **env)
 {
 	size_t	len;
@@ -63,11 +70,7 @@ static void	print_export(char **env)
 				ft_putchar_fd(env[i][j++], STDOUT_FILENO);
 			ft_putchar_fd(env[i][j++], STDOUT_FILENO);
 			if (env[i][j])
-			{
-				ft_putchar_fd('"', STDOUT_FILENO);
-				ft_putstr_fd(env[i] + j, STDOUT_FILENO);
-				ft_putchar_fd('"', STDOUT_FILENO);
-			}
+				print_quotes(env[i] + j);
 			ft_putchar_fd('\n', STDOUT_FILENO);
 		}
 		++i;

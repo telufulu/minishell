@@ -6,12 +6,12 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 13:09:55 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/16 12:45:07 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/17 15:27:07 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "builtings.h"
+#include "builtins.h"
 
 volatile sig_atomic_t	g_sigint = 0;
 

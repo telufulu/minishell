@@ -6,25 +6,25 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 01:47:05 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/13 18:43:11 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/17 15:29:17 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"	//ft_shell_error
 #include "lexer.h"		// t_cmd
 #include "libft.h"		// ft_strcmp
-#include "builtings.h"	// t_builts, ft_built_error
+#include "builtins.h"	// t_builts, ft_built_error
 
-t_builts	*init_builtings(t_builts *builtings, char **env)
+t_builts	*init_builtins(t_builts *builtins, char **env)
 {
-	builtings[0] = (t_builts){"echo", &echo_built, env};
-	builtings[1] = (t_builts){"cd", &cd_built, env};
-	builtings[2] = (t_builts){"pwd", &pwd_built, env};
-	builtings[3] = (t_builts){"export", &export_built, env};
-	builtings[4] = (t_builts){"unset", &unset_built, env};
-	builtings[5] = (t_builts){"env", &env_built, env};
-	builtings[6] = (t_builts){"exit", &exit_built, env};
-	return (builtings);
+	builtins[0] = (t_builts){"echo", &echo_built, env};
+	builtins[1] = (t_builts){"cd", &cd_built, env};
+	builtins[2] = (t_builts){"pwd", &pwd_built, env};
+	builtins[3] = (t_builts){"export", &export_built, env};
+	builtins[4] = (t_builts){"unset", &unset_built, env};
+	builtins[5] = (t_builts){"env", &env_built, env};
+	builtins[6] = (t_builts){"exit", &exit_built, env};
+	return (builtins);
 }
 
 static void	exit_execve(t_cmd *c)
@@ -46,7 +46,7 @@ int	my_execve(t_cmd *c, t_builts *builts, char **env)
 	i = -1;
 	if (!c->cmd || !c->ex_argv)
 		return (EXIT_SUCCESS);
-	while (++i < N_BUILTINGS)
+	while (++i < N_BUILTINS)
 		if (!ft_strncmp(builts[i].cmd, c->cmd, 6))
 			return (builts[i].built(c, env));
 	if (!c->path)
