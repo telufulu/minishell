@@ -6,7 +6,7 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:34:54 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/17 15:24:32 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/18 16:14:28 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	check_line(char *line, char *end)
 		write(STDOUT_FILENO, "\n", 1);
 		return (0);
 	}
-	if (ft_strncmp(line, end, 20) == 0)
+	if (ft_strncmp(line, end, ft_strlen(end) + 1) == 0)
 		return (free(line), 0);
 	return (1);
 }

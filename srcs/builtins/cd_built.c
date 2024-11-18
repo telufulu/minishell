@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 01:21:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/18 01:07:33 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/18 19:18:49 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int	cd_built(t_cmd *c, char **env)
 
 	if (c->next || c->index)
 		return (EXIT_SUCCESS);
-	check_path(c, env);
+	if (check_path(c, env))
+		return (EXIT_FAILURE);
 	old_pwd = ft_strdup(get_env(env, "PWD"));
 	pwd = new_pwd(env, getcwd(buffer, 1000), c->ex_argv[1]);
 	if (!pwd)
