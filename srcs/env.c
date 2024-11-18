@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 20:10:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/15 17:36:04 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/18 01:01:08 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@ char	*get_env(char **env, char *var)
 		return (NULL);
 	while (*env)
 	{
-		if (ft_strncmp(*env, var, var_len) == 0)
+		if (!ft_strncmp(*env, var, var_len))
 		{
 			if ((*env)[var_len] && (*env)[var_len] == '=')
 				return (*env + var_len + 1);
+			else if ((*env)[var_len] && (*env)[var_len] != '=')
+				return (NULL);
 			return (*env + var_len);
 		}
 		env++;

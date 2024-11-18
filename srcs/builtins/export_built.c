@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:48:17 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/17 15:45:38 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/17 16:04:31 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,11 @@ static char	*clean_arg(char *arg)
 	if (!arg)
 		ft_error("malloc failed", strerror(errno));
 	while (arg[i] && arg[i] != '=')
+	{
+		if (arg[i] == '+')
+			arg[i] = 0;
 		++i;
+	}
 	if (arg[i] == '=')
 		arg[i] = 0;
 	return (arg);
@@ -112,6 +116,7 @@ int	export_built(t_cmd *c, char **env)
 			c->data->env = ft_matrixjoin(env, c->ex_argv[i]);
 			ft_free_matrix(env);
 			env = c->data->env;
+			free(clean);
 		}
 		else
 			reset_arg(env, clean, c->ex_argv[i]);

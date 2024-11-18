@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 01:21:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/17 15:56:15 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/18 00:51:56 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,22 @@ int	check_env_error(char *env, t_bool one_dot)
 
 char	*check_dots(char *new, char *env, char **envi)
 {
+	char	*getenvi;
+	char	buff[1000];
+
+	getenvi = get_env(envi, "PWD");
+	if (!getenvi && !getcwd(buff, 1000))
+		return (ft_built_error(new, "unreachable: PWD unset", 1), NULL);
 	if (!ft_strncmp(new, ".", 2) || !ft_strncmp(new, "./", 3))
 	{
 		if (check_env_error(env, TRUE))
-			return (ft_strjoin(get_env(envi, "PWD"), "/."));
+			return (ft_strjoin(getenvi, "/."));
 		return (ft_strdup(env));
 	}
 	else if (!ft_strncmp(new, "..", 3) || !ft_strncmp(new, "../", 4))
 	{
 		if (check_env_error(env, FALSE))
-			return (relative_dots(get_env(envi, "PWD")));
+			return (relative_dots(getenvi));
 		return (relative_dots(env));
 	}
 	return (NULL);
