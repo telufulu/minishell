@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 01:21:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/18 00:55:08 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/18 01:07:33 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	cd_built(t_cmd *c, char **env)
 				ft_built_error(c->ex_argv[1], "no such file or directory", 1));
 	}
 	reset_var(c, "PWD", pwd, c->data->env);
-	if (get_env(env, "OLDPWD"))
+	if (get_env(c->data->env, "OLDPWD"))
 		reset_var(c, "OLDPWD", old_pwd, c->data->env);
 	free(pwd);
 	free(old_pwd);
