@@ -6,14 +6,13 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:37:58 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/15 18:34:37 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/17 15:25:09 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"		// t_cmd
-#include "builtings.h"	// t_builts
 #include "minishell.h"	//get_env
-#include "builtings.h"	// ft_built_error
+#include "builtins.h"	// ft_built_error
 
 int	find_arg(char **env, char *var)
 {

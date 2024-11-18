@@ -6,14 +6,14 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:48:17 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/15 20:26:33 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/18 01:10:07 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"		// t_cmd
 #include "libft.h"		// ft_strncmp, ft_strlen, t_bool, TRUE, FALSE
 #include "minishell.h"	// strerror
-#include "builtings.h"	// env_built
+#include "builtins.h"	// env_built
 
 static char	**order_env(char **env, size_t len)
 {
@@ -44,39 +44,35 @@ static char	**order_env(char **env, size_t len)
 	return (env);
 }
 
-static void	print_variable(const char *variable)
+static void	print_quotes(char *env)
 {
-	size_t	j;
-
-	if (variable && *variable)
-	{
-		j = 0;
-		ft_putstr_fd("declare -x ", STDOUT_FILENO);
-		while (variable[j] && variable[j] != '=')
-			ft_putchar_fd(variable[j++], STDOUT_FILENO);
-		if (variable[j])
-		{
-			ft_putchar_fd(variable[j++], STDOUT_FILENO);
-			ft_putchar_fd('"', STDOUT_FILENO);
-			while (variable[j])
-				ft_putchar_fd(variable[j++], STDOUT_FILENO);
-			ft_putchar_fd('"', STDOUT_FILENO);
-		}
-		ft_putchar_fd('\n', STDOUT_FILENO);
-	}
+	ft_putchar_fd('"', STDOUT_FILENO);
+	ft_putstr_fd(env, STDOUT_FILENO);
+	ft_putchar_fd('"', STDOUT_FILENO);
 }
 
 static void	print_export(char **env)
 {
 	size_t	len;
 	size_t	i;
+	size_t	j;
 
 	i = 0;
 	len = ft_matrix_len(env) + 1;
 	env = order_env(env, len);
 	while (i < len && env && env[i])
 	{
-		print_variable(env[i]);
+		if (env[i] && *env[i])
+		{
+			j = 0;
+			ft_putstr_fd("declare -x ", STDOUT_FILENO);
+			while (env[i][j] && env[i][j] != '=')
+				ft_putchar_fd(env[i][j++], STDOUT_FILENO);
+			ft_putchar_fd(env[i][j++], STDOUT_FILENO);
+			if (env[i][j])
+				print_quotes(env[i] + j);
+			ft_putchar_fd('\n', STDOUT_FILENO);
+		}
 		++i;
 	}
 	ft_free_matrix(env);
@@ -90,7 +86,11 @@ static char	*clean_arg(char *arg)
 	if (!arg)
 		ft_error("malloc failed", strerror(errno));
 	while (arg[i] && arg[i] != '=')
+	{
+		if (arg[i] == '+')
+			arg[i] = 0;
 		++i;
+	}
 	if (arg[i] == '=')
 		arg[i] = 0;
 	return (arg);

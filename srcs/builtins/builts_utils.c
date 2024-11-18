@@ -6,11 +6,11 @@
 /*   By: telufulu <Lufu@student.42madrid.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 17:07:28 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/15 20:22:15 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/18 01:07:17 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtings.h"
+#include "builtins.h"
 #include "minishell.h"	//get_env
 
 int	error_handler(char *args)
@@ -24,7 +24,8 @@ int	error_handler(char *args)
 	{
 		if (args[j] == '=')
 			++j;
-		else if (!ft_isalnum(args[j]) && args[j] != '_')
+		else if (!ft_isalnum(args[j]) && args[j] != '_' && args[j] != ' ' && \
+				args[j] != '$')
 			return (ft_built_error(args, "not a valid identifier", errno));
 		else
 			++j;
@@ -55,7 +56,7 @@ t_bool	is_built(t_builts *builts, char *cmd)
 	int	i;
 
 	i = 0;
-	while (i < N_BUILTINGS)
+	while (i < N_BUILTINS)
 	{
 		if (!ft_strncmp(builts[i].cmd, cmd, 6))
 			return (TRUE);

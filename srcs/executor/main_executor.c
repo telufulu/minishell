@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:29:37 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/15 19:50:57 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/17 15:28:29 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "parser.h"		// t_token, REDIRECT_IN
 #include "minishell.h"	// t_data, ft_shell_error, execve
 #include "libft.h"		// ft_error, ft_strcmp
-#include "builtings.h"	// my_execve, is_built
+#include "builtins.h"	// my_execve, is_built
 
 static void	child_process(t_pipes *pip, t_cmd *c, char **env)
 {
@@ -87,9 +87,9 @@ static int	handle_command(t_data *d, t_pipes *pip, t_cmd *c, char **env)
 void	main_executor(t_data *d, t_cmd *c)
 {
 	t_pipes		*pip;
-	t_builts	builts[N_BUILTINGS];
+	t_builts	builts[N_BUILTINS];
 
-	d->builts = init_builtings(builts, d->env);
+	d->builts = init_builtins(builts, d->env);
 	pip = ft_calloc(sizeof(t_pipes), 1);
 	pip->oldfd = -1;
 	pip->pid_array = malloc(sizeof(pid_t) * d->n_cmd);

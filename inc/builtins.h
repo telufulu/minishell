@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtings.h                                        :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 01:47:24 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/15 18:47:32 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/17 15:34:55 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINGS_H
-# define BUILTINGS_H
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
 /******************************************************************************
  * Includes
@@ -22,7 +22,7 @@
 /******************************************************************************
  * Includes
  *****************************************************************************/
-# define N_BUILTINGS 7
+# define N_BUILTINS 7
 
 /******************************************************************************
  * Structs
@@ -46,8 +46,8 @@ typedef struct s_heredoc
 /******************************************************************************
  * Files
  *****************************************************************************/
-// builtings.c
-t_builts	*init_builtings(t_builts *builtings, char **env);
+// builtins.c
+t_builts	*init_builtins(t_builts *builtins, char **env);
 int			my_execve(t_cmd *c, t_builts *builts, char **env);
 
 // builts_utils.c
@@ -63,7 +63,13 @@ int			echo_built(t_cmd *c, char **env);
 // cd_built.c
 int			cd_built(t_cmd *c, char **env);
 
-// basic_builtings.c
+// cd_utils.c
+void	check_path(t_cmd *c, char **env);
+char	*relative_dots(char *env);
+int		check_env_error(char *env, t_bool one_dot);
+char	*check_dots(char *new, char *env, char **envi);
+
+// basic_builtins.c
 int			exit_built(t_cmd *c, char **env);
 int			env_built(t_cmd *c, char **env);
 int			pwd_built(t_cmd *c, char **env);

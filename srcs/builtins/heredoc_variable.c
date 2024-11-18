@@ -6,11 +6,11 @@
 /*   By: aude-la- <aude-la-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:34:40 by aude-la-          #+#    #+#             */
-/*   Updated: 2024/11/14 17:34:42 by aude-la-         ###   ########.fr       */
+/*   Updated: 2024/11/17 15:23:58 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtings.h"
+#include "builtins.h"
 
 int	add_char_to_result(t_heredoc *hd, char c)
 {
