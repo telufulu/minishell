@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 01:21:07 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/18 00:51:56 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/18 17:44:33 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 
 void	check_path(t_cmd *c, char **env)
 {
-	char	*aux;
+	char	**aux;
 
 	if (c->ex_argv && !c->ex_argv[1] && get_env(env, "HOME"))
 	{
-		aux = c->ex_argv[1];
-		c->ex_argv[1] = ft_strdup(get_env(env, "HOME"));
-		free(aux);
+		aux = c->ex_argv;
+		c->ex_argv = ft_matrixjoin(c->ex_argv, get_env(env, "HOME"));
+		ft_free_matrix(aux);
 	}
 }
 
