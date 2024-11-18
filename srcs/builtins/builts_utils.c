@@ -6,7 +6,7 @@
 /*   By: telufulu <Lufu@student.42madrid.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 17:07:28 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/18 01:07:17 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/18 19:33:16 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,11 @@ int	error_handler(char *args)
 	j = 1;
 	if (args && !ft_isalpha(*args) && *args != '_')
 		return (ft_built_error(args, "not a valid identifier", errno));
-	while (args && args[j])
+	while (args && args[j] && args[j] != '=')
 	{
-		if (args[j] == '=')
-			++j;
-		else if (!ft_isalnum(args[j]) && args[j] != '_' && args[j] != ' ' && \
-				args[j] != '$')
+		if (!ft_isalnum(args[j]) && args[j] != '_')
 			return (ft_built_error(args, "not a valid identifier", errno));
-		else
-			++j;
+		++j;
 	}
 	return (0);
 }
