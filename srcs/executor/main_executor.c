@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:29:37 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/17 15:28:29 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/18 19:07:44 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static void	wait_for_children(t_pipes *pip, t_data *d)
 	while (++i < pip->cmd_count)
 	{
 		waitpid(pip->pid_array[i], &status, 0);
-		d->exit_status = get_exit_status(status);
+		if (i == pip->cmd_count)
+			d->exit_status = get_exit_status(status);
 	}
 	restore_parent_signal_handlers();
 }

@@ -6,7 +6,7 @@
 /*   By: telufulu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 13:09:55 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/17 15:27:07 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/18 19:05:38 by telufulu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	handle_sigint(int sig)
 {
 	(void)sig;
 	write(STDIN_FILENO, "\n", 1);
-//	rl_replace_line("", 0);
+	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
 	g_sigint = 1;
