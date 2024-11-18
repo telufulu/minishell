@@ -6,7 +6,7 @@
 /*   By: telufulu <telufulu@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 01:47:24 by telufulu          #+#    #+#             */
-/*   Updated: 2024/11/17 15:34:55 by telufulu         ###   ########.fr       */
+/*   Updated: 2024/11/18 13:46:15 by aude-la-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ int			echo_built(t_cmd *c, char **env);
 int			cd_built(t_cmd *c, char **env);
 
 // cd_utils.c
-void	check_path(t_cmd *c, char **env);
-char	*relative_dots(char *env);
-int		check_env_error(char *env, t_bool one_dot);
-char	*check_dots(char *new, char *env, char **envi);
+void		check_path(t_cmd *c, char **env);
+char		*relative_dots(char *env);
+int			check_env_error(char *env, t_bool one_dot);
+char		*check_dots(char *new, char *env, char **envi);
 
 // basic_builtins.c
 int			exit_built(t_cmd *c, char **env);
