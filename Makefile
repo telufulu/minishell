@@ -1,15 +1,13 @@
 NAME			=		minishell
 CC				=		cc
-CFLAGS			=		-Wall -Werror -Wextra -g3 -I$(INC) -I$(LIBFT_DIR)inc/
-SANITIZE		=		-fsanitize=
 INC				=		inc/
+LIBS			=		libs/
+LIBFT_DIR		=		$(LIBS)libft/
+LIBFT			=		$(LIBFT_DIR)libft.a
 
 SRCS_DIR		=		srcs/
 OBJS_DIR		=		objs/
 
-SRCS			=		$(addprefix $(SRCS_DIR), $(SRCS_FILES))
-OBJS			=		$(addprefix $(OBJS_DIR), $(OBJS_FILES))
-OBJS_FILES		=		$(SRCS_FILES:%.c=%.o)
 SRCS_FILES		=		main.c utils.c env.c signals.c signals_utils.c
 SRCS_FILES		+=		parser/parser.c parser/parser_args.c \
 						parser/parser_utils.c parser/parser_variable.c \
@@ -24,11 +22,33 @@ SRCS_FILES		+=		builtins/my_execve.c builtins/basic_builtins.c \
 						builtins/heredoc_variable.c builtins/heredoc_utils.c \
 						builtins/cd_utils.c
 
-LIBS			=		libs/
-LIBFT			=		$(LIBFT_DIR)libft.a
-LIBFT_DIR		=		$(LIBS)libft/
+SRCS			=		$(addprefix $(SRCS_DIR), $(SRCS_FILES))
+OBJS_FILES		=		$(SRCS_FILES:%.c=%.o)
+OBJS			=		$(addprefix $(OBJS_DIR), $(OBJS_FILES))
 
-LFLAGS			=		-L $(LIBFT_DIR) -lft -lreadline
+SANITIZE		=		-fsanitize=
+
+## Detección de sistema operativo
+UNAME_S			=		$(shell uname -s)
+
+# Valores por defecto (Linux): readline del sistema
+READLINE_INC	=
+READLINE_LIB	=		-lreadline
+
+# Ajustes específicos para macOS (Darwin) usando GNU Readline de Homebrew
+ifeq ($(UNAME_S),Darwin)
+READLINE_PREFIX	:=		$(shell brew --prefix readline 2>/dev/null)
+ifeq ($(READLINE_PREFIX),)
+$(error No se ha encontrado GNU readline instalada con Homebrew. Instala primero 'brew install readline' y vuelve a ejecutar 'make')
+endif
+READLINE_INC	=		-I$(READLINE_PREFIX)/include
+READLINE_LIB	=		-L$(READLINE_PREFIX)/lib -lreadline
+endif
+
+CFLAGS			=		-Wall -Werror -Wextra -g3 \
+						-I$(INC) -I$(LIBFT_DIR)inc/ $(READLINE_INC)
+
+LFLAGS			=		-L $(LIBFT_DIR) -lft $(READLINE_LIB)
 
 ## Colors
 
@@ -51,8 +71,8 @@ all:	$(NAME)
 sanitize:				CFLAGS += $(SANITIZE) -g3
 sanitize:				clean all
 
-sanitize_address:			CFLAGS += $(SANITIZE)address -g3
-sanitize_address:			clean all
+sanitize_address:		CFLAGS += $(SANITIZE)address -g3
+sanitize_address:		clean all
 
 sanitize_threads:		CFLAGS += $(SANITIZE)thread -pthread
 sanitize_threads:		clean all
